@@ -13,6 +13,19 @@ CP1–CP4 remain documented/reconciled with checkpoint-specific review status; C
 
 ## Checkpoint status hiện hành
 
+Số thư mục không trùng với số checkpoint; bảng dưới đây ánh xạ từng checkpoint sang thư mục chứa tài liệu.
+
+| Checkpoint | Thư mục |
+|---|---|
+| CP1 — Product Foundation | `00-start-here/` + `01-product-foundation/` |
+| CP2 — Domain | `02-domain/` |
+| CP3 — Actor Authority + Core Workflows | `03-actor-authority/` + `04-core-workflows/` |
+| CP4 — State Machines & Policies | `05-state-machines-policies/` |
+| CP5 — V0 Scope | `06-v0-scope/` |
+| CP6 — Information Architecture | `07-information-architecture/` |
+| CP7 — Data Model | `08-conceptual-data-model/` + `09-database-design/` (persistence direction, supporting architecture) |
+| CP8 — UX / Design System | `10-ux-foundation/` + `11-detailed-interaction/` + `12-prototype-validation/` |
+
 | Checkpoint | Evidence-backed status |
 |---|---|
 | CP1 — Product Foundation | Reopened for reconciliation; Founder review/freeze history is preserved at artifact scope, not re-declared globally here |
@@ -38,7 +51,7 @@ Stayora là marketplace và operating network cho các destination lưu trú có
 
 1. [Source of Truth](SOURCE_OF_TRUTH.md): authority, provenance, giới hạn nguồn và quy tắc thay đổi.
 2. [Glossary](GLOSSARY.md): Owner/Primary Host, booking/stay, Inventory Commitment, payment session/deposit, Verified/reputation.
-3. [Decisions](DECISIONS.md): 59 ADR và [20 mục contradiction audit](DECISIONS.md#contradiction-audit).
+3. [Decisions](DECISIONS.md): decision register và [contradiction audit](DECISIONS.md#contradiction-audit).
 4. [Overview](../01-product-foundation/00-overview.md), rồi các chương theo nhu cầu.
 5. [Open Questions](../01-product-foundation/13-open-questions.md): 24 câu hỏi còn mở, ưu tiên founder review.
 6. [Checkpoint 4 — State Machines, Lifecycles & Policy Architecture](../05-state-machines-policies/README.md).

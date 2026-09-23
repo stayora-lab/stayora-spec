@@ -45,7 +45,7 @@ Các stale status/prose đã được sửa ở đúng các file nêu trên. TBD
 
 ### R-04 — Số lượng ADR — RESOLVED
 
-[Start Here README](../00-start-here/README.md), “Đọc theo thứ tự”, nay ghi 59 ADR, phù hợp với [Decision register](../00-start-here/DECISIONS.md) có ADR-P001–ADR-P059. Đây chỉ là documentation count correction.
+[Start Here README](../00-start-here/README.md), “Đọc theo thứ tự”, nay tham chiếu [Decision register](../00-start-here/DECISIONS.md) mà không nhắc lại số lượng ADR. Cách này loại bỏ cả lớp lỗi số lượng bị lệch mỗi khi register thay đổi, không chỉ sửa một lần. Đây chỉ là documentation correction.
 
 ## Điều không phải contradiction mới
 

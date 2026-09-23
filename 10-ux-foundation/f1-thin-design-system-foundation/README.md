@@ -2,7 +2,7 @@
 
 > Parent: **CP8 — UX / Design System**  
 > Status: **ACCEPTED — F1 FOUNDATION**  
-> Workstream: **CP8-F COMPLETE / ACCEPTED** · F1 accepted; F2 accepted; CP8-G is ready for Founder/Product Architect validation; implementation is not started.
+> Workstream: **CP8-F COMPLETE / ACCEPTED** · F1 accepted; F2 accepted; CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED; implementation is not started.
 
 F1 defines the smallest visual and interaction foundation needed to prototype the accepted V0 UX architecture. It is an architecture document, not a component library, code package, prototype or visual freeze.
 
@@ -42,4 +42,4 @@ Owner is a perspective/context inside Host/Property architecture, not a new top-
 
 ## Stop condition
 
-F1 stops at a thin foundation. It does not include prototype work or implementation. The exit assessment records **F1: PASS**; [F2 Prototype-Ready Design Language](../f2-prototype-ready-design-language/README.md) is accepted as the CP8-G baseline; CP8-F is complete/accepted while CP8-G is ready for Founder/Product Architect validation.
+F1 stops at a thin foundation. It does not include prototype work or implementation. The exit assessment records **F1: PASS**; [F2 Prototype-Ready Design Language](../f2-prototype-ready-design-language/README.md) is accepted as the CP8-G baseline; CP8-F is complete/accepted while CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED.
