@@ -168,6 +168,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P068](#adr-p068) | Payment UNKNOWN may receive one bounded reconciliation extension | CONFIRMED |
 | [ADR-P069](#adr-p069) | Oceanami V0 is Vietnamese-first | CONFIRMED |
 | [ADR-P070](#adr-p070) | Parallel Commercial Acceptance and Competitive Confirmation | CONFIRMED |
+| [ADR-P071](#adr-p071) | Request deadlines and expiry | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -922,6 +923,23 @@ Vietnamese is the primary UI language for every Oceanami V0 surface. English is 
 **TBD / configurable:** default and maximum deadlines, reminder schedule, refund timing, the maximum number of concurrent Commercial Acceptances if any, and the exact copy and presentation of disclosure. Values for the Oceanami pilot belong in 13-destination-operations/oceanami/configuration.md.
 
 **Nguồn:** [SRC-30](SOURCE_OF_TRUTH.md#src-30) — Founder operating case, 2026-09-23; Product Architect disposition, 2026-09-23.
+
+<a id="adr-p071"></a>
+### ADR-P071 — Request deadlines and expiry
+
+**Status: CONFIRMED**
+
+A Booking Request carries two independent deadlines. While PENDING, a Host-response deadline measures how long the Host has to respond; expiry transitions the Request to EXPIRED without Host action. After Commercial Acceptance, an acceptance / confirmation-response deadline runs from the moment of acceptance; its expiry also transitions the Request to EXPIRED. The two clocks are independent and serve different purposes: a PENDING Request has no acceptance clock, and acceptance starts a new one.
+
+Where several Requests overlap, each accepted Request carries its own acceptance deadline from its own acceptedAt (ADR-P070). A Request left PENDING while another is accepted keeps only its Host-response deadline, which allows a Host to accept one Request while keeping another as a fallback.
+
+EXPIRED is terminal. A Request is never revived from EXPIRED; a Guest who still wants the stay submits a new Request. EXPIRED does not mean Payment FAILED, does not cancel a Booking and does not itself release Inventory.
+
+A PENDING Request's Host-response deadline must never extend beyond the applicable Check-in boundary. A deadline past Check-in would leave a Request pending after the accommodation opportunity it refers to has begun or lost meaning. Destination policy may apply a shorter response window as Check-in approaches.
+
+Deadline values — the normal response window, the near-Check-in threshold and the shortened window, and acceptance-response values — are destination configuration, not universal constants. Oceanami pilot values are in [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md).
+
+**Nguồn:** [SRC-31](SOURCE_OF_TRUTH.md#src-31) — Founder Decision Gate, 2026-09-23; Product Architect disposition, 2026-09-23.
 
 ## Founder Decision canonicalization
 

@@ -6,6 +6,7 @@
 
 ```text
 PENDING → ACCEPTED → CONFLICTED
+                  ↘ EXPIRED
        ↘ REJECTED
        ↘ EXPIRED
        ↘ CONFLICTED
@@ -16,6 +17,8 @@ PENDING → ACCEPTED → CONFLICTED
 Non-accepted outcomes are distinct. `REJECTED` is the Host declining the Request. `EXPIRED` is the Request lapsing under its applicable lifecycle or expiry. `CONFLICTED` is a Request that could still have progressed but can no longer be fulfilled because a new authoritative inventory truth exists — including when another competing Request becomes Booking CONFIRMED ([ADR-P070](../00-start-here/DECISIONS.md#adr-p070)).
 
 Acceptance may be handled exclusively or competitively per [ADR-P070](../00-start-here/DECISIONS.md#adr-p070). Only the exclusive form creates a Temporary Exclusive Commitment.
+
+Two independent clocks apply. The Host-response deadline runs while a Request is `PENDING` and measures how long the Host has to respond. The acceptance / confirmation-response deadline runs after Commercial Acceptance, from `acceptedAt`. Expiry of either transitions the Request to `EXPIRED`, which is terminal. A Host-response deadline never extends beyond the applicable Check-in boundary ([ADR-P071](../00-start-here/DECISIONS.md#adr-p071)).
 
 ## Commercial commitment boundary
 

@@ -254,6 +254,13 @@ Turn ID: `Founder operating case, relayed in the Product Architect disposition o
 
 Founder operating case, 2026-09-23 — two overlapping Requests on one Host's open dates; the Host accepts without rejecting the other so as not to lose both if the deposit does not arrive; deposit race; waiting time set by the Host; extension on request; confirmation blocks the remaining Requests. Recorded as the source of ADR-P070.
 
+<a id="src-31"></a>
+### SRC-31 — Founder Decision Gate: Request deadlines
+
+Turn ID: `Founder Decision Gate, relayed in the Product Architect disposition of 2026-09-23`
+
+Founder Decision Gate, 2026-09-23 — Request deadlines: a PENDING Request carries a Host-response deadline and expires if the Host does not respond; an accepted Request carries its own acceptance / confirmation-response deadline from acceptedAt; the two clocks are independent; EXPIRED is terminal and no Request is revived; a Host-response deadline never extends beyond the Check-in boundary; the Oceanami pilot default for the normal Host-response window is 24 hours. Recorded as the source of ADR-P071.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.
