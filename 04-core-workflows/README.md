@@ -6,7 +6,7 @@
 
 ## Mục đích và phạm vi
 
-Tài liệu hóa sáu workflow cốt lõi dựa trên quyết định đã duyệt. Mô tả authority, domain truth và economics; không phải state machine triển khai.
+Tài liệu hóa các workflow cốt lõi dựa trên quyết định đã duyệt. Mô tả authority, domain truth và economics; không phải state machine triển khai.
 
 **Cách đọc status:** CONFIRMED chỉ áp dụng cho principle được nêu rõ trong nguồn. TBD / WORKING MODEL được ghi riêng tại nơi sử dụng; checkpoint đang được reconciliation, nhưng các TBD/WORKING MODEL nội dung vẫn giữ nguyên.
 
@@ -27,6 +27,10 @@ Thứ tự đọc: [Foundation](../00-start-here/README.md) → [Domain](../02-d
 7. [WF-06 — Completion → Settlement → Payout](06-completion-settlement-payout.md).
 8. [Cross-workflow invariants](07-cross-workflow-invariants.md).
 9. [Open Workflow Questions](08-open-workflow-questions.md).
+10. [WF-07 — Owner / Host Onboarding](09-owner-onboarding.md).
+11. [WF-08 — Property and Bookable Unit Onboarding](10-property-onboarding.md).
+12. [WF-09 — Sale Onboarding](11-sale-onboarding.md).
+13. [WF-10 — Butler Onboarding](12-butler-onboarding.md).
 
 Đọc cùng [Actor Authority](../03-actor-authority/README.md). Mỗi flow chỉ ra tác nhân và domain sở hữu truth; mũi tên không cấp quyền và không cam kết triển khai đồng bộ.
 
@@ -40,7 +44,7 @@ Notifications chưa có recipient/channel/timing policy đầy đủ trong ngu�
 
 **Documentation pass đang ở trạng thái REOPENED FOR RECONCILIATION — 2026-09-18.** Bộ này gồm authority và workflow documentation; các TBD/WORKING MODEL vẫn giữ nguyên.
 
-Markdown validation kiểm tra toàn bộ 43 file trong năm vùng tài liệu, cả relative paths và heading/explicit anchors: **PASS**. Không có liên kết nội bộ hỏng. Đã kiểm tra status, purpose/scope, source links và đủ 13 mục nội dung của từng workflow.
+Markdown validation kiểm tra toàn bộ 43 file trong năm vùng tài liệu, cả relative paths và heading/explicit anchors: **PASS**. Không có liên kết nội bộ hỏng. Đã kiểm tra status, purpose/scope, source links và đủ 15 mục nội dung của từng workflow.
 
 **Cross-document consistency: hoàn tất, có các source discrepancies giữ OPEN REVIEW.** Không phát hiện regression mới trong Checkpoint 3 đối với các boundaries dưới đây. Các mục SUPERSEDED và ví dụ bị phủ định trong nguồn không được coi là current requirements.
 
