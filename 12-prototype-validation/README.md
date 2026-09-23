@@ -140,29 +140,51 @@ No clipping, no inaccessible primary action, no unusable modal, no table that hi
 
 > This snapshot is validation evidence at one specific commit. It is **not** canonical product semantics. Later iterations add new columns/tables; this snapshot is never overwritten.
 
-Summary: **10 TESTED — PASS · 2 PARTIAL · 1 TESTED — FAIL · 6 NOT REPRESENTED**
+Summary: **9 TESTED — PASS · 2 PARTIAL · 1 TESTED — FAIL · 7 NOT REPRESENTED**
 
-| # | Guardrail | State at `5c39748` | Evidence |
-|---|---|---|---|
-| 1 | Request ≠ Booking | TESTED — PASS | `domain.test.ts` #442 (distinct RQ/BK/ST ids); #778 (only payment recording creates a Booking) |
-| 2 | Acceptance ≠ Confirmation | TESTED — PASS | #390 (acceptance creates a temporary hold only); #442 |
-| 3 | Payment SUCCEEDED ≠ automatic Booking CONFIRMED | TESTED — PASS | #501 (late success → refund, no Booking); #665; #881 |
-| 4 | Payment UNKNOWN ≠ FAILED | TESTED — PASS | #472; #529 |
-| 5 | Booking cancellation ≠ automatic Stay state mirroring | **TESTED — FAIL** | `resolveConflict` sets Stay `CANCELLED`; protected by #991 and #1027 — see [KD-01](#known-deviations) |
-| 6 | Arrival observation ≠ Check-in | NOT REPRESENTED | No arrival-observation concept in the engine |
-| 7 | Departure observation ≠ Checkout | NOT REPRESENTED | No departure-observation concept |
-| 8 | Checkout ≠ Completion | PARTIAL | `checkOutStay` completes in the same action when nothing blocks (consistent with FD-02) but the difference is not observable |
-| 9 | Completion ≠ Inventory release | TESTED — PASS | #274 |
-| 10 | Incident ≠ Maintenance Block | TESTED — PASS | #305 (incident changes no Booking, Stay or commitment) |
-| 11 | Emergency Protective Hold ≠ Maintenance Block | NOT REPRESENTED | No Protective Hold |
-| 12 | Emergency Protective Hold ≠ Commitment | NOT REPRESENTED | No Protective Hold |
-| 13 | External Report ≠ External Fact | NOT REPRESENTED | Only the Host records directly; no report path from Sale/Butler |
-| 14 | External Fact ≠ External-backed Commitment | NOT REPRESENTED | One action creates both |
-| 15 | External Accommodation ≠ Stayora Booking | TESTED — PASS | #763; #835 |
-| 16 | Assignment ≠ Authority | PARTIAL | Engine restricts Butler to assigned villas; no dedicated test for an unassigned Butler |
-| 17 | BQL visibility ≠ Authority | TESTED — PASS | #248; #1336 |
-| 18 | Working Context ≠ Authority | NOT REPRESENTED | Roles come from links; no Working Context |
-| 19 | Conflict ≠ automatic winner | TESTED — PASS | #859; #1124 |
+| # | Guardrail | State at `5c39748` | Evidence | Disposition |
+|---|---|---|---|---|
+| 1 | Request ≠ Booking | TESTED — PASS | `domain.test.ts` #442 (distinct RQ/BK/ST ids); #778 (only payment recording creates a Booking) | |
+| 2 | Acceptance ≠ Confirmation | TESTED — PASS | #390 (acceptance creates a temporary hold only); #442 | |
+| 3 | Payment SUCCEEDED ≠ automatic Booking CONFIRMED | TESTED — PASS | #501 (late success → refund, no Booking); #665; #881 | |
+| 4 | Payment UNKNOWN ≠ FAILED | TESTED — PASS | #472; #529 | |
+| 5 | Booking cancellation ≠ automatic Stay state mirroring | **TESTED — FAIL** | `resolveConflict` sets Stay `CANCELLED`; protected by #991 and #1027 — see [KD-01](#known-deviations) | |
+| 6 | Arrival observation ≠ Check-in | NOT REPRESENTED | No arrival-observation concept in the engine | MUST REPRESENT |
+| 7 | Departure observation ≠ Checkout | NOT REPRESENTED | No departure-observation concept | MUST REPRESENT |
+| 8 | Checkout ≠ Completion | PARTIAL | `checkOutStay` completes in the same action when nothing blocks (consistent with FD-02) but the difference is not observable | |
+| 9 | Completion ≠ Inventory release | TESTED — PASS | #274 | |
+| 10 | Incident ≠ Maintenance Block | TESTED — PASS | #305 (incident changes no Booking, Stay or commitment) | |
+| 11 | Emergency Protective Hold ≠ Maintenance Block | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
+| 12 | Emergency Protective Hold ≠ Commitment | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
+| 13 | External Report ≠ External Fact | NOT REPRESENTED | Only the Host records directly; no report path from Sale/Butler | MUST REPRESENT |
+| 14 | External Fact ≠ External-backed Commitment | NOT REPRESENTED | One action creates both | TBD — PRODUCT ARCHITECT |
+| 15 | External Accommodation ≠ Stayora Booking | TESTED — PASS | #763; #835 | |
+| 16 | Assignment ≠ Authority | PARTIAL | Engine restricts Butler to assigned villas; no dedicated test for an unassigned Butler | |
+| 17 | BQL visibility ≠ Authority | TESTED — PASS | #248; #1336 | |
+| 18 | Working Context ≠ Authority | NOT REPRESENTED | Roles come from links; no Working Context | VALIDATED ELSEWHERE (conditional) |
+| 19 | Conflict ≠ automatic winner | TESTED — PASS | #859; #1124 | |
+
+Correction, 2026-09-23: the baseline summary originally read 10 · 2 · 1 · 6. That was a miscount in the artifact; the per-row states are unchanged.
+
+#### Disposition — Product Architect, 2026-09-23
+
+Mandatory journey list: UNCHANGED. The Exit Contract is not narrowed to reduce iteration scope.
+
+Rows 6, 7, 11, 12 and 13 MUST REPRESENT behaviorally: each is required to validate a mandatory journey — Butler for 6 and 7, Exception / Inventory for 11 and 12, External Stay for 13. Citing CP8-E documentation does not satisfy them. Row 14 has no disposition yet; it is referred to the Product Architect. The auditor's recommendation is MUST REPRESENT within G-v2.3, because the mandatory External Stay journey runs external information → authoritative Fact → applicable inventory representation → Stay, and row 14 is that third step.
+
+Row 18 is VALIDATED ELSEWHERE: canonical evidence is CP8-D1 Workspace Surface Architecture and CP8-E1. This holds only while Working Context is not materially represented in prototype UX. If the prototype later lets one identity switch between capacities or workspaces, or Working Context becomes a real interaction, VALIDATED ELSEWHERE lapses for that scope and the boundary must be tested behaviorally.
+
+CP8-G remains IN PROGRESS — ITERATION REQUIRED. CP8-H is not opened.
+
+#### CP8-G v2 iteration slices
+
+These are implementation slices inside CP8-G v2. They are not new gates, not new guardrails and not new checkpoints. Each slice delivers a real experience, not a checklist of boundaries rendered as UI. A whole-of-G validation pass across G1–G6 and cross-surface continuity follows the three slices; no slice closes G on its own.
+
+**G-v2.1 — Butler Field Journey.** Today → Prepare → Arrival observation → authorized Check-in → In-stay → Departure observation → authorized Checkout. Demonstrates rows 6 and 7, and is expected to move row 8 (Checkout ≠ Completion) beyond PARTIAL.
+
+**G-v2.2 — Exception and Inventory Journey.** Incident → Attention → Emergency Protective Hold → evaluation → Maintenance Block or release, together with Inventory Conflict and reconciliation. Demonstrates rows 11 and 12, and must keep Hold, conflict, Maintenance Block and Commitment visibly distinct.
+
+**G-v2.3 — External Stay and lifecycle reconciliation.** External information / report → authoritative Fact → applicable External-backed Commitment → Stay, creating no fake Stayora Booking. Demonstrates row 13. KD-01 is reconciled in this slice, not as a separate earlier fix: the deviation sits at the Booking → Stay lifecycle boundary, so code, the two Known Deviation Tests and the coverage record change in the same change-set, as the Known Deviation Test Rule requires. Regression coverage is re-run after the change.
 
 Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for traceability only — not evidence that any gate PASSES.
 
@@ -179,8 +201,10 @@ Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for trac
 
 | Iteration | Commit | PASS | PARTIAL | FAIL | NOT REP. | VAL. ELSEWHERE |
 |---|---|---|---|---|---|---|
-| Baseline | `5c39748` | 10 | 2 | 1 | 6 | 0 |
-| Iteration 1 | — | | | | | |
+| Baseline | `5c39748` | 9 | 2 | 1 | 7 | 0 |
+| G-v2.1 | — | | | | | |
+| G-v2.2 | — | | | | | |
+| G-v2.3 | — | | | | | |
 | Final validation | — | | | | | |
 
 Every prototype change in an iteration states which **journey, gate or coverage row** it addresses.
