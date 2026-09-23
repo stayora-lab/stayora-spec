@@ -26,6 +26,8 @@ Số thư mục không trùng với số checkpoint; bảng dưới đây ánh x
 | CP7 — Data Model | `08-conceptual-data-model/` + `09-database-design/` (persistence direction, supporting architecture) |
 | CP8 — UX / Design System | `10-ux-foundation/` + `11-detailed-interaction/` + `12-prototype-validation/` |
 
+Ngoài các thư mục checkpoint ở trên, `13-destination-operations/` chứa policy, configuration và integration của từng destination; nó không phải thư mục checkpoint.
+
 | Checkpoint | Evidence-backed status |
 |---|---|
 | CP1 — Product Foundation | Reopened for reconciliation; Founder review/freeze history is preserved at artifact scope, not re-declared globally here |
