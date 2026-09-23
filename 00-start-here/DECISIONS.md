@@ -859,6 +859,45 @@ Inventory Release requires an authoritative end of the applicable Inventory Comm
 
 Payment Default concerns a policy determination that an applicable due Payment Obligation remains unsatisfied after its deadline and applicable reconciliation/grace conditions. Required Payment Condition is only a condition for a specific commercial action such as Booking Confirmation; it does not represent all future Payment Obligations. No-show/no-arrival concerns operational non-use. No-show does not automatically terminate a valid accommodation right, create Payment Default or mark Stay COMPLETED.
 
+<a id="adr-p066"></a>
+### ADR-P066 — Stay non-occurrence is general, reason-bearing and not mirrored from Booking
+
+**Status: CONFIRMED**
+
+No CANCELLED state is added to Stay. DID_NOT_OCCUR means a scheduled Stay that ultimately did not take place; it is not a synonym for no-show. A non-occurrence reason is mandatory: BOOKING_CANCELLED, NO_SHOW or OTHER_AUTHORIZED_REASON. Booking cancellation does not automatically transition Stay; the transition occurs through the applicable Stay lifecycle policy and authority. Different reasons carry different downstream commercial consequences; none are decided here. This clarifies and generalizes FD-05, which previously described no-show only.
+
+<a id="adr-p067"></a>
+### ADR-P067 — Emergency Protective Hold is an Availability Block, not an Inventory Commitment
+
+**Status: CONFIRMED**
+
+Inventory protection is organised as Availability Block (Owner Block, Maintenance Block, Emergency Protective Hold) alongside Inventory Commitment. Emergency Protective Hold prevents new conflicting commitments while an assessment is pending; it does not override existing commitments and is not proof that a unit is uninhabitable. It is distinct from Maintenance Block and from Finding. ADR-P063 (Inventory Commitment umbrella) is unchanged. Review/expiry duration, eligible actor grants and operating procedure remain policy-defined and TBD.
+
+<a id="adr-p068"></a>
+### ADR-P068 — Payment UNKNOWN may receive one bounded reconciliation extension
+
+**Status: CONFIRMED — POLICY DIRECTION; parameters TBD**
+
+Payment UNKNOWN is neither SUCCEEDED nor FAILED and continues to block unsafe duplicate payment. Where an applicable Temporary Exclusive Commitment is near expiry, policy MAY grant one bounded reconciliation extension. The extension is not automatic, not universal and not a fixed duration. Duration, eligibility conditions and the effect of an unresolved UNKNOWN at expiry remain configurable and TBD. This records a policy direction consistent with FD-19; it does not resolve retry, refund, deposit, deadline or settlement details.
+
+<a id="adr-p069"></a>
+### ADR-P069 — Oceanami V0 is Vietnamese-first
+
+**Status: CONFIRMED**
+
+Vietnamese is the primary UI language for every Oceanami V0 surface. English is deferred localization and is not a V0 capability. UI copy must not be structured in a way that blocks later localization; that is an implementation concern, not a V0 multilingual feature.
+
+## Founder Decision canonicalization
+
+Founder Decisions (FD) are the historical record of the Founder Decision Gate. ADR-P entries are the canonical durable product/domain decision record. A domain-effective FD is marked CANONICALIZED → ADR-P0xx in the CP8-E reconciliation register. FD entries are not renumbered and are not marked SUPERSEDED; canonicalization does not weaken the original decision.
+
+| FD | Canonical ADR |
+|---|---|
+| FD-05 | ADR-P066 (clarified and generalized) |
+| FD-15 | ADR-P067 |
+| FD-16 | ADR-P067 |
+| FD-19 | ADR-P068 (policy direction) |
+
 <a id="contradiction-audit"></a>
 ## Contradiction audit
 
