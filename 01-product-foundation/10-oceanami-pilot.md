@@ -36,24 +36,9 @@ Phụ thuộc: [ADR-P015](../00-start-here/DECISIONS.md#adr-p015), [ADR-P016](..
 
 **Status: CONFIRMED — Oceanami Pilot policy; NOT a global Stayora invariant.**
 
-### Booking created more than 24 hours before scheduled Check-in
+The policy is decided in [ADR-P061](../00-start-here/DECISIONS.md#adr-p061). Its configuration values are recorded in [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md).
 
-- Initial Payment = 50%.
-- Satisfying the 50% Required Payment Condition may allow Booking Confirmation when all other Booking Confirmation Conditions are satisfied.
-- Remaining Balance = 50%, due at T-24h before scheduled Check-in.
-
-### Booking created at or within 24 hours before scheduled Check-in
-
-- No partial/deposit confirmation path.
-- 100% payment is required to satisfy the Required Payment Condition.
-
-Before commercial commitment, clearly disclose Total Price, Initial Payment, Remaining Balance, exact payment deadline, applicable consequences, Change Policy, Cancellation Policy and No-show policy. Material terms require explicit auditable consent and a policy snapshot.
-
-### T-48h and T-24h checkpoints
-
-T-48h is Pre-arrival / Payment Assurance: system reminder plus Sale and/or Host follow-up as applicable. Butler is not the primary debt collector; Butler focuses on ETA, guest count, readiness and Destination/BQL operations. A reminder does not create the payment obligation.
-
-T-24h is the Commercial Commitment Checkpoint, not primarily an anti-Sale enforcement mechanism. If the required balance remains unsatisfied after the deadline, do not automatically label it Payment Default when provider/payment result is UNKNOWN. Payment Default requires the applicable required balance unsatisfied, deadline passed, no valid approved change/cancellation/exception, and no unresolved provider/payment transaction requiring reconciliation. Exact legal wording/enforceability remains TBD · legal-validation-required.
+At the Pre-arrival / Payment Assurance checkpoint: system reminder plus Sale and/or Host follow-up as applicable. Butler is not the primary debt collector; Butler focuses on ETA, guest count, readiness and Destination/BQL operations. A reminder does not create the payment obligation.
 
 **TBD — FOUNDER DECISION:** when a transaction begins before the 24-hour boundary but Booking Confirmation occurs at or inside 24 hours, the policy evaluation timestamp (for example, transaction start versus confirmation/commitment time) has not been selected. This pass does not choose it.
 

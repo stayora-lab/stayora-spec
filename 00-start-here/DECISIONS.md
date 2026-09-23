@@ -831,6 +831,8 @@ Booking Confirmation requires satisfaction of applicable Booking Confirmation Co
 
 For bookings created more than 24 hours before scheduled Check-in: Initial Payment = 50%; satisfying that Required Payment Condition may allow Booking Confirmation when other conditions are met; Remaining Balance = 50%, due at T-24h. At or within 24 hours: no partial/deposit confirmation path; 100% payment is required for the Required Payment Condition. Material Total Price, payments, deadline, consequences and Change/Cancellation/No-show Policy require explicit auditable consent/policy snapshot. T-48h is Payment Assurance; T-24h is a Commercial Commitment Checkpoint. Butler is not primary debt collector. Payment Default excludes unresolved provider/payment UNKNOWN and remains legal-validation-required/TBD in exact wording.
 
+The Oceanami pilot configuration values are recorded in [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md); that file transcribes this ADR and does not override it.
+
 <a id="adr-p062"></a>
 ### ADR-P062 — Inventory Availability derived truth
 

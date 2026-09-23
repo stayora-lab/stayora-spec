@@ -16,7 +16,7 @@ Phụ thuộc: [ADR-P019](../00-start-here/DECISIONS.md#adr-p019), [ADR-P020](..
 
 ## Payment direction hiện hành
 
-**WORKING MODEL · legal-validation-required.** Baseline ưu tiên booking money đi qua facilitated collection rail bằng hạ tầng payment partner được cấp phép; Stayora điều phối booking, đối soát, phân bổ và settlement. “Facilitated collection 100%” nói về rail/collection responsibility, không nói Guest phải thanh toán 100% tại Booking Confirmation. Oceanami Pilot có thể dùng 50% + 50%. Đây là hướng product để nghiên cứu, không kết luận mô hình đã được phép triển khai tại Việt Nam, provider nào hỗ trợ hoặc Stayora có quyền giữ tiền.
+**WORKING MODEL · legal-validation-required.** Baseline ưu tiên booking money đi qua facilitated collection rail bằng hạ tầng payment partner được cấp phép; Stayora điều phối booking, đối soát, phân bổ và settlement. “Facilitated collection 100%” nói về rail/collection responsibility, không nói Guest phải thanh toán 100% tại Booking Confirmation. Cấu hình thanh toán của Oceanami Pilot được ghi tại [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md) (quyết định: ADR-P061). Đây là hướng product để nghiên cứu, không kết luận mô hình đã được phép triển khai tại Việt Nam, provider nào hỗ trợ hoặc Stayora có quyền giữ tiền.
 
 **SUPERSEDED.** 30% chuyển về tài khoản Stayora và 70% Owner nhận trực tiếp không còn là foundation mặc định. Không áp lại cơ chế này từ checkpoint Câu 34–35. Cũng không dùng lý luận “nhận 30% thì doanh thu chịu thuế là 30%”.
 
