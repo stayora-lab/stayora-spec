@@ -24,6 +24,26 @@ class Rules(unittest.TestCase):
         sample.write_text('# Sample\n> Status: DRAFT\nLast reviewed: 2026-09-23\n')
         return sample, decision
 
+    def test_warning_scope_and_secret_scan(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.base(root)
+            fixture_root = Path(__file__).parent / 'fixtures'
+            for folder, filename in [('generated', 'evidence.md'), ('tools', 'evidence.md'), ('.github', 'evidence.md'), ('spec', 'chapter.md')]:
+                target = root / folder / filename
+                target.parent.mkdir(parents=True)
+                fixture_folder = folder if folder == 'spec' else 'generated'
+                target.write_text((fixture_root / fixture_folder / filename.replace('.md', '.txt')).read_text())
+            findings, suppressed = checker.run(root, today=__import__('datetime').date(2026, 9, 23), return_meta=True)
+            self.assertEqual(suppressed, 6)
+            self.assertFalse(any(f['file'].startswith(('generated/', 'tools/', '.github/')) and f['rule'] in ('W1', 'W2') for f in findings))
+            self.assertEqual({f['rule'] for f in findings if f['file'] == 'spec/chapter.md'}, {'W1', 'W2'})
+            for folder in ('generated', 'tools', '.github'):
+                with (root / folder / 'evidence.md').open('a') as stream:
+                    stream.write('Contact test@example.com\n')
+            findings = checker.run(root, only='E6')
+            self.assertEqual({f['file'] for f in findings}, {f'{folder}/evidence.md' for folder in ('generated', 'tools', '.github')})
+
     def test_fixture_cases(self):
         for rule, cases in CASES.items():
             for outcome, content in cases.items():

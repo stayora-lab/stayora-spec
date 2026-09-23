@@ -11,6 +11,9 @@ from pathlib import Path
 from urllib.parse import unquote
 
 RULES = {**{f'E{i}': 'ERROR' for i in range(1, 8)}, **{f'W{i}': 'WARN' for i in range(1, 5)}}
+# These paths hold tooling and generated evidence, not specification documents.
+# Only W1/W2 skip them; all ERROR rules still scan their Markdown files.
+NON_SPEC_WARNING_PREFIXES = ('generated/', 'tools/', '.github/')
 ADR = re.compile(r'\bADR-P\d{3}\b')
 FD = re.compile(r'\bFD-\d{2}\b')
 HEADING = re.compile(r'^(#{1,6})\s+(.+?)\s*#*\s*$')
@@ -29,12 +32,13 @@ def slug(s):
 def clean(s):
     return re.sub(r'\*|`', '', s).strip().rstrip('.').strip()
 
-def run(root, only=None, today=None):
+def run(root, only=None, today=None, return_meta=False):
     root = Path(root).resolve()
     today = today or dt.date.today()
-    docs = {p.relative_to(root).as_posix(): p.read_text(encoding='utf-8') for p in root.rglob('*.md') if '.git' not in p.parts and 'tools' not in p.relative_to(root).parts}
+    docs = {p.relative_to(root).as_posix(): p.read_text(encoding='utf-8') for p in root.rglob('*.md') if '.git' not in p.parts}
     lines = {p: t.splitlines() for p, t in docs.items()}
     findings = []
+    suppressed_w1_w2 = 0
     def add(rule, path, n, detail):
         if only and rule != only: return
         source = lines.get(path, [])
@@ -143,15 +147,20 @@ def run(root, only=None, today=None):
                 if expected and int(m.group(1)) != expected: add('E7', path, n, f'Stated {m.group(1)}, register has {expected}')
     for path, ls in lines.items():
         if path == 'AGENTS.md': continue
+        excluded = path.startswith(NON_SPEC_WARNING_PREFIXES)
+        def warn(rule, detail):
+            nonlocal suppressed_w1_w2
+            if excluded: suppressed_w1_w2 += 1
+            else: add(rule, path, 1, detail)
         header = '\n'.join(ls[:12])
-        if not ls or not ls[0].startswith('# ') or not re.search(r'(?i)(?:status|checkpoint|scope)', header): add('W1', path, 1, 'Missing/malformed heading or header metadata')
+        if not ls or not ls[0].startswith('# ') or not re.search(r'(?i)(?:status|checkpoint|scope)', header): warn('W1', 'Missing/malformed heading or header metadata')
         m = re.search(r'(?im)^.*Last reviewed\s*:\s*(20\d{2}-\d{2}-\d{2})', '\n'.join(ls[:30]))
-        if not m: add('W2', path, 1, 'Missing Last reviewed date')
+        if not m: warn('W2', 'Missing Last reviewed date')
         else:
             try:
                 reviewed = dt.date.fromisoformat(m.group(1))
-                if (today-reviewed).days > 180: add('W2', path, 1, f'Last reviewed {reviewed} is over 180 days old')
-            except ValueError: add('W2', path, 1, 'Malformed Last reviewed date')
+                if (today-reviewed).days > 180: warn('W2', f'Last reviewed {reviewed} is over 180 days old')
+            except ValueError: warn('W2', 'Malformed Last reviewed date')
     main = '00-start-here/README.md'
     states = {}
     in_status_table = False
@@ -167,7 +176,8 @@ def run(root, only=None, today=None):
             m = re.search(r'\b(CP[1-8])\b.{0,70}\b(?:status|is)\s*[:=]?\s*(IN PROGRESS|NOT STARTED|COMPLETE|CLOSED|ACCEPTED|FAILED)\b', line, re.I)
             if m and m.group(1) in states and m.group(2).lower() not in states[m.group(1)].lower():
                 add('W4', path, n, f'Claim {m.group(1)} {m.group(2)} differs from README status: {states[m.group(1)]}')
-    return sorted(findings, key=lambda x: (list(RULES).index(x['rule']), x['file'], x['line'], x['detail']))
+    sorted_findings = sorted(findings, key=lambda x: (list(RULES).index(x['rule']), x['file'], x['line'], x['detail']))
+    return (sorted_findings, suppressed_w1_w2) if return_meta else sorted_findings
 
 def main():
     ap = argparse.ArgumentParser()
@@ -175,9 +185,9 @@ def main():
     ap.add_argument('--format', choices=['text', 'json'], default='text')
     ap.add_argument('--only', choices=RULES)
     args = ap.parse_args()
-    found = run(args.root, args.only)
+    found, suppressed = run(args.root, args.only, return_meta=True)
     counts = Counter(f['severity'] for f in found)
-    if args.format == 'json': print(json.dumps({'findings': found, 'summary': {'ERROR': counts['ERROR'], 'WARN': counts['WARN']}}, ensure_ascii=False, indent=2))
+    if args.format == 'json': print(json.dumps({'findings': found, 'summary': {'ERROR': counts['ERROR'], 'WARN': counts['WARN'], 'SUPPRESSED_W1_W2': suppressed}}, ensure_ascii=False, indent=2))
     else:
         for rule in RULES:
             group = [f for f in found if f['rule'] == rule]
@@ -191,7 +201,7 @@ def main():
                         excerpt = '<missing Last reviewed>' if rule == 'W2' and f['detail'].startswith('Missing') else f['text']
                         detail = '' if rule in ('W1', 'W2') else f" — {f['detail']}"
                         print(f"  {Path(f['file']).name}:{f['line']}: {excerpt}{detail}")
-        print(f"SUMMARY ERROR={counts['ERROR']} WARN={counts['WARN']}")
+        print(f"SUMMARY ERROR={counts['ERROR']} WARN={counts['WARN']} SUPPRESSED_W1_W2={suppressed}")
     return int(counts['ERROR'] > 0)
 
 if __name__ == '__main__': sys.exit(main())
