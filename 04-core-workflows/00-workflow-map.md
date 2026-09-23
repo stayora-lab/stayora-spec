@@ -49,7 +49,7 @@ External Commerce
 
 Hai nhánh Inventory và Stay có thể được dùng và/hoặc tùy nhu cầu/điều kiện hợp lệ; không bắt buộc một Stayora Booking. External Booking là external commerce record, Inventory/Stay chỉ reference hoặc ghi tối thiểu. External path không bị ép qua Stayora Payment/Settlement.
 
-## Sáu workflow
+## Các workflow
 
 | Workflow | Điểm vào | Ranh giới kết quả |
 |---|---|---|
@@ -59,6 +59,10 @@ Hai nhánh Inventory và Stay có thể được dùng và/hoặc tùy nhu cầu
 | [WF-04](04-stay-lifecycle.md) | Scheduled Stay từ các nguồn | Actual operations → Checkout → completion readiness → STAY COMPLETED hoặc policy-governed DID_NOT_OCCUR; Checkout ≠ Completed |
 | [WF-05](05-incident-resolution.md) | Observation/Complaint | Evidence/response/resolution/responsibility; consequences do domain liên quan quyết định |
 | [WF-06](06-completion-settlement-payout.md) | Actual Checkout → Operational Completion Readiness → STAY COMPLETED | Financial Reconciliation → Settlement → Payout; policy-driven exception eligibility remains separate |
+| [WF-07](09-owner-onboarding.md) | Identity với Owner/Host intent, claim hoặc invitation | Owner và/hoặc Primary Host relationship + explicit capability grants; không publish, Verified, Inventory hay finance tự động |
+| [WF-08](10-property-onboarding.md) | Property được represent (resource-first) | Destination + Bookable Unit + independent readiness outcomes; không Availability, Booking hay Stay |
+| [WF-09](11-sale-onboarding.md) | Sale application, invitation hoặc Admin-assisted | Platform Eligibility + Distribution Relationship → bounded Sale Working Context; không Booking/Inventory Authority |
+| [WF-10](12-butler-onboarding.md) | Butler application, invitation hoặc assignment | Platform Eligibility + scoped Butler Assignment → Butler Working Context; không commercial/Inventory/Money authority |
 
 ## Completed Stay là eligibility boundary — CONFIRMED
 
