@@ -58,7 +58,7 @@ This report is the required `CP8-B2-EXTERNAL-BOOKING-TO-STAY-REPORT.md`.
 ### Changed
 
 - [CP8 UX README](README.md) now records B2 as an accepted baseline and D1 as the current draft execution unit.
-- [Start Here README](../00-start-here/README.md), [Source of Truth](../00-start-here/SOURCE_OF_TRUTH.md) and [outputs README](../../README.md) now point to C1 as current; later work remains not started.
+- [Start Here README](../00-start-here/README.md), [Source of Truth](../00-start-here/SOURCE_OF_TRUTH.md) and outputs README (file not part of this repository) now point to C1 as current; later work remains not started.
 
 These are index/status corrections only. No CP1–CP7 product, domain, authority, workflow, lifecycle, policy, V0 or data-model decision was changed.
 

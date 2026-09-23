@@ -163,6 +163,10 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P063](#adr-p063) | Inventory Commitment umbrella | CONFIRMED |
 | [ADR-P064](#adr-p064) | Physical absence ≠ Inventory Release | CONFIRMED |
 | [ADR-P065](#adr-p065) | Payment Default ≠ No-show | CONFIRMED |
+| [ADR-P066](#adr-p066) | Stay non-occurrence is general, reason-bearing and not mirrored from Booking | CONFIRMED |
+| [ADR-P067](#adr-p067) | Emergency Protective Hold is an Availability Block, not an Inventory Commitment | CONFIRMED |
+| [ADR-P068](#adr-p068) | Payment UNKNOWN may receive one bounded reconciliation extension | CONFIRMED |
+| [ADR-P069](#adr-p069) | Oceanami V0 is Vietnamese-first | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -878,7 +882,7 @@ Inventory protection is organised as Availability Block (Owner Block, Maintenanc
 <a id="adr-p068"></a>
 ### ADR-P068 — Payment UNKNOWN may receive one bounded reconciliation extension
 
-**Status: CONFIRMED — POLICY DIRECTION; parameters TBD**
+**Status: CONFIRMED** — policy direction; parameters TBD.
 
 Payment UNKNOWN is neither SUCCEEDED nor FAILED and continues to block unsafe duplicate payment. Where an applicable Temporary Exclusive Commitment is near expiry, policy MAY grant one bounded reconciliation extension. The extension is not automatic, not universal and not a fixed duration. Duration, eligibility conditions and the effect of an unresolved UNKNOWN at expiry remain configurable and TBD. This records a policy direction consistent with FD-19; it does not resolve retry, refund, deposit, deadline or settlement details.
 
