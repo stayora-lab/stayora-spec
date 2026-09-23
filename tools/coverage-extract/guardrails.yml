@@ -1,0 +1,31 @@
+# Adding a pattern changes what evidence is surfaced, never what the coverage state is.
+# JSON syntax is used here because JSON is a YAML 1.2 subset and needs no parser dependency.
+{
+  "expected_files": [
+    "src/lib/domain/domain.test.ts",
+    "src/lib/domain/engine.ts",
+    "src/lib/domain/config.ts",
+    "src/lib/domain/types.ts"
+  ],
+  "guardrails": {
+    "1": {"name": "Request ≠ Booking", "patterns": ["ids all different", "no exported function creates a Booking", "re:^createRequest$"]},
+    "2": {"name": "Acceptance ≠ Confirmation", "patterns": ["accept first", "ids all different", "re:^acceptRequest$"]},
+    "3": {"name": "Payment SUCCEEDED ≠ automatic Booking CONFIRMED", "patterns": ["late SUCCEEDED", "SUCCEEDED on INITIAL after hold ended", "INITIAL SUCCEEDED → no Booking", "re:^recordPayment$"]},
+    "4": {"name": "Payment UNKNOWN ≠ FAILED", "patterns": ["re:\\bUNKNOWN\\b", "re:^resolveUnknown$"]},
+    "5": {"name": "Booking cancellation ≠ automatic Stay state mirroring", "patterns": ["Stay CANCELLED", "re:^resolveConflict$"]},
+    "6": {"name": "Arrival observation ≠ Check-in", "patterns": ["arrival observation", "observeArrival"]},
+    "7": {"name": "Departure observation ≠ Checkout", "patterns": ["departure observation", "observeDeparture"]},
+    "8": {"name": "Checkout ≠ Completion", "patterns": ["checkOutStay", "re:checkout.*completion"]},
+    "9": {"name": "Completion ≠ Inventory release", "patterns": ["completing a Stay does not end", "re:completion.*commitment"]},
+    "10": {"name": "Incident ≠ Maintenance Block", "patterns": ["an incident does not change", "re:^reportIncident$"]},
+    "11": {"name": "Emergency Protective Hold ≠ Maintenance Block", "patterns": ["Emergency Protective Hold", "protectiveHold"]},
+    "12": {"name": "Emergency Protective Hold ≠ Commitment", "patterns": ["Emergency Protective Hold", "protectiveHold"]},
+    "13": {"name": "External Report ≠ External Fact", "patterns": ["External Report", "reportExternal"]},
+    "14": {"name": "External Fact ≠ External-backed Commitment", "patterns": ["re:^recordExternalBooking$", "External-backed Commitment"]},
+    "15": {"name": "External Accommodation ≠ Stayora Booking", "patterns": ["no Booking exists for any Stay with origin EXTERNAL", "external booking on free dates"]},
+    "16": {"name": "Assignment ≠ Authority", "patterns": ["unassigned Butler", "re:^checkInStay$"]},
+    "17": {"name": "BQL visibility ≠ Authority", "patterns": ["BQL cannot", "BQL/Butler/Sale calling"]},
+    "18": {"name": "Working Context ≠ Authority", "patterns": ["Working Context", "workingContext"]},
+    "19": {"name": "Conflict ≠ automatic winner", "patterns": ["3-way conflict", "external overlapping a Stayora booking", "re:^resolveConflict$"]}
+  }
+}
