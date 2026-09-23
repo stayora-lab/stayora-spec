@@ -9,7 +9,7 @@ python3 tools/spec-check/check.py --only=E4
 python3 -m unittest discover -s tools/spec-check/tests
 ```
 
-The checker scans Markdown files in the specification tree, excluding `tools/`. It uses only Python's standard library and reads no network resources. Findings are grouped by rule and include `file:line`, source text, and a short reason. ERROR findings produce exit code 1; WARN alone produces 0. JSON emits `findings` and severity totals. `--root` selects a fixture or another checkout.
+The checker scans Markdown files throughout the repository. It uses only Python's standard library and reads no network resources. Findings are grouped by rule and include `file:line`, source text, and a short reason. ERROR findings produce exit code 1; WARN alone produces 0. JSON emits `findings`, severity totals and the W1/W2 suppression count. `--root` selects a fixture or another checkout.
 
 | Rule | Check |
 |---|---|
@@ -26,3 +26,7 @@ The checker scans Markdown files in the specification tree, excluding `tools/`. 
 | W4 | Best-effort CP status claims compare with the evidence-backed status table in `00-start-here/README.md`. It only recognizes simple `CPn is/status` claims and reports disagreements for human review. |
 
 To add a rule, add its severity to `RULES`, implement a deterministic scan in `run`, document it here, and add passing and failing fixture cases in `tests/fixtures/cases.json`. Keep the tests independent of live spec content. Add the rule to `--only` automatically through `RULES`.
+
+## W1/W2 document scope
+
+`generated/**`, `tools/**` and `.github/**` contain tooling or generated evidence rather than specification documents. W1 (header metadata) and W2 (`Last reviewed`) do not report findings for Markdown files there. The summary shows `SUPPRESSED_W1_W2`, the number of W1/W2 candidates skipped by this scope. Every ERROR rule still scans these paths, including E6 secret and personal-data detection.
