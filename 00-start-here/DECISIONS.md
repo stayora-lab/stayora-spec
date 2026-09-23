@@ -111,7 +111,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P011](#adr-p011) | Sale là actor phân phối trọng tâm | CONFIRMED |
 | [ADR-P012](#adr-p012) | Normallist / whitelist / blacklist | CONFIRMED |
 | [ADR-P013](#adr-p013) | Request không giữ inventory | CONFIRMED |
-| [ADR-P014](#adr-p014) | Authorized acceptance tạo Temporary Inventory Commitment; Money attempt tách riêng | CONFIRMED — REFINED |
+| [ADR-P014](#adr-p014) | Authorized acceptance có thể tạo Temporary Inventory Commitment; Money attempt tách riêng | CONFIRMED — REFINED |
 | [ADR-P015](#adr-p015) | Một villa-night một inventory truth | CONFIRMED |
 | [ADR-P016](#adr-p016) | External stay tham gia operations | CONFIRMED |
 | [ADR-P017](#adr-p017) | Instant Book là commitment | CONFIRMED |
@@ -167,6 +167,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P067](#adr-p067) | Emergency Protective Hold is an Availability Block, not an Inventory Commitment | CONFIRMED |
 | [ADR-P068](#adr-p068) | Payment UNKNOWN may receive one bounded reconciliation extension | CONFIRMED |
 | [ADR-P069](#adr-p069) | Oceanami V0 is Vietnamese-first | CONFIRMED |
+| [ADR-P070](#adr-p070) | Parallel Commercial Acceptance and Competitive Confirmation | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -312,7 +313,7 @@ Request chỉ là ý định; không reserve villa-night và không dùng để 
 **Nguồn:** [SRC-00](SOURCE_OF_TRUTH.md#src-00), [SRC-22](SOURCE_OF_TRUTH.md#src-22)
 
 <a id="adr-p014"></a>
-### ADR-P014 — Authorized Acceptance tạo Temporary Inventory Commitment
+### ADR-P014 — Authorized Acceptance có thể tạo Temporary Inventory Commitment
 
 **Status: CONFIRMED — REFINED**
 
@@ -321,6 +322,8 @@ Request không reserve Inventory. Host hoặc Co-host có authority accept có t
 **Ranh giới:** Duration, payment pending/late success và race: TBD.
 
 **Nguồn:** [SRC-00](SOURCE_OF_TRUTH.md#src-00), [SRC-22](SOURCE_OF_TRUTH.md#src-22)
+
+**Refinement, 2026-09-23:** Acceptance MAY lead to a Temporary Exclusive Commitment where applicable policy and Host intent require exclusivity. Acceptance does not inherently create one. An implementation that always creates a Temporary Exclusive Commitment on acceptance narrows behavior that CP4 explicitly permits ([Booking Request lifecycle](../05-state-machines-policies/02-booking-request-and-booking.md): "Multiple Requests may coexist while no exclusive commitment exists").
 
 <a id="adr-p015"></a>
 ### ADR-P015 — Một villa-night một inventory truth
@@ -332,6 +335,8 @@ Confirmed external booking có cùng inventory authority với Stayora booking; 
 **Ranh giới:** Không hứa real-time đa kênh hay tự chọn bên thắng khi hai confirmation xung đột.
 
 **Nguồn:** [SRC-00](SOURCE_OF_TRUTH.md#src-00), [SRC-22](SOURCE_OF_TRUTH.md#src-22)
+
+**Cross-reference, 2026-09-23:** This ADR governs conflicting authoritative inventory truths. It does not govern competition among Commercial Acceptances that have not yet become confirmed inventory truth; see ADR-P070.
 
 <a id="adr-p016"></a>
 ### ADR-P016 — External stay tham gia operations
@@ -886,12 +891,37 @@ Inventory protection is organised as Availability Block (Owner Block, Maintenanc
 
 Payment UNKNOWN is neither SUCCEEDED nor FAILED and continues to block unsafe duplicate payment. Where an applicable Temporary Exclusive Commitment is near expiry, policy MAY grant one bounded reconciliation extension. The extension is not automatic, not universal and not a fixed duration. Duration, eligibility conditions and the effect of an unresolved UNKNOWN at expiry remain configurable and TBD. This records a policy direction consistent with FD-19; it does not resolve retry, refund, deposit, deadline or settlement details.
 
+**Refinement, 2026-09-23:** UNKNOWN has two contexts. Within an applicable Temporary Exclusive Commitment, policy MAY grant one bounded reconciliation extension as stated above. In competitive parallel acceptance, an UNKNOWN attempt neither creates exclusivity nor establishes competitive priority, and does not prevent another Request from reaching confirmation. UNKNOWN does not win and is not assumed to have lost: after reconciliation, if the payment was never received there is nothing to refund; if it was received while another Request already confirmed, the applicable refund/recovery path applies; if it remains UNKNOWN it stays in reconciliation.
+
 <a id="adr-p069"></a>
 ### ADR-P069 — Oceanami V0 is Vietnamese-first
 
 **Status: CONFIRMED**
 
 Vietnamese is the primary UI language for every Oceanami V0 surface. English is deferred localization and is not a V0 capability. UI copy must not be structured in a way that blocks later localization; that is an implementation concern, not a V0 multilingual feature.
+
+<a id="adr-p070"></a>
+### ADR-P070 — Parallel Commercial Acceptance and Competitive Confirmation
+
+**Status: CONFIRMED**
+
+**Canonicalizes existing behavior (CP4, ADR-P013, ADR-P014).** Three concepts are distinct: Commercial Acceptance, Inventory Exclusivity, Booking Confirmation. Commercial Acceptance expresses Host willingness to proceed; it does not, by itself, reserve Inventory or establish priority over another Request. Multiple overlapping Requests may hold Commercial Acceptance concurrently while no applicable exclusive Inventory Commitment prevents competition. Only a Temporary Exclusive Commitment creates exclusivity; only Booking Confirmation creates booking truth.
+
+**New decision — Host handling modes.** At acceptance the Host chooses how the Request is handled: exclusive handling, which pairs Commercial Acceptance with a Temporary Exclusive Commitment reserving Unit × Time for a bounded period; or competitive handling, which is Commercial Acceptance alone and leaves Unit × Time open to other accepted Requests. These are two ways of handling a Request after acceptance, not two kinds of Request or Booking.
+
+**New decision — competitive confirmation priority.** In competitive handling, priority is determined by the first qualifying authoritative confirmation: the first payment or confirmation evidence successfully verified or recorded under the applicable Booking Confirmation Policy (see ADR-P061 for the Oceanami pilot's Required Payment Condition). It is not the earliest claimed bank-transfer timestamp, which Stayora cannot prove. Competitive priority never overrides a valid Temporary Exclusive Commitment.
+
+**Consequence for competing Requests.** When one Request becomes Booking CONFIRMED and establishes the applicable confirmed inventory truth, overlapping competing Requests are no longer eligible for confirmation and become CONFLICTED — not REJECTED, because the Host did not judge them unsuitable; the inventory opportunity disappeared.
+
+**Disclosure.** Competition may be disclosed only when an overlapping accepted Request genuinely exists. Disclosure is symmetric across the competing parties, and any count shown is derivable from canonical truth and auditable records. Scarcity fiction is prohibited.
+
+**Deadlines.** A deadline communicated to a Guest at acceptance is a transaction snapshot. The Host may extend it; the Host may not unilaterally shorten it. In competitive handling the deadline is not a guarantee of inventory, and the Guest must be told so.
+
+**Payment already in flight.** Ending competition prevents new payment initiation through Stayora; it does not make an external or in-flight payment impossible. A reconciliation path is required, and refund applicability depends on money actually received and on applicable policy.
+
+**TBD / configurable:** default and maximum deadlines, reminder schedule, refund timing, the maximum number of concurrent Commercial Acceptances if any, and the exact copy and presentation of disclosure. Values for the Oceanami pilot belong in 13-destination-operations/oceanami/configuration.md.
+
+**Nguồn:** [SRC-30](SOURCE_OF_TRUTH.md#src-30) — Founder operating case, 2026-09-23; Product Architect disposition, 2026-09-23.
 
 ## Founder Decision canonicalization
 
