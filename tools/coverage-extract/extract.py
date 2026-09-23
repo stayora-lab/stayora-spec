@@ -91,7 +91,7 @@ def md_cell(value):
 
 
 def render(data, mapping, sha, spec_commit, timestamp):
-    out = [f'# Coverage evidence — {sha}', '', 'Prototype repository: `stayora-lab/stayora-new`  ', f'Prototype SHA: `{sha}`  ', f'Extraction timestamp (UTC): `{timestamp}`  ', f'Spec commit containing mapping: `{spec_commit}`', '', 'Generated evidence. Not canonical. Coverage states are assigned by the Product Architect.', '', '## 1. Guardrail evidence', '']
+    out = [f'# Coverage evidence — {sha}', '', 'Prototype repository: `stayora-lab/stayora-new`', '', f'Prototype SHA: `{sha}`', '', f'Extraction timestamp (UTC): `{timestamp}`', '', f'Spec commit containing mapping: `{spec_commit}`', '', 'Generated evidence. Not canonical. Coverage states are assigned by the Product Architect.', '', '## 1. Guardrail evidence', '']
     if data['missing']:
         out += ['Expected files missing at this SHA:'] + [f'- `{path}`' for path in data['missing']] + ['']
     material = data['tests'] + data['functions']
