@@ -1,0 +1,8 @@
+{
+  "prototype": "CP8-G deterministic local simulation",
+  "destination": "Oceanami",
+  "properties": [{"id":"P-03","name":"Villa 03","units":["U-03"]},{"id":"P-04","name":"Villa 04","units":["U-04"]}],
+  "actors": {"guest":"G-001","host":"HOST-03","sale":"SA-014","butler":"BUTLER-07","bql":"BQL-OCEANAMI","admin":"ADMIN-01"},
+  "objects": {"request":"RQ-104","booking":"BK-084","stay":"ST-084","paymentAttempt":"PA-084","externalReport":"ER-019"},
+  "inventoryTruths": ["Owner Block","Maintenance Block","Emergency Protective Hold","Temporary Exclusive Commitment","Confirmed Accommodation Commitment","External-backed Commitment","Conflict","Derived Availability","Contextual Bookability"]
+}

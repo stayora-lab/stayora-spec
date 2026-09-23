@@ -1,0 +1,23 @@
+# B1 — Responsibility Handoffs
+
+> Status: **DRAFT — FOUNDER / PRODUCT ARCHITECT REVIEW** · **NOT FROZEN**
+
+Each handoff changes who needs to act or understand the object. It does not grant authority from navigation, create a duplicate object or close an unresolved policy.
+
+| Handoff | From → To | Trigger | Canonical object | Authority basis | Receiving context must know | If handoff fails |
+|---|---|---|---|---|---|---|
+| H1 | Guest → Sale | Guest asks for help finding accommodation | Guest need / discovery context; Lead only if an existing lead path applies | Sale platform eligibility and relevant distribution relationship | Minimum demand needed to search; communication/source context; no commercial commitment yet | Remain outside Booking path or use existing Lead policy; do not invent CRM record. |
+| H2 | Sale → shared Marketplace/Inventory projection | Sale searches a candidate | Property, Bookable Unit, Listing, derived Availability, Public Price | Sale discovery capability; no Inventory Authority | Dates, scope, provenance/uncertainty and actor-specific bookability | Do not promise dates; continue discovery or surface no suitable supply. |
+| H3 | Sale → Guest | Sale presents an option/Offer | Conceptual Offer / terms | Sale may compose/present; Offer ownership remains TBD | Price, dates, material terms, trust/provenance and what remains subject to Host decision | Guest declines or terms change; no Request/Booking created. |
+| H4 | Guest → Sale | Guest authorizes proceeding | Guest/party relationship and Offer/terms | Guest consent/participation; payer/creator/staying party remain distinct | Required data and consent basis for a truthful Request | Stop or return for correction; no misleading Request. |
+| H5 | Sale → Host / authorized Booking Authority | Sale creates `PENDING` Booking Request | Booking Request | Sale Request-creation capability; Host has later decision authority | Request terms, dates/unit, relevant Guest/party data, source and provenance | Missing authority/notification path remains exception/TBD; no auto-accept/reject. |
+| H6 | Host / authorized Co-host → Inventory/payment progression | Authorized Host accepts Request | Request `ACCEPTED`; Inventory Commitment/Payment objects may follow | Booking Authority plus required Inventory/policy evaluation | Accepted terms, revalidated availability, finite commitment/payment conditions | No Booking confirmation; preserve Request and conflict/exception truth. |
+| H7 | Inventory/Booking progression → Payer/Guest | Applicable Required Payment Condition is due | Required Payment Condition, Payment Obligation/Attempt | Money/payment context and explicit payer consent | Specific condition, amount/deadline only where policy defines them; not all future obligations | Do not confirm; exact expiry/default/grace remains open. |
+| H8 | Payer/Payment → Booking confirmation evaluation | Attempt/obligation outcome is available | Payment Attempt, Obligation, Request, Confirmation Conditions | Money and Booking policy evaluation | Succeeded/Failed/UNKNOWN distinction, condition satisfaction and remaining uncertainty | No invented default/cancellation/release; reconcile/escalate. |
+| H9 | Booking confirmation → Guest/Sale/Host projections | All confirmation conditions pass | Booking `CONFIRMED` + Confirmed Accommodation Commitment | Valid commercial authority and policy conditions | Confirmed terms, provenance, next responsibility and separate Stay/access meaning | Keep pre-confirmation truth; do not show a confirmed Booking. |
+| H10 | Confirmed commerce → Guest Stay Access | Confirmed Booking and valid represented Stay/access relationship | Booking, Accommodation Basis, Stay, scoped credential | Guest relationship plus destination/access policy | Need-to-know arrival/access and privacy conditions | Escalate access exception; no universal denial or commercial rewrite. |
+| H11 | Confirmed/represented Stay → Butler/BQL/Host Operations | Stay becomes operationally relevant | Stay, Arrival, Access, Staying Party, operational issue | Assignment/function/destination scope; not Sale capacity | Dates, arrival, readiness, access and operational fields only | Record/escalate operational exception; do not cancel or complete by convenience. |
+
+## Authority handoff rule
+
+H5 and H6 are the critical authority boundary. A Sale may create a Request when eligible, but acceptance must be attributable to a Host/Primary Host or Co-host with valid delegated Booking Authority. If one Identity is both Sale and Co-host, the action is valid only when explicitly performed under the Co-host authority context; the Sale context cannot be used as a shortcut.

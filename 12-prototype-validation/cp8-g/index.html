@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stayora · CP8-G Prototype & Validation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">S</span><div><strong>stayora</strong><span class="eyebrow">CP8-G prototype</span></div></div>
+      <div class="prototype-badge"><span class="dot"></span> Local deterministic simulation</div>
+      <div class="top-actions"><button class="quiet" data-action="reset">Reset demo</button><button class="quiet" data-action="validation">Validation map</button></div>
+    </header>
+    <div class="body-grid">
+      <nav class="rail" aria-label="Prototype surfaces">
+        <div class="rail-heading">Surfaces</div>
+        <button class="nav-item active" data-view="marketplace"><span>⌂</span><span>Marketplace</span></button>
+        <button class="nav-item" data-view="guest"><span>◫</span><span>Guest stay</span></button>
+        <button class="nav-item" data-view="host"><span>◒</span><span>Host workspace</span></button>
+        <button class="nav-item" data-view="sale"><span>↗</span><span>Sale workspace</span></button>
+        <button class="nav-item" data-view="butler"><span>✦</span><span>Butler ops</span></button>
+        <button class="nav-item" data-view="destination"><span>⌁</span><span>Destination / BQL</span></button>
+        <button class="nav-item" data-view="admin"><span>⊙</span><span>Stayora Admin</span></button>
+        <div class="rail-foot"><span class="mini-label">Working context</span><strong id="rail-context">Guest · Oceanami</strong><span class="muted">Context shapes the view. It does not grant authority.</span></div>
+      </nav>
+      <main class="main" id="main-content"></main>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
