@@ -10,7 +10,7 @@ Phụ thuộc: [ADR-P003](../00-start-here/DECISIONS.md#adr-p003), [ADR-P035](..
 
 ## Scope của Checkpoint 1
 
-**CONFIRMED — nhiệm vụ tài liệu.** Reconcile discovery, decision register và contradiction audit; tạo 18 Markdown files Start Here + Product Foundation, cross-link và consistency check; artifact đã được Founder freeze ngày 2026-09-18. Freeze không chuyển Foundation thành thiết kế Domain/Authority/Workflow/State/Policy/IA/Data/UX hoặc code.
+**CONFIRMED — nhiệm vụ tài liệu.** Reconcile discovery, decision register và contradiction audit; tạo 18 Markdown files Start Here + Product Foundation, cross-link và consistency check; artifact có lịch sử Founder xác nhận ở cấp artifact ngày 2026-09-18, không suy ra global Founder Freeze; các quyết định CONFIRMED được điều chỉnh bởi Protected Baseline trong [SOURCE_OF_TRUTH](../00-start-here/SOURCE_OF_TRUTH.md). Việc xác nhận ở cấp artifact không chuyển Foundation thành thiết kế Domain/Authority/Workflow/State/Policy/IA/Data/UX hoặc code.
 
 ## Conceptual core hiện tại
 

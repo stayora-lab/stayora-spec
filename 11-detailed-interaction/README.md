@@ -4,7 +4,7 @@
 > Status: **CP8-E CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE**
 > Freeze status: **CP8-E CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE** · Current scope: **E1–E4 closed** · 2026-09-21
 
-CP8-D Workspace / Surface UX is accepted as the baseline for CP8-E. CP8-E1 through E4 are now CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE. CP8-F1 and CP8-F2 are accepted; CP8-F is complete/accepted; CP8-G is ready for Founder/Product Architect validation; CP8-H remains not started.
+CP8-D Workspace / Surface UX is accepted as the baseline for CP8-E. CP8-E1 through E4 are now CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE. CP8-F1 and CP8-F2 are accepted; CP8-F is complete/accepted; CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED; CP8-H remains not started.
 
 ## Reading order
 
@@ -25,4 +25,4 @@ Founder decisions → canonical confirmed product decisions → CP1–CP6 → CP
 
 ## Stop condition
 
-CP8-E is closed. [CP8-F1 Thin Design System Foundation](../10-ux-foundation/f1-thin-design-system-foundation/README.md) accepted. [CP8-F2](../10-ux-foundation/f2-prototype-ready-design-language/README.md) accepted and [CP8-F](../10-ux-foundation/f2-prototype-ready-design-language/CP8-F2-FINAL-RECONCILIATION-CLOSURE-REPORT.md) complete/accepted; CP8-G Prototype is ready for Founder/Product Architect validation; CP8-H Acceptance Package and implementation are not started.
+CP8-E is closed. [CP8-F1 Thin Design System Foundation](../10-ux-foundation/f1-thin-design-system-foundation/README.md) accepted. [CP8-F2](../10-ux-foundation/f2-prototype-ready-design-language/README.md) accepted and [CP8-F](../10-ux-foundation/f2-prototype-ready-design-language/CP8-F2-FINAL-RECONCILIATION-CLOSURE-REPORT.md) complete/accepted; CP8-G Prototype is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED; CP8-H Acceptance Package and implementation are not started.

@@ -3,9 +3,9 @@
 > Parent checkpoint: **CP8 — UX / Design System**  
 > Status: **CP8-A through CP8-D COMPLETE; CP8-E CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE; CP8-F COMPLETE / ACCEPTED**  
 > Freeze status: **NOT FROZEN**  
-> Current scope: **CP8-D and CP8-E complete; CP8-F1/F2 accepted; CP8-F complete/accepted; CP8-G ready for Founder/Product Architect validation** · 2026-09-21
+> Current scope: **CP8-D and CP8-E complete; CP8-F1/F2 accepted; CP8-F complete/accepted; CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED** · 2026-09-21
 
-CP8-A translated the approved CP1–CP7 product, domain, authority, workflow, lifecycle, policy, V0 and information-architecture decisions into a UX reasoning system and is accepted as the baseline for CP8. CP8-B1 Sale-assisted Booking through CP8-B5 Inventory Intervention and CP8-C1 through C4 Onboarding are accepted baselines. CP8-D1, D2 and D3 are accepted baselines for CP8-E. CP8-E1 through E4 are CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE. The Founder Decision Gate and Closure Coverage Pass are review activities inside CP8-E, not new checkpoints. CP8-F1 Thin Design System Foundation and CP8-F2 Prototype-Ready Design Language are accepted; CP8-F is complete/accepted; CP8-G is ready for Founder/Product Architect validation.
+CP8-A translated the approved CP1–CP7 product, domain, authority, workflow, lifecycle, policy, V0 and information-architecture decisions into a UX reasoning system and is accepted as the baseline for CP8. CP8-B1 Sale-assisted Booking through CP8-B5 Inventory Intervention and CP8-C1 through C4 Onboarding are accepted baselines. CP8-D1, D2 and D3 are accepted baselines for CP8-E. CP8-E1 through E4 are CLOSED — ACCEPTED V0 UX ARCHITECTURE BASELINE. The Founder Decision Gate and Closure Coverage Pass are review activities inside CP8-E, not new checkpoints. CP8-F1 Thin Design System Foundation and CP8-F2 Prototype-Ready Design Language are accepted; CP8-F is complete/accepted; CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED.
 
 The directory name `10-ux-foundation` follows the repository's artifact ordering; it does not create a CP10 or a new roadmap checkpoint. This material belongs to CP8.
 
@@ -90,9 +90,9 @@ CP8-A keeps the canonical distinctions in [CP3 authority](../03-actor-authority/
 
 The documents below do not settle any upstream `TBD`, `WORKING MODEL`, `HYPOTHESIS`, `OUT OF SCOPE — V0` or `SUPERSEDED` status. They record the UX consequence of those statuses and leave unresolved policy visible. No wireframe, screen layout, visual styling, component, prototype, Figma artifact, implementation artifact or new capability is introduced.
 
-CP8-D is accepted as the baseline for CP8-E. CP8-E1 through E4 are CLOSED / ACCEPTED. CP8-F1 and CP8-F2 are accepted; CP8-F is **COMPLETE / ACCEPTED**; CP8-G is ready for Founder/Product Architect validation; CP8-H and implementation remain **not started**.
+CP8-D is accepted as the baseline for CP8-E. CP8-E1 through E4 are CLOSED / ACCEPTED. CP8-F1 and CP8-F2 are accepted; CP8-F is **COMPLETE / ACCEPTED**; CP8-G is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED; CP8-H and implementation remain **not started**.
 
 
 ## Next checkpoint
 
-[CP8-G Prototype & Validation](../12-prototype-validation/README.md) is ready for Founder/Product Architect validation. CP8-H remains not started.
+[CP8-G Prototype & Validation](../12-prototype-validation/README.md) is in progress; v2 validation disposition is FAILED — ITERATION REQUIRED. CP8-H remains not started.

@@ -2,7 +2,7 @@
 
 > Parent: **CP8 — UX / Design System**  
 > Status: **ACCEPTED — F2 FOUNDER VISUAL DECISION WITH FOUR SEMANTIC PRESENTATION CORRECTIONS**  
-> Workstream: **CP8-F COMPLETE / ACCEPTED** · CP8-G **READY FOR FOUNDER / PRODUCT ARCHITECT VALIDATION**  
+> Workstream: **CP8-F COMPLETE / ACCEPTED** · CP8-G **IN PROGRESS — v2 VALIDATION DISPOSITION FAILED — ITERATION REQUIRED**  
 > Decision status: visual direction is accepted as the CP8-G baseline; implementation details remain open and no global future-design freeze is implied.
 
 F2 converts the accepted [F1 foundation](../f1-thin-design-system-foundation/README.md) into a concrete design language and pattern map sufficient for CP8-G prototype work. It defines accepted reference values, primitive behavior and domain presentation patterns without building UI or deciding product policy.
@@ -41,4 +41,4 @@ The seven surfaces remain exactly: Public Marketplace, Guest Stay Access, Host W
 
 ## Stop condition
 
-F2 stops at prototype-ready documentation. It does not create React/Tailwind code, a token file, a Figma library or production UI. The final status is **F2: ACCEPTED**, **CP8-F: COMPLETE / ACCEPTED**, **CP8-G: READY FOR FOUNDER / PRODUCT ARCHITECT VALIDATION**. The [final reconciliation & closure report](CP8-F2-FINAL-RECONCILIATION-CLOSURE-REPORT.md) is the current closure record; the earlier completion report is retained as historical pre-closure context.
+F2 stops at prototype-ready documentation. It does not create React/Tailwind code, a token file, a Figma library or production UI. The final status is **F2: ACCEPTED**, **CP8-F: COMPLETE / ACCEPTED**, **CP8-G: IN PROGRESS — v2 VALIDATION DISPOSITION FAILED — ITERATION REQUIRED**. The [final reconciliation & closure report](CP8-F2-FINAL-RECONCILIATION-CLOSURE-REPORT.md) is the current closure record; the earlier completion report is retained as historical pre-closure context.
