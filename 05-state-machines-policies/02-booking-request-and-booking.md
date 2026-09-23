@@ -5,13 +5,17 @@
 ## Booking Request lifecycle
 
 ```text
-PENDING → ACCEPTED
+PENDING → ACCEPTED → CONFLICTED
        ↘ REJECTED
        ↘ EXPIRED
        ↘ CONFLICTED
 ```
 
 `ACCEPTED` authorizes proceeding; it is not Booking Confirmed. Request does not reserve Inventory. Request expiry, Temporary Inventory Commitment expiry, and Payment Session expiry are separate. Multiple Requests may coexist while no exclusive commitment exists.
+
+Non-accepted outcomes are distinct. `REJECTED` is the Host declining the Request. `EXPIRED` is the Request lapsing under its applicable lifecycle or expiry. `CONFLICTED` is a Request that could still have progressed but can no longer be fulfilled because a new authoritative inventory truth exists — including when another competing Request becomes Booking CONFIRMED ([ADR-P070](../00-start-here/DECISIONS.md#adr-p070)).
+
+Acceptance may be handled exclusively or competitively per [ADR-P070](../00-start-here/DECISIONS.md#adr-p070). Only the exclusive form creates a Temporary Exclusive Commitment.
 
 ## Commercial commitment boundary
 

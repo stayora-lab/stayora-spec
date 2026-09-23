@@ -247,6 +247,13 @@ Turn ID: `9d226a42-f3c9-471f-9af3-af5bb6a16537; 38f06ef4-a79c-43d6-8315-1ef44104
 
 Reconcile trước; Sol architect/editor, executor tạo file; 18 docs; không tự nâng status, founder review rồi mới freeze.
 
+<a id="src-30"></a>
+### SRC-30 — Founder operating case: parallel acceptance
+
+Turn ID: `Founder operating case, relayed in the Product Architect disposition of 2026-09-23`
+
+Founder operating case, 2026-09-23 — two overlapping Requests on one Host's open dates; the Host accepts without rejecting the other so as not to lose both if the deposit does not arrive; deposit race; waiting time set by the Host; extension on request; confirmation blocks the remaining Requests. Recorded as the source of ADR-P070.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.
