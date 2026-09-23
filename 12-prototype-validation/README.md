@@ -61,7 +61,9 @@ Exit rules:
 
 ### Protected Baseline guardrails (minimum regression set)
 
-Request ≠ Booking · Acceptance ≠ Confirmation · Payment SUCCEEDED ≠ automatic Booking CONFIRMED · Payment UNKNOWN ≠ FAILED · Booking cancellation ≠ automatic Stay state mirroring · Arrival observation ≠ Check-in · Departure observation ≠ Checkout · Checkout ≠ Completion · Completion ≠ Inventory release · Incident ≠ Maintenance Block · Emergency Protective Hold ≠ Maintenance Block · Emergency Protective Hold ≠ Commitment · External Report ≠ External Fact · External Fact ≠ External-backed Commitment · External Accommodation ≠ Stayora Booking · Assignment ≠ Authority · BQL visibility ≠ Authority · Working Context ≠ Authority · Conflict ≠ automatic winner.
+Request ≠ Booking · Acceptance ≠ Confirmation · Payment SUCCEEDED ≠ automatic Booking CONFIRMED · Payment UNKNOWN ≠ FAILED · Booking cancellation ≠ automatic Stay state mirroring · Arrival observation ≠ Check-in · Departure observation ≠ Checkout · Checkout ≠ Completion · Completion ≠ Inventory release · Incident ≠ Maintenance Block · Emergency Protective Hold ≠ Maintenance Block · Emergency Protective Hold ≠ Commitment · External Report ≠ External Fact · External Fact ≠ External-backed Commitment · External Accommodation ≠ Stayora Booking · Assignment ≠ Authority · BQL visibility ≠ Authority · Working Context ≠ Authority · Conflict ≠ automatic winner · Commercial Acceptance ≠ Temporary Exclusive Commitment · Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity.
+
+Rows 20 and 21 are added to the minimum regression set by Product Architect decision, 2026-09-23 (SP-11). This is an explicit approved change to the CP8-G minimum regression contract, not administrative cleanup.
 
 ## Representation Requirement
 
@@ -116,7 +118,7 @@ Only these journeys are required. CP8-G does not require prototyping the whole o
 | Journey | Flow | Must be evident |
 |---|---|---|
 | **Guest** | Discover → Villa → Dates/Guests → Request → Waiting → Confirmation → Upcoming Stay | A Request is not a confirmed Booking — understood through the experience, without explaining the state machine. |
-| **Sale / Host** | Demand → Request → Host Decision → Confirmation conditions → Booking | Sale brings demand in; Sale has no Host authority; Host decision is not Booking CONFIRMED; confirmation conditions are handled correctly. |
+| **Sale / Host** | Demand → Request → Host Commercial Acceptance → **EXCLUSIVE PATH:** choose exclusive hold → Temporary Exclusive Commitment → confirmation conditions → Booking · **COMPETITIVE PATH:** Request B + Request C → Host commercially accepts both → no Inventory Commitment from acceptance → truthful competition disclosure → one Request satisfies authoritative confirmation conditions first → Booking CONFIRMED → competing overlapping Request(s) CONFLICTED → late / in-flight payment reconciliation | Sale brings demand in; Sale has no Host authority; Host decision is not Booking CONFIRMED; acceptance alone creates no commitment; both handling paths must be demonstrated end to end; a losing competitor ends CONFLICTED, not REJECTED. |
 | **Butler** | Today → Prepare → Arrival → Check-in → In-stay → Departure → Checkout | Mobile-first operational experience. No domain-debugger presentation. |
 | **Exception / Inventory** | Incident → Attention → authorized inventory intervention · Inventory Conflict → preserve conflicting truths → reconciliation | Does not need a large workspace. Both paths must be validated. |
 | **External Stay** | External accommodation information → authoritative fact → applicable inventory representation → Stay | No fake Stayora Booking is created. |
@@ -140,12 +142,12 @@ No clipping, no inaccessible primary action, no unusable modal, no table that hi
 
 > This snapshot is validation evidence at one specific commit. It is **not** canonical product semantics. Later iterations add new columns/tables; this snapshot is never overwritten.
 
-Summary: **9 TESTED — PASS · 2 PARTIAL · 1 TESTED — FAIL · 7 NOT REPRESENTED**
+Summary: **9 TESTED — PASS · 2 PARTIAL · 2 TESTED — FAIL · 8 NOT REPRESENTED**
 
 | # | Guardrail | State at `5c39748` | Evidence | Disposition |
 |---|---|---|---|---|
 | 1 | Request ≠ Booking | TESTED — PASS | `domain.test.ts` #442 (distinct RQ/BK/ST ids); #778 (only payment recording creates a Booking) | |
-| 2 | Acceptance ≠ Confirmation | TESTED — PASS | #390 (acceptance creates a temporary hold only); #442 | |
+| 2 | Acceptance ≠ Confirmation | TESTED — PASS | #390 (acceptance creates a temporary hold only, not a Booking confirmation); #442 — the exclusivity these tests encode is classified under [KD-02](#known-deviations) | |
 | 3 | Payment SUCCEEDED ≠ automatic Booking CONFIRMED | TESTED — PASS | #501 (late success → refund, no Booking); #665; #881 | |
 | 4 | Payment UNKNOWN ≠ FAILED | TESTED — PASS | #472; #529 | |
 | 5 | Booking cancellation ≠ automatic Stay state mirroring | **TESTED — FAIL** | `resolveConflict` sets Stay `CANCELLED`; protected by #991 and #1027 — see [KD-01](#known-deviations) | |
@@ -163,6 +165,8 @@ Summary: **9 TESTED — PASS · 2 PARTIAL · 1 TESTED — FAIL · 7 NOT REPRESEN
 | 17 | BQL visibility ≠ Authority | TESTED — PASS | #248; #1336 | |
 | 18 | Working Context ≠ Authority | NOT REPRESENTED | Roles come from links; no Working Context | VALIDATED ELSEWHERE (conditional) |
 | 19 | Conflict ≠ automatic winner | TESTED — PASS | #859; #1124 | |
+| 20 | Commercial Acceptance ≠ Temporary Exclusive Commitment | **TESTED — FAIL** | `acceptRequest` unconditionally creates a Temporary Exclusive HOLD on every acceptance, and a second overlapping acceptance is directly CONFLICTED while the first hold is active. Protected by KNOWN DEVIATION TESTS #390, #442 — see [KD-02](#known-deviations) | MUST REPRESENT / reconcile in G-v2.4 |
+| 21 | Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity | NOT REPRESENTED | No competitive acceptance mode at `5c39748`; every acceptance is exclusive (KD-02), so UNKNOWN never occurs in a competitive context | MUST REPRESENT in G-v2.4 |
 
 Correction, 2026-09-23: the baseline summary originally read 10 · 2 · 1 · 6. That was a miscount in the artifact; the per-row states are unchanged.
 
@@ -178,13 +182,28 @@ CP8-G remains IN PROGRESS — ITERATION REQUIRED. CP8-H is not opened.
 
 #### CP8-G v2 iteration slices
 
-These are implementation slices inside CP8-G v2. They are not new gates, not new guardrails and not new checkpoints. Each slice delivers a real experience, not a checklist of boundaries rendered as UI. A whole-of-G validation pass across G1–G6 and cross-surface continuity follows the three slices; no slice closes G on its own.
+These are implementation slices inside CP8-G v2. They are not new gates, not new guardrails and not new checkpoints. Each slice delivers a real experience, not a checklist of boundaries rendered as UI. A whole-of-G validation pass across G1–G6 and cross-surface continuity follows the four slices; no slice closes G on its own.
 
 **G-v2.1 — Butler Field Journey.** Today → Prepare → Arrival observation → authorized Check-in → In-stay → Departure observation → authorized Checkout. Demonstrates rows 6 and 7, and is expected to move row 8 (Checkout ≠ Completion) beyond PARTIAL.
 
 **G-v2.2 — Exception and Inventory Journey.** Incident → Attention → Emergency Protective Hold → evaluation → Maintenance Block or release, together with Inventory Conflict and reconciliation. Demonstrates rows 11 and 12, and must keep Hold, conflict, Maintenance Block and Commitment visibly distinct.
 
 **G-v2.3 — External Stay and lifecycle reconciliation.** External information / report → authoritative Fact → applicable External-backed Commitment → Stay, creating no fake Stayora Booking. Demonstrates rows 13 and 14. KD-01 is reconciled in this slice, not as a separate earlier fix: the deviation sits at the Booking → Stay lifecycle boundary, so code, the two Known Deviation Tests and the coverage record change in the same change-set, as the Known Deviation Test Rule requires. Regression coverage is re-run after the change.
+
+**G-v2.4 — Parallel Acceptance & Competitive Confirmation.** Overlapping Requests → parallel Commercial Acceptance → Host chooses exclusive or competitive handling → applicable confirmation conditions → one authoritative confirmation → Booking → competing overlapping Requests become CONFLICTED → late / UNKNOWN payment reconciliation. Demonstrates rows 20 and 21. KD-02 is reconciled in this slice: the deviation sits at the acceptance → exclusivity boundary, so code, the Known Deviation Tests and the coverage record change in the same change-set, as the Known Deviation Test Rule requires. Regression coverage is re-run after the change.
+
+It must prove at minimum:
+
+- Commercial Acceptance does not automatically create a commitment.
+- Multiple accepted overlapping Requests can coexist when no exclusive commitment exists.
+- Host can choose exclusive handling.
+- Exclusive handling creates a Temporary Exclusive Commitment.
+- Competitive handling does not create an Inventory Commitment merely from acceptance.
+- Competition disclosure is truthful and symmetric.
+- Payment UNKNOWN does not establish competitive priority or exclusivity.
+- A qualifying authoritative confirmation creates the Booking.
+- Remaining overlapping competing Requests become CONFLICTED.
+- Late or in-flight payment has a reconciliation path.
 
 Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for traceability only — not evidence that any gate PASSES.
 
@@ -201,10 +220,11 @@ Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for trac
 
 | Iteration | Commit | PASS | PARTIAL | FAIL | NOT REP. | VAL. ELSEWHERE |
 |---|---|---|---|---|---|---|
-| Baseline | `5c39748` | 9 | 2 | 1 | 7 | 0 |
+| Baseline | `5c39748` | 9 | 2 | 2 | 8 | 0 |
 | G-v2.1 | — | | | | | |
 | G-v2.2 | — | | | | | |
 | G-v2.3 | — | | | | | |
+| G-v2.4 | — | | | | | |
 | Final validation | — | | | | | |
 
 Every prototype change in an iteration states which **journey, gate or coverage row** it addresses.
@@ -231,6 +251,7 @@ Concrete values in v2 that stand in for open decisions. Each is a **PROTOTYPE AS
 | ID | Deviation | Conflicts with | Tests protecting it | Status |
 |---|---|---|---|---|
 | **KD-01** | Ending a commitment through conflict resolution sets Stay to `CANCELLED` (Stayora and external stays). Stay has no `CANCELLED` state, and Booking cancellation must not automatically drive Stay state. | CP4 Stay lifecycle (`05-state-machines-policies/04-stay-lifecycle.md`); ADR-P066 (draft) | **KNOWN DEVIATION TEST**: `domain.test.ts` #991, #1027 | OPEN — reconcile code, tests and this table in one change-set |
+| **KD-02** | `acceptRequest` always creates a Temporary Exclusive HOLD (an exclusive Inventory Commitment) on every Commercial Acceptance, and a second overlapping acceptance is directly CONFLICTED because the first hold makes the dates unavailable. The prototype turns every Commercial Acceptance into Inventory Exclusivity; there is no Host-selected competitive handling, no competition disclosure and no competitive priority. | CP4 Booking Request lifecycle ("Multiple Requests may coexist while no exclusive commitment exists"; `ACCEPTED → CONFLICTED` only via a new authoritative inventory truth); ADR-P014 (refined 2026-09-23); ADR-P070 | **KNOWN DEVIATION TEST**: `domain.test.ts` #390 (accept first → accept second → CONFLICTED, exactly 1 ACTIVE HOLD), #442 (payment confirmation expects the acceptance-created HOLD); `world-mutate.test.ts` #47 (concurrent accepts → 1 ACTIVE hold, other CONFLICTED). Additional tests that depend on the acceptance-created hold and change together with this reconciliation: #472, #501, #665, #881, #1056 | OPEN — reconcile code, tests and coverage rows #20, #21 in one change-set (G-v2.4) |
 
 ---
 
@@ -241,7 +262,7 @@ CP8-G ends with a **CP8-G Validation Report**, never with "the prototype looks g
 - **A. Validated journeys** — PASS / PARTIAL / FAIL per mandatory journey.
 - **B. Protected Baseline regression** — final coverage table; no P0/P1 without disposition.
 - **C. Founder validation findings.**
-- **D. Prototype deviations** — including KD-01 until reconciled.
+- **D. Prototype deviations** — including KD-01 and KD-02 until reconciled.
 - **E. Prototype assumptions.**
 - **F. Product learnings** — what the prototype taught about UX.
 - **G. Remaining TBDs** — not force-closed.
@@ -259,7 +280,8 @@ This does not mean v2 failed the way v1 did. It means v2 has not met the exit co
 Blocking evidence:
 
 - **Semantic blocker** — KD-01: Booking cancellation → Stay `CANCELLED`, conflicting with the CP4 Stay lifecycle and ADR-P066, and preserved by tests #991 and #1027.
-- **Coverage gaps** — 6 guardrails NOT REPRESENTED; each must be classified as required-to-prototype or VALIDATED ELSEWHERE under the constraint above.
+- **Semantic blocker** — KD-02: every Commercial Acceptance becomes an exclusive HOLD and a second overlapping acceptance is directly CONFLICTED, conflicting with the CP4 Booking Request lifecycle, ADR-P014 and ADR-P070, and preserved by tests #390 and #442 (`domain.test.ts`) and #47 (`world-mutate.test.ts`). Reconcile in G-v2.4.
+- **Coverage gaps** — 7 guardrails NOT REPRESENTED must be represented behaviorally (rows 6, 7, 11, 12, 13, 14 and 21); row 18 remains VALIDATED ELSEWHERE under the constraint above.
 - **Journey gaps** — Butler Prepare → Arrival → In-stay → Departure; Exception Incident → Attention → authorized intervention; BQL operational attention.
 - **Actor validation** — no representative-user evidence for G1 / G4.
 
