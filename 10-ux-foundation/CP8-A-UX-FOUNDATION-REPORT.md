@@ -51,7 +51,7 @@ Source priority follows the canonical Source of Truth. Existing `CONFIRMED`, `WO
 
 ### Upstream index files changed
 
-- [`outputs/README.md`](../../README.md) — current-position index now points to CP8-A.
+- `outputs/README.md` (file not part of this repository) — current-position index now points to CP8-A.
 - [`00-start-here/README.md`](../00-start-here/README.md) — checkpoint table and reading order now identify CP8-A as the current draft pass.
 - [`00-start-here/SOURCE_OF_TRUTH.md`](../00-start-here/SOURCE_OF_TRUTH.md) — current checkpoint pointer now identifies CP8-A; CP8-B remains not started.
 

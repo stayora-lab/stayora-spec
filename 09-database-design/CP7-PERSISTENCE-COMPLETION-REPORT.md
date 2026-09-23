@@ -27,7 +27,7 @@ This CP7 persistence portion documents the physical database design direction th
 - [`../00-start-here/README.md`](../00-start-here/README.md)
 - [`../00-start-here/SOURCE_OF_TRUTH.md`](../00-start-here/SOURCE_OF_TRUTH.md)
 - [`../00-start-here/DECISIONS.md`](../00-start-here/DECISIONS.md)
-- [Root outputs README](../../README.md)
+- Root outputs README (file not part of this repository)
 - [`../08-conceptual-data-model/CHECKPOINT-7-COMPLETION-REPORT.md`](../08-conceptual-data-model/CHECKPOINT-7-COMPLETION-REPORT.md)
 - [`../08-conceptual-data-model/README.md`](../08-conceptual-data-model/README.md)
 - [`../07-information-architecture/CHECKPOINT-6-COMPLETION-REPORT.md`](../07-information-architecture/CHECKPOINT-6-COMPLETION-REPORT.md)

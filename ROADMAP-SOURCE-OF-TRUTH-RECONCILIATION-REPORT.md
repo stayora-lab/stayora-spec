@@ -19,7 +19,7 @@ The supplied original plan explicitly placed Data Model after Information Archit
 - [00-start-here/README.md](00-start-here/README.md)
 - [00-start-here/SOURCE_OF_TRUTH.md](00-start-here/SOURCE_OF_TRUTH.md)
 - [00-start-here/DECISIONS.md](00-start-here/DECISIONS.md)
-- [outputs README](../README.md)
+- outputs README (file not part of this repository)
 - [07-information-architecture/CHECKPOINT-6-COMPLETION-REPORT.md](07-information-architecture/CHECKPOINT-6-COMPLETION-REPORT.md)
 - [06-v0-scope/CHECKPOINT-5-COMPLETION-REPORT.md](06-v0-scope/CHECKPOINT-5-COMPLETION-REPORT.md)
 - [08-conceptual-data-model/README.md](08-conceptual-data-model/README.md)

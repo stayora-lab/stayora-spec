@@ -51,7 +51,7 @@ This report is the required `CP8-B1-SALE-ASSISTED-BOOKING-REPORT.md`.
 
 - [CP8-A README](README.md) now links to the current B1 workstream and records CP8-A as the accepted baseline for CP8-B.
 - CP8-A component documents and its report now carry the accepted-baseline metadata; their UX content is unchanged.
-- [Start Here README](../00-start-here/README.md), [Source of Truth](../00-start-here/SOURCE_OF_TRUTH.md) and [outputs README](../../README.md) now identify D1 as the current execution unit; B1 remains an accepted journey baseline.
+- [Start Here README](../00-start-here/README.md), [Source of Truth](../00-start-here/SOURCE_OF_TRUTH.md) and outputs README (file not part of this repository) now identify D1 as the current execution unit; B1 remains an accepted journey baseline.
 
 These index/status edits do not change CP1–CP7 product, domain, authority, workflow, lifecycle, policy, V0 or data-model decisions.
 
