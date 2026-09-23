@@ -157,7 +157,7 @@ Summary: **9 TESTED — PASS · 2 PARTIAL · 1 TESTED — FAIL · 7 NOT REPRESEN
 | 11 | Emergency Protective Hold ≠ Maintenance Block | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
 | 12 | Emergency Protective Hold ≠ Commitment | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
 | 13 | External Report ≠ External Fact | NOT REPRESENTED | Only the Host records directly; no report path from Sale/Butler | MUST REPRESENT |
-| 14 | External Fact ≠ External-backed Commitment | NOT REPRESENTED | One action creates both | TBD — PRODUCT ARCHITECT |
+| 14 | External Fact ≠ External-backed Commitment | NOT REPRESENTED | One action creates both | MUST REPRESENT |
 | 15 | External Accommodation ≠ Stayora Booking | TESTED — PASS | #763; #835 | |
 | 16 | Assignment ≠ Authority | PARTIAL | Engine restricts Butler to assigned villas; no dedicated test for an unassigned Butler | |
 | 17 | BQL visibility ≠ Authority | TESTED — PASS | #248; #1336 | |
@@ -170,7 +170,7 @@ Correction, 2026-09-23: the baseline summary originally read 10 · 2 · 1 · 6. 
 
 Mandatory journey list: UNCHANGED. The Exit Contract is not narrowed to reduce iteration scope.
 
-Rows 6, 7, 11, 12 and 13 MUST REPRESENT behaviorally: each is required to validate a mandatory journey — Butler for 6 and 7, Exception / Inventory for 11 and 12, External Stay for 13. Citing CP8-E documentation does not satisfy them. Row 14 has no disposition yet; it is referred to the Product Architect. The auditor's recommendation is MUST REPRESENT within G-v2.3, because the mandatory External Stay journey runs external information → authoritative Fact → applicable inventory representation → Stay, and row 14 is that third step.
+Rows 6, 7, 11, 12 and 13 MUST REPRESENT behaviorally: each is required to validate a mandatory journey — Butler for 6 and 7, Exception / Inventory for 11 and 12, External Stay for 13. Citing CP8-E documentation does not satisfy them. Row 14 is MUST REPRESENT behaviorally in CP8-G v2. External Stay is a mandatory journey and this boundary sits on its critical path: external information / report → authoritative Fact → applicable External-backed Commitment → Stay. The UI need not force two separate user actions — one user action may drive several system steps — but the prototype must show that Fact and Commitment are two different truths, and that a Fact can exist while a commitment is not, or not yet, established. This adopts the auditor's recommendation to represent row 14 within G-v2.3.
 
 Row 18 is VALIDATED ELSEWHERE: canonical evidence is CP8-D1 Workspace Surface Architecture and CP8-E1. This holds only while Working Context is not materially represented in prototype UX. If the prototype later lets one identity switch between capacities or workspaces, or Working Context becomes a real interaction, VALIDATED ELSEWHERE lapses for that scope and the boundary must be tested behaviorally.
 
@@ -184,7 +184,7 @@ These are implementation slices inside CP8-G v2. They are not new gates, not new
 
 **G-v2.2 — Exception and Inventory Journey.** Incident → Attention → Emergency Protective Hold → evaluation → Maintenance Block or release, together with Inventory Conflict and reconciliation. Demonstrates rows 11 and 12, and must keep Hold, conflict, Maintenance Block and Commitment visibly distinct.
 
-**G-v2.3 — External Stay and lifecycle reconciliation.** External information / report → authoritative Fact → applicable External-backed Commitment → Stay, creating no fake Stayora Booking. Demonstrates row 13. KD-01 is reconciled in this slice, not as a separate earlier fix: the deviation sits at the Booking → Stay lifecycle boundary, so code, the two Known Deviation Tests and the coverage record change in the same change-set, as the Known Deviation Test Rule requires. Regression coverage is re-run after the change.
+**G-v2.3 — External Stay and lifecycle reconciliation.** External information / report → authoritative Fact → applicable External-backed Commitment → Stay, creating no fake Stayora Booking. Demonstrates rows 13 and 14. KD-01 is reconciled in this slice, not as a separate earlier fix: the deviation sits at the Booking → Stay lifecycle boundary, so code, the two Known Deviation Tests and the coverage record change in the same change-set, as the Known Deviation Test Rule requires. Regression coverage is re-run after the change.
 
 Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for traceability only — not evidence that any gate PASSES.
 

@@ -38,6 +38,8 @@ Phụ thuộc: [ADR-P015](../00-start-here/DECISIONS.md#adr-p015), [ADR-P016](..
 
 The policy is decided in [ADR-P061](../00-start-here/DECISIONS.md#adr-p061). Its configuration values are recorded in [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md).
 
+**Oceanami Pilot Operating Behavior — not universal product policy**
+
 At the Pre-arrival / Payment Assurance checkpoint: system reminder plus Sale and/or Host follow-up as applicable. Butler is not the primary debt collector; Butler focuses on ETA, guest count, readiness and Destination/BQL operations. A reminder does not create the payment obligation.
 
 **TBD — FOUNDER DECISION:** when a transaction begins before the 24-hour boundary but Booking Confirmation occurs at or inside 24 hours, the policy evaluation timestamp (for example, transaction start versus confirmation/commitment time) has not been selected. This pass does not choose it.

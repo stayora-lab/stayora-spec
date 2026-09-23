@@ -8,9 +8,9 @@ Identity; basic Role/Platform Eligibility/Authority; Host/Co-host authority; Pro
 
 ## MANUAL-ASSISTED
 
-Inventory conflict resolution; Incident consequences; complex refunds and financial adjustments; settlement reconciliation; payout execution; Sale commission exceptions; Stayora Verified assessment; Verification Review; reputation moderation/disputes; Lead assignment; payment assurance/follow-up; external conflict resolution; booking changes; cancellation/no-show/Payment Default exceptions; unusual settlement cases.
+Inventory conflict resolution; Incident consequences; complex refunds and financial adjustments; settlement reconciliation; payout execution; Sale commission exceptions; Stayora Verified assessment; Verification Review; reputation moderation/disputes; Lead assignment; payment assurance/follow-up; external conflict resolution; booking changes; cancellation/no-show/Payment Default exceptions; unusual settlement cases; Sale eligibility review and approval; Butler eligibility review and assignment; ownership evidence review and establishment of the ownership relationship.
 
-Manual assistance does not permit fake commitments, lost provenance, silent impersonation, automatic commission or overwritten financial history.
+Manual assistance does not permit fake commitments, lost provenance, silent impersonation, automatic commission or overwritten financial history. Manual assistance does not widen authority: approval is not unrestricted authority, Butler assignment is not authority, ownership evidence is not a verified ownership relationship, and a verified ownership relationship is not unrestricted authority. Evidence still passes through authorized review to produce the resulting relationship or fact, following the canonical model.
 
 ## Integrity requirements
 
