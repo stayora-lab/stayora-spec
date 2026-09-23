@@ -40,3 +40,14 @@ This register records the current canonical effect of FD-01 through FD-19. It do
 ## Historical handling
 
 E1–E4 reports and their original TBD/blocker rows retain their historical meaning. Current closure overlays are added to the affected registers and reports; old prose is not treated as a current blocker when a Founder decision now closes the architecture. No policy detail is inferred from the closure.
+
+## Canonicalization index
+
+| FD | Canonical ADR | Note |
+|---|---|---|
+| FD-05 | ADR-P066 | Clarified and generalized: DID_NOT_OCCUR is not a synonym for no-show; reason mandatory |
+| FD-15 | ADR-P067 | Emergency Protective Hold is an Availability Block, not an Inventory Commitment |
+| FD-16 | ADR-P067 | Review/expiry boundary remains policy-defined and TBD |
+| FD-19 | ADR-P068 | Policy direction: one bounded reconciliation extension; parameters TBD |
+
+FD entries remain the historical record and are not renumbered or superseded.

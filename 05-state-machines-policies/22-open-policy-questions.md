@@ -16,5 +16,7 @@ The following remain open and are not resolved by Checkpoint 4:
 10. Guest field-level access, retention, masking, privacy, and audit detail.
 11. Dual-capacity/self-dealing policy and authority precedence among independently valid authorities.
 12. Exact Completion blockers/automation timing and technical concurrency/locking.
+13. Temporary Exclusive Commitment duration for Oceanami V0 remains TBD and configurable (FD-10). A concrete value is set through pilot policy. Any value used in a prototype is a PROTOTYPE ASSUMPTION and does not create policy.
+14. The Oceanami ">24h before Check-in" threshold remains TBD — FOUNDER DECISION. Before choosing the governing event, define which policy the threshold governs — for example eligibility for the 50% initial-payment path, or the point at which the Guest commits to payment terms. Host acceptance and Guest acceptance of payment terms are different events (ADR-P061).
 
 These are policy/data-model/implementation follow-ups. No item is promoted to a requirement here. See [Foundation Open Questions](../01-product-foundation/13-open-questions.md), [Domain Questions](../02-domain/04-open-domain-questions.md), and [Workflow Questions](../04-core-workflows/08-open-workflow-questions.md).
