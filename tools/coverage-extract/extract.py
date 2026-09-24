@@ -26,10 +26,14 @@ def load_mapping(path):
     raw = '\n'.join(line for line in Path(path).read_text(encoding='utf-8').splitlines() if not line.lstrip().startswith('#'))
     data = json.loads(raw)
     rows = data['guardrails']
-    if set(rows) != {str(n) for n in range(1, 20)}:
-        raise ValueError('Mapping must have exactly guardrails 1–19')
-    for row in rows.values():
-        if not row.get('name') or not isinstance(row.get('patterns'), list): raise ValueError('Each guardrail needs a name and pattern list')
+    if set(rows) != {str(n) for n in range(1, 22)}:
+        raise ValueError('Mapping must have exactly guardrails 1–21')
+    for number, row in rows.items():
+        if not row.get('name') or not isinstance(row.get('patterns'), list):
+            raise ValueError(f'Guardrail {number} needs a name and pattern list')
+        pair_with = row.get('pair_with', [])
+        if not isinstance(pair_with, list) or not all(isinstance(value, str) for value in pair_with):
+            raise ValueError(f'Guardrail {number} pair_with must be a list of strings')
     return data
 
 
@@ -78,11 +82,24 @@ def extract(prototype, mapping):
     return {'missing': missing, 'tests': tests, 'functions': functions, 'assumptions': assumptions, 'states': states}
 
 
-def matched(name, patterns):
+def matched(name, patterns, pair_with=None, kind='test'):
+    """Return True if any pattern matches *name*. A declared pair_with list
+    additionally requires the name to contain at least one pair_with term.
+    pair_with constrains tests only: a symbol name is a single token and
+    cannot carry both sides of a boundary, so kind='function' skips the
+    pair check."""
     for pattern in patterns:
         if pattern.startswith('re:'):
-            if re.search(pattern[3:], name, re.I): return True
-        elif pattern.casefold() in name.casefold(): return True
+            if re.search(pattern[3:], name, re.I):
+                if kind != 'test' or not pair_with or any(
+                    p.casefold() in name.casefold() for p in pair_with
+                ):
+                    return True
+        elif pattern.casefold() in name.casefold():
+            if kind != 'test' or not pair_with or any(
+                p.casefold() in name.casefold() for p in pair_with
+            ):
+                return True
     return False
 
 
@@ -96,16 +113,26 @@ def render(data, mapping, sha, spec_commit, timestamp):
         out += ['Expected files missing at this SHA:'] + [f'- `{path}`' for path in data['missing']] + ['']
     material = data['tests'] + data['functions']
     mapped = set()
-    for number in range(1, 20):
+    for number in range(1, 22):
         row = mapping['guardrails'][str(number)]
+        pair_with = row.get('pair_with', [])
         out += [f"### {number}. {row['name']}", '']
-        found = [(index, item) for index, item in enumerate(material) if matched(item['name'], row['patterns'])]
-        if not found: out += ['No matching evidence found at this SHA.', '']
+        found = set()
+        for index, item in enumerate(material):
+            if item['kind'] == 'function':
+                hit = matched(item['name'], row['patterns'], None, kind='function')
+            else:
+                hit = matched(item['name'], row['patterns'], pair_with, kind='test')
+            if hit:
+                found.add(index)
+        if not found:
+            out += ['No matching evidence found at this SHA.', '']
         else:
-            for index, item in found:
-                mapped.add(index)
+            for index in sorted(found):
+                item = material[index]
                 out.append(f"- {item['kind'].title()}: `{item['name']}` — `{item['file']}:{item['line']}`")
             out.append('')
+        mapped |= found
     out += ['## 2. Prototype assumptions found', '', '| Name | Value | File:line |', '|---|---|---|']
     for item in data['assumptions']:
         out.append(f"| `{md_cell(item['name'])}` | `{md_cell(item['value'])}` | `{item['file']}:{item['line']}` |")
