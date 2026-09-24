@@ -205,7 +205,7 @@ It must prove at minimum:
 - Remaining overlapping competing Requests become CONFLICTED.
 - Late or in-flight payment has a reconciliation path.
 
-Implementation evidence at `5c39748`: 44 domain tests passing. Recorded for traceability only — not evidence that any gate PASSES.
+Implementation and test evidence at `5c39748` is recorded for traceability only — not evidence that any gate PASSES.
 
 ### Journey coverage at `5c39748`
 
@@ -252,6 +252,13 @@ Concrete values in v2 that stand in for open decisions. Each is a **PROTOTYPE AS
 |---|---|---|---|---|
 | **KD-01** | Ending a commitment through conflict resolution sets Stay to `CANCELLED` (Stayora and external stays). Stay has no `CANCELLED` state, and Booking cancellation must not automatically drive Stay state. | CP4 Stay lifecycle (`05-state-machines-policies/04-stay-lifecycle.md`); ADR-P066 (draft) | **KNOWN DEVIATION TEST**: `domain.test.ts` #991, #1027 | OPEN — reconcile code, tests and this table in one change-set |
 | **KD-02** | `acceptRequest` always creates a Temporary Exclusive HOLD (an exclusive Inventory Commitment) on every Commercial Acceptance, and a second overlapping acceptance is directly CONFLICTED because the first hold makes the dates unavailable. The prototype turns every Commercial Acceptance into Inventory Exclusivity; there is no Host-selected competitive handling, no competition disclosure and no competitive priority. | CP4 Booking Request lifecycle ("Multiple Requests may coexist while no exclusive commitment exists"; `ACCEPTED → CONFLICTED` only via a new authoritative inventory truth); ADR-P014 (refined 2026-09-23); ADR-P070 | **KNOWN DEVIATION TEST**: `domain.test.ts` #390 (accept first → accept second → CONFLICTED, exactly 1 ACTIVE HOLD), #442 (payment confirmation expects the acceptance-created HOLD); `world-mutate.test.ts` #47 (concurrent accepts → 1 ACTIVE hold, other CONFLICTED). Additional tests that depend on the acceptance-created hold and change together with this reconciliation: #472, #501, #665, #881, #1056 | OPEN — reconcile code, tests and coverage rows #20, #21 in one change-set (G-v2.4) |
+
+Evidence extraction note: the canonical coverage table identifies `domain.test.ts` #442 as a
+**KNOWN DEVIATION TEST** for KD-02 based on Product Architect judgement. The current
+pattern-based `coverage-extract` output does not surface #442 for guardrail row 20
+because its test name lacks the required `CONFLICTED` pair term. The extractor's
+mechanical mapping and the reviewed canonical judgement are not contradictory. Do
+not remove #442 from KD-02 merely to make the table match extractor output.
 
 ---
 
