@@ -103,3 +103,11 @@ changed; and which cross-references were verified.
 
 One task, one branch, one PR. Do not bundle unrelated changes; do not mix a migration
 or refactor with content decisions. Do not merge without Founder approval.
+
+If another agent or process is actively working in the primary checkout and a task
+could touch the same files, do not edit those files concurrently. Use a separate git
+worktree for the task or wait until the other work is complete.
+
+Never commit directly to main. Work on the task branch. If the required branch cannot
+be created or checked out safely, stop and report the blocker; do not work around the
+failure by committing on main.
