@@ -42,7 +42,7 @@ Sale role không có booking acceptance authority. Nếu người đó đồng t
 | External confirmed booking | Cùng authority đóng inventory như Stayora confirmed |
 | External confirmed trong lúc request pending | Request không được thắng confirmed inventory |
 
-**TBD:** commitment window, concurrent accept, late payment, provider UNKNOWN/reconciliation, hai confirmed từ nhiều nguồn, manual override, cancellation/reopen, no-show/Payment Default và sync failure. Không tự chọn “first timestamp wins” hoặc “Stayora wins”.
+**TBD:** commitment window, concurrent accept, late payment, provider UNKNOWN/reconciliation, hai confirmed từ nhiều nguồn, manual override, cancellation/reopen, no-show/Payment Default và sync failure. Không tự chọn “first timestamp wins” hoặc “Stayora wins” khi hòa giải các authoritative Inventory truth đã xung đột. Ranh giới này không cấm competitive confirmation giữa các Commercial Acceptance; xem [ADR-P015](../00-start-here/DECISIONS.md#adr-p015), [ADR-P070](../00-start-here/DECISIONS.md#adr-p070) và [Booking Request and Booking lifecycle](../05-state-machines-policies/02-booking-request-and-booking.md) cho các quy tắc có authority.
 
 **CONFIRMED — hướng integration.** Host ghi nhận direct/Zalo/external booking để truth phản ánh thực tế; iCal hỗ trợ OTA. **WORKING MODEL:** polling 15 phút từ nguồn cũ. Độ trễ vẫn tạo rủi ro; không hứa zero overbooking hoặc realtime khi nguồn ngoài không có real-time integration.
 
