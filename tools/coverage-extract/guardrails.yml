@@ -26,6 +26,8 @@
     "16": {"name": "Assignment ≠ Authority", "patterns": ["unassigned Butler", "re:^checkInStay$"]},
     "17": {"name": "BQL visibility ≠ Authority", "patterns": ["BQL cannot", "BQL/Butler/Sale calling"]},
     "18": {"name": "Working Context ≠ Authority", "patterns": ["Working Context", "workingContext"]},
-    "19": {"name": "Conflict ≠ automatic winner", "patterns": ["3-way conflict", "external overlapping a Stayora booking", "re:^resolveConflict$"]}
+    "19": {"name": "Conflict ≠ automatic winner", "patterns": ["3-way conflict", "external overlapping a Stayora booking", "re:^resolveConflict$"]},
+  "20": {"name": "Commercial Acceptance ≠ Temporary Exclusive Commitment", "patterns": ["acceptRequest", "HOLD", "accept first", "parallel acceptance"], "pair_with": ["CONFLICTED"]},
+  "21": {"name": "Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity", "patterns": ["competitive", "exclusivity"], "pair_with": []}
   }
 }

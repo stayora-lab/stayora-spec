@@ -14,8 +14,8 @@ class ExtractionTests(unittest.TestCase):
     def setUp(self):
         self.mapping = extractor.load_mapping(ROOT / 'guardrails.yml')
 
-    def test_mapping_has_exact_19_rows(self):
-        self.assertEqual(list(self.mapping['guardrails']), [str(i) for i in range(1, 20)])
+    def test_mapping_has_exact_21_rows(self):
+        self.assertEqual(list(self.mapping['guardrails']), [str(i) for i in range(1, 22)])
 
     def test_lexical_extraction_and_unmapped_material(self):
         data = extractor.extract(FIXTURE, self.mapping)
