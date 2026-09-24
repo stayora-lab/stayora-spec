@@ -9,4 +9,5 @@ jobs:
         with:
           python-version: '3.12'
       - run: python3 -m unittest discover -s tools/spec-check/tests
+      - run: python3 -m unittest discover -s tools/coverage-extract/tests
       - run: python3 tools/spec-check/check.py
