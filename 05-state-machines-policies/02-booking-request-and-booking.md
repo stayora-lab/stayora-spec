@@ -28,6 +28,8 @@ Valid Offer/Terms + Valid Authority + Inventory Exclusivity Available
 → Commercial Accommodation Commitment → Booking CONFIRMED
 ```
 
+`Inventory Exclusivity Available` means that, at authoritative confirmation time, no applicable Inventory truth or valid exclusive commitment prevents this Request from establishing the Commercial Accommodation Commitment. The confirming Request need not already hold a Temporary Exclusive Commitment: competitive handling can reach confirmation without one, while a valid Temporary Exclusive Commitment held by another Request cannot be bypassed. Revalidate current Inventory truth at confirmation ([ADR-P014](../00-start-here/DECISIONS.md#adr-p014), [ADR-P070](../00-start-here/DECISIONS.md#adr-p070)).
+
 Booking begins when the commercial accommodation commitment is successfully established. Its small lifecycle is `CONFIRMED → CANCELLED`; `TERMINATED` remains a future modeling hypothesis. Do not mirror Payment, Stay, Settlement, or Payout states into Booking. A failed pre-confirmation attempt is not a cancelled Booking because no Booking existed.
 
 Request Booking and Instant Book converge after authorization at this same commitment boundary.
