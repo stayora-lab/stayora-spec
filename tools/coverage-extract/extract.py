@@ -37,6 +37,24 @@ def load_mapping(path):
     return data
 
 
+def read_tests(path, rel):
+    found = []
+    for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+        match = TEST_CALL.search(line)
+        if match and re.search(r'\b(?:it|test)(?:\.skip|\.only)?\s*\(', line):
+            found.append({'kind': 'test', 'name': match.group(2), 'file': rel, 'line': number})
+    return found
+
+
+def read_functions(path, rel):
+    found = []
+    for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+        match = EXPORTED_FUNCTION.match(line)
+        if match:
+            found.append({'kind': 'function', 'name': match.group(1), 'file': rel, 'line': number})
+    return found
+
+
 def extract(prototype, mapping):
     prototype = Path(prototype)
     missing = [p for p in mapping['expected_files'] if not (prototype / p).is_file()]
@@ -44,15 +62,16 @@ def extract(prototype, mapping):
     domain = prototype / 'src/lib/domain'
     for path in sorted(domain.rglob('*.test.ts')) if domain.exists() else []:
         rel = path.relative_to(prototype).as_posix()
-        for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
-            match = TEST_CALL.search(line)
-            if match and re.search(r'\b(?:it|test)(?:\.skip|\.only)?\s*\(', line):
-                tests.append({'kind': 'test', 'name': match.group(2), 'file': rel, 'line': number})
+        tests.extend(read_tests(path, rel))
+    access_test = prototype / 'src/lib/access.test.ts'
+    if access_test.is_file():
+        tests.extend(read_tests(access_test, 'src/lib/access.test.ts'))
     engine = domain / 'engine.ts'
     if engine.exists():
-        for number, line in enumerate(engine.read_text(encoding='utf-8').splitlines(), 1):
-            match = EXPORTED_FUNCTION.match(line)
-            if match: functions.append({'kind': 'function', 'name': match.group(1), 'file': 'src/lib/domain/engine.ts', 'line': number})
+        functions.extend(read_functions(engine, 'src/lib/domain/engine.ts'))
+    access = prototype / 'src/lib/access.ts'
+    if access.is_file():
+        functions.extend(read_functions(access, 'src/lib/access.ts'))
     config = domain / 'config.ts'
     if config.exists():
         for number, line in enumerate(config.read_text(encoding='utf-8').splitlines(), 1):

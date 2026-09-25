@@ -20,8 +20,8 @@ class ExtractionTests(unittest.TestCase):
     def test_lexical_extraction_and_unmapped_material(self):
         data = extractor.extract(FIXTURE, self.mapping)
         self.assertEqual(data['missing'], [])
-        self.assertEqual([(x['name'], x['line']) for x in data['tests']], [('request differs from Booking', 2), ('new unmapped behavior', 3)])
-        self.assertEqual([x['name'] for x in data['functions']], ['createRequest', 'resolveConflict', 'newBehavior'])
+        self.assertEqual([(x['name'], x['line']) for x in data['tests']], [('request differs from Booking', 2), ('new unmapped behavior', 3), ('an active grant is the role; a client-sent role is ignored', 2)])
+        self.assertEqual([x['name'] for x in data['functions']], ['createRequest', 'resolveConflict', 'newBehavior', 'resolveWorkingRole'])
         self.assertEqual(data['assumptions'][0]['value'], '30 * 60 * 1000')
         self.assertIn('COMPLETED', data['states'][0]['values'])
         self.assertTrue(any(x['name'] == 'Booking.status' for x in data['states']))
@@ -31,11 +31,16 @@ class ExtractionTests(unittest.TestCase):
         self.assertIn('newBehavior', output.split('## 4. Unmapped material')[1])
         self.assertIn('Generated evidence. Not canonical.', output)
         self.assertNotIn('TESTED — PASS', output)
+        self.assertNotIn('VALIDATED ELSEWHERE', output)
+        row18 = output.split('### 18.')[1].split('### 19.')[0]
+        self.assertIn('an active grant is the role; a client-sent role is ignored', row18)
+        self.assertIn('resolveWorkingRole', row18)
+        self.assertNotIn('No matching evidence found at this SHA.', row18)
 
     def test_missing_expected_file_is_reported(self):
         with tempfile.TemporaryDirectory() as directory:
             data = extractor.extract(directory, self.mapping)
-            self.assertEqual(len(data['missing']), 4)
+            self.assertEqual(len(data['missing']), 6)
             output = extractor.render(data, self.mapping, 'a'*40, 'b'*40, '2026-09-23T00:00:00Z')
             self.assertIn('Expected files missing at this SHA:', output)
             self.assertIn('src/lib/domain/engine.ts', output)

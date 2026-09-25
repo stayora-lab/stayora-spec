@@ -5,7 +5,9 @@
     "src/lib/domain/domain.test.ts",
     "src/lib/domain/engine.ts",
     "src/lib/domain/config.ts",
-    "src/lib/domain/types.ts"
+    "src/lib/domain/types.ts",
+    "src/lib/access.ts",
+    "src/lib/access.test.ts"
   ],
   "guardrails": {
     "1": {"name": "Request ≠ Booking", "patterns": ["ids all different", "no exported function creates a Booking", "re:^createRequest$"]},
@@ -15,17 +17,17 @@
     "5": {"name": "Booking cancellation ≠ automatic Stay state mirroring", "patterns": ["Stay CANCELLED", "re:^resolveConflict$"]},
     "6": {"name": "Arrival observation ≠ Check-in", "patterns": ["arrival observation", "observeArrival"]},
     "7": {"name": "Departure observation ≠ Checkout", "patterns": ["departure observation", "observeDeparture"]},
-    "8": {"name": "Checkout ≠ Completion", "patterns": ["checkOutStay", "re:checkout.*completion"]},
+    "8": {"name": "Checkout ≠ Completion", "patterns": ["checkOutStay", "evaluateStayCompletion", "checkout records CHECKED_OUT and leaves completion for a later evaluation", "re:checkout.*completion"]},
     "9": {"name": "Completion ≠ Inventory release", "patterns": ["completing a Stay does not end", "re:completion.*commitment"]},
     "10": {"name": "Incident ≠ Maintenance Block", "patterns": ["an incident does not change", "re:^reportIncident$"]},
     "11": {"name": "Emergency Protective Hold ≠ Maintenance Block", "patterns": ["Emergency Protective Hold", "protectiveHold"]},
     "12": {"name": "Emergency Protective Hold ≠ Commitment", "patterns": ["Emergency Protective Hold", "protectiveHold"]},
-    "13": {"name": "External Report ≠ External Fact", "patterns": ["External Report", "reportExternal"]},
+    "13": {"name": "External Report ≠ External Fact", "patterns": ["submitExternalReport", "a Sale or Butler report is not a Fact and does not hold the calendar"]},
     "14": {"name": "External Fact ≠ External-backed Commitment", "patterns": ["re:^recordExternalBooking$", "External-backed Commitment"]},
     "15": {"name": "External Accommodation ≠ Stayora Booking", "patterns": ["no Booking exists for any Stay with origin EXTERNAL", "external booking on free dates"]},
-    "16": {"name": "Assignment ≠ Authority", "patterns": ["unassigned Butler", "re:^checkInStay$"]},
+    "16": {"name": "Assignment ≠ Authority", "patterns": ["a Butler cannot prepare, observe, check in, or check out a villa they are not assigned to", "re:^checkInStay$"]},
     "17": {"name": "BQL visibility ≠ Authority", "patterns": ["BQL cannot", "BQL/Butler/Sale calling"]},
-    "18": {"name": "Working Context ≠ Authority", "patterns": ["Working Context", "workingContext"]},
+    "18": {"name": "Working Context ≠ Authority", "patterns": ["resolveWorkingRole", "an active grant is the role", "client sends admin", "unsigned callers stay guests"]},
     "19": {"name": "Conflict ≠ automatic winner", "patterns": ["3-way conflict", "external overlapping a Stayora booking", "re:^resolveConflict$"]},
   "20": {"name": "Commercial Acceptance ≠ Temporary Exclusive Commitment", "patterns": ["acceptRequest", "HOLD", "accept first", "parallel acceptance"], "pair_with": ["CONFLICTED"]},
   "21": {"name": "Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity", "patterns": ["competitive", "exclusivity"], "pair_with": []}
