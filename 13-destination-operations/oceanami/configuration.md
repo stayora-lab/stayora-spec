@@ -34,6 +34,14 @@ Decision source: the Founder Decision Gate of 2026-09-23 recorded in [SRC-31](..
 
 The 24-hour value is a pilot default informed by common marketplace practice, and it is configurable.
 
+## Villa Readiness
+
+Decision source: [ADR-P072](../../00-start-here/DECISIONS.md#adr-p072) (freshness decay rule); the duration has not been set by the Founder.
+
+| Parameter | Applies when | Value |
+|---|---|---|
+| Freshness decay period | Villa is READY with no guest present | TBD — configurable |
+
 ## Open
 
 Not configuration values; they remain open and are not restated here:
