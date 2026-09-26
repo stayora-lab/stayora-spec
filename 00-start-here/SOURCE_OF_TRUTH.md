@@ -261,6 +261,13 @@ Turn ID: `Founder Decision Gate, relayed in the Product Architect disposition of
 
 Founder Decision Gate, 2026-09-23 — Request deadlines: a PENDING Request carries a Host-response deadline and expires if the Host does not respond; an accepted Request carries its own acceptance / confirmation-response deadline from acceptedAt; the two clocks are independent; EXPIRED is terminal and no Request is revived; a Host-response deadline never extends beyond the Check-in boundary; the Oceanami pilot default for the normal Host-response window is 24 hours. Recorded as the source of ADR-P071.
 
+<a id="src-32"></a>
+### SRC-32 — Founder Decision Gate: Villa Readiness
+
+Turn ID: `Founder Decision Gate, confirmed by Product Architect, 2026-09-26`
+
+Founder Decision Gate, 2026-09-26 — Villa Readiness identified as a missing domain concept during a UX research pass on the Butler 'Việc hôm nay' screen, cross-validated by four independent reviews. A villa carries a physical readiness state (DIRTY → CLEANING → READY) independent of any single Stay; it decays back to DIRTY on guest departure or after a configurable no-guest period. Butler is the primary actor; Host has a supporting capability without an inspection/approval layer or a shortcut. Villa Readiness is not a Stay Completion blocker, an Availability Block, or an Inventory Commitment. Recorded as the source of ADR-P072.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.

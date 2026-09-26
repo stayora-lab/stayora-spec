@@ -169,6 +169,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P069](#adr-p069) | Oceanami V0 is Vietnamese-first | CONFIRMED |
 | [ADR-P070](#adr-p070) | Parallel Commercial Acceptance and Competitive Confirmation | CONFIRMED |
 | [ADR-P071](#adr-p071) | Request deadlines and expiry | CONFIRMED |
+| [ADR-P072](#adr-p072) | Villa Readiness is an independent lifecycle | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -940,6 +941,27 @@ A PENDING Request's Host-response deadline must never extend beyond the applicab
 Deadline values — the normal response window, the near-Check-in threshold and the shortened window, and acceptance-response values — are destination configuration, not universal constants. Oceanami pilot values are in [13-destination-operations/oceanami/configuration.md](../13-destination-operations/oceanami/configuration.md).
 
 **Nguồn:** [SRC-31](SOURCE_OF_TRUTH.md#src-31) — Founder Decision Gate, 2026-09-23; Product Architect disposition, 2026-09-23.
+
+<a id="adr-p072"></a>
+### ADR-P072 — Villa Readiness is an independent lifecycle
+
+**Status: CONFIRMED**
+
+A villa carries a physical readiness state independent of any single Stay, persisting across stays rather than resetting with each one:
+
+```text
+DIRTY → CLEANING → READY → (next stay's departure) → DIRTY
+```
+
+This lifecycle is parallel to and distinct from the Stay, Booking and Payment lifecycles. It answers whether the villa is physically fit for the next guest, not whether a booking has concluded.
+
+**Transitions.** The Butler assigned to the villa begins cleaning (`DIRTY → CLEANING`) and may complete it (`CLEANING → READY`). When the Butler cannot operate the system, the villa's Host may record either transition, including completion after the Butler began cleaning. Each transition is self-attested by its actual acting identity; there is no inspection or second-party approval step in V0. `READY → DIRTY` occurs automatically when a guest's departure is recorded for that villa, through observed departure or Checkout. A READY villa also decays automatically to DIRTY after a configurable period with no guest present; dust, humidity and pool upkeep require periodic cleaning even without a Stay in progress. The rule is CONFIRMED; the duration is destination configuration, TBD, recorded in [Oceanami Pilot Configuration](../13-destination-operations/oceanami/configuration.md#villa-readiness). `DID_NOT_OCCUR` does not change Villa Readiness: no guest was physically present or departed, and freshness decay runs independently.
+
+**Actors.** The assigned Butler is the primary operational actor. The villa's Host has a supporting capability at any step where the Butler cannot operate the system, including taking over an in-progress CLEANING transition. A Host-recorded transition stores the Host's actual acting identity; it is never attributed to the Butler. This is not inspection or approval, creates no quality-control layer, and grants no shortcut: the villa still moves through `DIRTY → CLEANING → READY` in order, never directly from DIRTY to READY.
+
+**Boundaries.** Villa Readiness is not a Stay Completion blocker. DIRTY or CLEANING never prevents Stay Completion; the unresolved FD-02 blocker catalogue remains separate and is not resolved here. Villa Readiness is neither an Availability Block nor an Inventory Commitment. A DIRTY or CLEANING villa remains commercially bookable for future dates; readiness is an internal Host/Butler operational signal, not a marketplace signal, absent a future decision. `reportPrepared` / `Stay.preparedAt` is SUPERSEDED as the canonical representation of readiness: it was scoped to a single Stay, so it could not persist across stays or show cleaning in progress. Prototype migration is a separate task.
+
+**Nguồn:** [SRC-32](SOURCE_OF_TRUTH.md#src-32) — Founder Decision Gate, 2026-09-26; Product Architect confirmation, 2026-09-26.
 
 ## Founder Decision canonicalization
 
