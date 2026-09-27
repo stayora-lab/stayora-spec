@@ -48,7 +48,7 @@ Supporting Persistence Architecture is documented in [09-database-design](../09-
 | ID | Canonical outcome | Status | Residual boundary |
 |---|---|---|---|
 | FD-01 | Check-in/Checkout = explicit capability/grant + Assignment/resource scope + current Stay preconditions. | CLOSED | Exact grant administration |
-| FD-02 | CHECKED_OUT is evaluated; COMPLETED is automatic when canonical conditions pass; blockers remain pending for re-evaluation. | CLOSED | Exception policy |
+| FD-02 | Authorized Checkout requires Checkout Assessment before Completion evaluation; the V0 catalogue and qualifying damage/compensation blocker are canonicalized in ADR-P073. | CLOSED | ADR-P073; future blocker types require a governed decision |
 | FD-03 | COMPLETED ends the Stay lifecycle; it does not close Incident, Payment, compensation, Settlement or release Inventory. | CLOSED | Separate downstream policies |
 | FD-04 | V0 completion conditions are authoritative Checkout → CHECKED_OUT → evaluation → COMPLETED when no Stay-lifecycle blocker exists. | CLOSED | No workforce workflow |
 | FD-05 | DID_NOT_OCCUR is explicit, authorized and evaluated; never clock-automatic. | CLOSED | Penalty/refund/default/cancellation/release effects |
@@ -170,6 +170,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P070](#adr-p070) | Parallel Commercial Acceptance and Competitive Confirmation | CONFIRMED |
 | [ADR-P071](#adr-p071) | Request deadlines and expiry | CONFIRMED |
 | [ADR-P072](#adr-p072) | Villa Readiness is an independent lifecycle | CONFIRMED |
+| [ADR-P073](#adr-p073) | Checkout Assessment and V0 Stay Completion blocker catalogue | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -963,12 +964,26 @@ This lifecycle is parallel to and distinct from the Stay, Booking and Payment li
 
 **Nguồn:** [SRC-32](SOURCE_OF_TRUTH.md#src-32) — Founder Decision Gate, 2026-09-26; Product Architect confirmation, 2026-09-26.
 
+<a id="adr-p073"></a>
+### ADR-P073 — Checkout Assessment and V0 Stay Completion blocker catalogue
+
+**Status:** CONFIRMED
+
+**Decision.** FD-02 is closed for the V0 Checkout Assessment and Stay Completion blocker catalogue. Authorized Checkout requires Checkout Assessment before Completion evaluation. The minimum complete V0 catalogue is NORMAL, DAMAGE / COMPENSATION REQUIRING RESOLUTION, and ENHANCED CLEANING REQUIRED. Only a qualifying unresolved checkout damage/compensation Incident blocks Completion; Stay remains CHECKED_OUT until no applicable blocker remains, then Completion may be evaluated again. NORMAL and enhanced cleaning do not block Completion. Lost property is not a V0 Completion blocker. Future blocker types require a future governed decision; this catalogue is not universally exhaustive.
+
+**Canonical boundaries.** Damage reuses the existing Incident lifecycle, not a parallel domain. The appropriately assigned Butler normally observes/records the assessment. For Oceanami V0, a Host may ordinarily receive explicit villa-scoped authority for applicable damage-resolution actions that allow the blocker to clear; ownership or the HOST label alone grants no such authority. This creates neither a universal Host Checkout approval gate nor an inspection role; NORMAL requires no Host approval. Incident resolution/responsibility may establish eligibility for a downstream consequence under existing Money policy, but does not execute a financial transaction. Enhanced cleaning creates a structured operational indication for Villa Readiness without adding a state. Stay Completion never waits for READY; DIRTY/CLEANING are not blockers.
+
+**Canonical detail:** [Stay Completion Policy](../05-state-machines-policies/16-stay-completion-policy.md), [Incident lifecycle](../05-state-machines-policies/07-incident-lifecycle.md), [WF-05](../04-core-workflows/05-incident-resolution.md), [WF-06](../04-core-workflows/06-completion-settlement-payout.md), and [Effective Permission](../03-actor-authority/05-effective-permission.md). Unrelated Incident taxonomy, severity, SLA, appeals and financial policy questions remain open.
+
+**Nguồn:** [SRC-33](SOURCE_OF_TRUTH.md#src-33) — Founder Decision Gate, 2026-09-27; Product Architect task contract, 2026-09-27.
+
 ## Founder Decision canonicalization
 
 Founder Decisions (FD) are the historical record of the Founder Decision Gate. ADR-P entries are the canonical durable product/domain decision record. A domain-effective FD is marked CANONICALIZED → ADR-P0xx in the CP8-E reconciliation register. FD entries are not renumbered and are not marked SUPERSEDED; canonicalization does not weaken the original decision.
 
 | FD | Canonical ADR |
 |---|---|
+| FD-02 | ADR-P073 |
 | FD-05 | ADR-P066 (clarified and generalized) |
 | FD-15 | ADR-P067 |
 | FD-16 | ADR-P067 |

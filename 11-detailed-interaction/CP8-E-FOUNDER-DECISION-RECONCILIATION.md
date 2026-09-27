@@ -8,7 +8,7 @@ This register records the current canonical effect of FD-01 through FD-19. It do
 | ID | Current canonical decision | Reconciliation status | Residual boundary deliberately open |
 |---|---|---|---|
 | FD-01 | Check-in/Checkout requires explicit operational capability/grant + valid Assignment/resource scope + current Stay preconditions. Assignment, Host relationship or BQL visibility alone is insufficient. | CLOSED — architecture | Exact role/capacity grants and field policy where not separately decided |
-| FD-02 | After authoritative CHECKED_OUT, completion evaluation automatically establishes COMPLETED when canonical conditions pass; a lifecycle blocker keeps completion pending for authorized resolution/re-evaluation. | CLOSED — lifecycle | Exact exception handling remains policy-bound |
+| FD-02 | Authorized Checkout requires Checkout Assessment before Completion evaluation; qualifying unresolved checkout damage/compensation blocks Completion, while NORMAL and enhanced cleaning do not. | CANONICALIZED → [ADR-P073](../00-start-here/DECISIONS.md#adr-p073) | V0 catalogue closed; future blocker types require a governed decision |
 | FD-03 | COMPLETED means the accommodation/Stay lifecycle is complete; it does not close Incident, Payment, compensation, Settlement or release Inventory. | CLOSED — semantics | Separate financial/Incident policies |
 | FD-04 | V0 minimal completion is authoritative Checkout → CHECKED_OUT → evaluation → COMPLETED when no canonical Stay-lifecycle blocker exists. | CLOSED — conditions | No workforce/housekeeping workflow implied |
 | FD-05 | DID_NOT_OCCUR is never clock-automatic: expected arrival → Attention → authorized operational evaluation → explicit action with capability + Assignment/scope + current preconditions. | CLOSED — architecture | Penalty, refund, default, cancellation and release effects remain open |
@@ -45,6 +45,7 @@ E1–E4 reports and their original TBD/blocker rows retain their historical mean
 
 | FD | Canonical ADR | Note |
 |---|---|---|
+| FD-02 | ADR-P073 | V0 Checkout Assessment and qualifying Completion blocker catalogue closed |
 | FD-05 | ADR-P066 | Clarified and generalized: DID_NOT_OCCUR is not a synonym for no-show; reason mandatory |
 | FD-15 | ADR-P067 | Emergency Protective Hold is an Availability Block, not an Inventory Commitment |
 | FD-16 | ADR-P067 | Review/expiry boundary remains policy-defined and TBD |
