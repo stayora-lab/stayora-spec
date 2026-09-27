@@ -142,7 +142,7 @@ No clipping, no inaccessible primary action, no unusable modal, no table that hi
 
 > This snapshot is validation evidence at one specific commit. It is **not** canonical product semantics. Later iterations add new columns/tables; this snapshot is never overwritten.
 
-Summary: **9 TESTED — PASS · 2 PARTIAL · 2 TESTED — FAIL · 8 NOT REPRESENTED**
+Summary: **20 TESTED — PASS · 1 PARTIAL · 0 TESTED — FAIL · 0 NOT REPRESENTED**
 
 | # | Guardrail | State at `5c39748` | Evidence | Disposition |
 |---|---|---|---|---|
@@ -150,23 +150,23 @@ Summary: **9 TESTED — PASS · 2 PARTIAL · 2 TESTED — FAIL · 8 NOT REPRESEN
 | 2 | Acceptance ≠ Confirmation | TESTED — PASS | #390 (acceptance creates a temporary hold only, not a Booking confirmation); #442 — the exclusivity these tests encode is classified under [KD-02](#known-deviations) | |
 | 3 | Payment SUCCEEDED ≠ automatic Booking CONFIRMED | TESTED — PASS | #501 (late success → refund, no Booking); #665; #881 | |
 | 4 | Payment UNKNOWN ≠ FAILED | TESTED — PASS | #472; #529 | |
-| 5 | Booking cancellation ≠ automatic Stay state mirroring | **TESTED — FAIL** | `resolveConflict` sets Stay `CANCELLED`; protected by #991 and #1027 — see [KD-01](#known-deviations) | |
-| 6 | Arrival observation ≠ Check-in | NOT REPRESENTED | No arrival-observation concept in the engine | MUST REPRESENT |
-| 7 | Departure observation ≠ Checkout | NOT REPRESENTED | No departure-observation concept | MUST REPRESENT |
-| 8 | Checkout ≠ Completion | PARTIAL | `checkOutStay` completes in the same action when nothing blocks (consistent with FD-02) but the difference is not observable | |
+| 5 | Booking cancellation ≠ automatic Stay state mirroring | TESTED — PASS | `domain.test.ts` "end Stayora commitment → Booking CANCELLED, Stay still SCHEDULED, then DID_NOT_OCCUR is a separate step"; "end EXTERNAL commitment → its Stay stays SCHEDULED until a separate non-occurrence". `resolveConflict` no longer sets Stay `CANCELLED`; Booking `CANCELLED` → `markDidNotOccur` with a mandatory reason is the only path to a Stay state change. KD-01 closed. | |
+| 6 | Arrival observation ≠ Check-in | TESTED — PASS | `observeArrival` is separate from `checkInStay`. `domain.test.ts` "observing arrival leaves the stay scheduled and does not check in"; "check-in does not record an arrival observation". Check-in does not record an arrival observation. | |
+| 7 | Departure observation ≠ Checkout | TESTED — PASS | `observeDeparture` is separate from `checkOutStay`. `domain.test.ts` "observing departure leaves the guest checked in and does not check out"; "checkout does not record a departure observation". | |
+| 8 | Checkout ≠ Completion | PARTIAL | Checkout and Completion are separated at the engine level (evaluateStayCompletion is a distinct function from checkOutStay), but the prototype provides no product path that leaves a Stay observably CHECKED_OUT, because the applicable Stay-lifecycle blocker catalogue (FD-02) remains unresolved. No blocker may be invented to force this row to PASS. | |
 | 9 | Completion ≠ Inventory release | TESTED — PASS | #274 | |
 | 10 | Incident ≠ Maintenance Block | TESTED — PASS | #305 (incident changes no Booking, Stay or commitment) | |
-| 11 | Emergency Protective Hold ≠ Maintenance Block | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
-| 12 | Emergency Protective Hold ≠ Commitment | NOT REPRESENTED | No Protective Hold | MUST REPRESENT |
-| 13 | External Report ≠ External Fact | NOT REPRESENTED | Only the Host records directly; no report path from Sale/Butler | MUST REPRESENT |
-| 14 | External Fact ≠ External-backed Commitment | NOT REPRESENTED | One action creates both | MUST REPRESENT |
+| 11 | Emergency Protective Hold ≠ Maintenance Block | TESTED — PASS | `placeProtectiveHold` and `releaseProtectiveHold` are separate from `recordMaintenanceFromHold`. `domain.test.ts` "placing a protective hold does not create a maintenance block"; "recording maintenance is a separate host action and is not the hold". `assertHoldActor` restricts placement to Host or BQL: a Butler is refused in "a protective hold over a stay does not end the booking or open a conflict". | |
+| 12 | Emergency Protective Hold ≠ Commitment | TESTED — PASS | A protective hold creates no Inventory Commitment. `domain.test.ts` "placing a protective hold does not create a maintenance block" (commitment count unchanged); "a protective hold over a stay does not end the booking or open a conflict". | |
+| 13 | External Report ≠ External Fact | TESTED — PASS | PASS against the G-v2.1–G-v2.4 V0 baseline. submitExternalReport (Sale or an assigned Butler) creates a Report only — the calendar is unaffected and no Fact is created. | |
+| 14 | External Fact ≠ External-backed Commitment | TESTED — PASS | `submitExternalReport` and `recordExternalBooking` write distinct truths. `domain.test.ts` "a Host can record a Fact while no External-backed Commitment exists"; "establishing a commitment is a different truth from the Fact, and one action can write both without a Booking". One action may write both without creating a fake Booking. | |
 | 15 | External Accommodation ≠ Stayora Booking | TESTED — PASS | #763; #835 | |
-| 16 | Assignment ≠ Authority | PARTIAL | Engine restricts Butler to assigned villas; no dedicated test for an unassigned Butler | |
+| 16 | Assignment ≠ Authority | TESTED — PASS | `domain.test.ts` "a Butler cannot prepare, observe, check in, or check out a villa they are not assigned to". | |
 | 17 | BQL visibility ≠ Authority | TESTED — PASS | #248; #1336 | |
-| 18 | Working Context ≠ Authority | NOT REPRESENTED | Roles come from links; no Working Context | VALIDATED ELSEWHERE (conditional) |
+| 18 | Working Context ≠ Authority | TESTED — PASS | resolveWorkingRole selects only among the caller's own active grants; a client-sent role or grantId cannot elevate authority; a forged grantId falls back to GUEST. Working Context selects among existing authority — it does not create authority, and Effective Permission is evaluated under the selected valid acting context, not as a union of every grant the actor holds. This is the validated boundary; do not generalize the forward-to-GUEST fallback into a universal policy beyond what CP3 states. | |
 | 19 | Conflict ≠ automatic winner | TESTED — PASS | #859; #1124 | |
-| 20 | Commercial Acceptance ≠ Temporary Exclusive Commitment | **TESTED — FAIL** | `acceptRequest` unconditionally creates a Temporary Exclusive HOLD on every acceptance, and a second overlapping acceptance is directly CONFLICTED while the first hold is active. Protected by KNOWN DEVIATION TESTS #390, #442 — see [KD-02](#known-deviations) | MUST REPRESENT / reconcile in G-v2.4 |
-| 21 | Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity | NOT REPRESENTED | No competitive acceptance mode at `5c39748`; every acceptance is exclusive (KD-02), so UNKNOWN never occurs in a competitive context | MUST REPRESENT in G-v2.4 |
+| 20 | Commercial Acceptance ≠ Temporary Exclusive Commitment | TESTED — PASS | `acceptRequest` creates a HOLD only when `handling === "EXCLUSIVE"`; COMPETITIVE creates no commitment. `domain.test.ts` "competitive accept of two overlapping requests → both ACCEPTED, no hold"; "exclusive handling still reserves the dates and blocks a second exclusive accept". `world-mutate.test.ts` "two concurrent competitive accepts on overlapping requests → both ACCEPTED, no hold". KD-02 closed. | |
+| 21 | Payment UNKNOWN ≠ Competitive Priority / Inventory Exclusivity | TESTED — PASS | UNKNOWN in competitive mode does not establish priority and does not block the other request. `domain.test.ts` "UNKNOWN does not win, does not block the other request, and reconciles into a refund only if money arrived". | |
 
 Correction, 2026-09-23: the baseline summary originally read 10 · 2 · 1 · 6. That was a miscount in the artifact; the per-row states are unchanged.
 
@@ -221,10 +221,10 @@ Implementation and test evidence at `5c39748` is recorded for traceability only 
 | Iteration | Commit | PASS | PARTIAL | FAIL | NOT REP. | VAL. ELSEWHERE |
 |---|---|---|---|---|---|---|
 | Baseline | `5c39748` | 9 | 2 | 2 | 8 | 0 |
-| G-v2.1 | — | | | | | |
-| G-v2.2 | — | | | | | |
-| G-v2.3 | — | | | | | |
-| G-v2.4 | — | | | | | |
+| G-v2.1 | `22bddc221ad5c63dee09d7c0f677ab31cdbe226b` | 13 | 1 | 2 | 5 | 0 |
+| G-v2.2 | `d87435548a38eedb00b3483a2bb0fb2464a6fef0` | 15 | 1 | 2 | 3 | 0 |
+| G-v2.3 | `52ee16708f86d0bbfd1d66184bec259c2e30b733` | 18 | 1 | 1 | 1 | 0 |
+| G-v2.4 | `64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65` | 20 | 1 | 0 | 0 | 0 |
 | Final validation | — | | | | | |
 
 Every prototype change in an iteration states which **journey, gate or coverage row** it addresses.
@@ -250,8 +250,8 @@ Concrete values in v2 that stand in for open decisions. Each is a **PROTOTYPE AS
 
 | ID | Deviation | Conflicts with | Tests protecting it | Status |
 |---|---|---|---|---|
-| **KD-01** | Ending a commitment through conflict resolution sets Stay to `CANCELLED` (Stayora and external stays). Stay has no `CANCELLED` state, and Booking cancellation must not automatically drive Stay state. | CP4 Stay lifecycle (`05-state-machines-policies/04-stay-lifecycle.md`); ADR-P066 (draft) | **KNOWN DEVIATION TEST**: `domain.test.ts` #991, #1027 | OPEN — reconcile code, tests and this table in one change-set |
-| **KD-02** | `acceptRequest` always creates a Temporary Exclusive HOLD (an exclusive Inventory Commitment) on every Commercial Acceptance, and a second overlapping acceptance is directly CONFLICTED because the first hold makes the dates unavailable. The prototype turns every Commercial Acceptance into Inventory Exclusivity; there is no Host-selected competitive handling, no competition disclosure and no competitive priority. | CP4 Booking Request lifecycle ("Multiple Requests may coexist while no exclusive commitment exists"; `ACCEPTED → CONFLICTED` only via a new authoritative inventory truth); ADR-P014 (refined 2026-09-23); ADR-P070 | **KNOWN DEVIATION TEST**: `domain.test.ts` #390 (accept first → accept second → CONFLICTED, exactly 1 ACTIVE HOLD), #442 (payment confirmation expects the acceptance-created HOLD); `world-mutate.test.ts` #47 (concurrent accepts → 1 ACTIVE hold, other CONFLICTED). Additional tests that depend on the acceptance-created hold and change together with this reconciliation: #472, #501, #665, #881, #1056 | OPEN — reconcile code, tests and coverage rows #20, #21 in one change-set (G-v2.4) |
+| **KD-01** | Ending a commitment through conflict resolution sets Stay to `CANCELLED` (Stayora and external stays). Stay has no `CANCELLED` state, and Booking cancellation must not automatically drive Stay state. | CP4 Stay lifecycle (`05-state-machines-policies/04-stay-lifecycle.md`); ADR-P066 (draft) | **KNOWN DEVIATION TEST**: `domain.test.ts` #991, #1027 | **RESOLVED** at `52ee16708f86d0bbfd1d66184bec259c2e30b733` (G-v2.3). Closing note: `resolveConflict` no longer sets Stay `CANCELLED`. Historical status, preserved: OPEN — reconcile code, tests and this table in one change-set. |
+| **KD-02** | `acceptRequest` always creates a Temporary Exclusive HOLD (an exclusive Inventory Commitment) on every Commercial Acceptance, and a second overlapping acceptance is directly CONFLICTED because the first hold makes the dates unavailable. The prototype turns every Commercial Acceptance into Inventory Exclusivity; there is no Host-selected competitive handling, no competition disclosure and no competitive priority. | CP4 Booking Request lifecycle ("Multiple Requests may coexist while no exclusive commitment exists"; `ACCEPTED → CONFLICTED` only via a new authoritative inventory truth); ADR-P014 (refined 2026-09-23); ADR-P070 | **KNOWN DEVIATION TEST**: `domain.test.ts` #390 (accept first → accept second → CONFLICTED, exactly 1 ACTIVE HOLD), #442 (payment confirmation expects the acceptance-created HOLD); `world-mutate.test.ts` #47 (concurrent accepts → 1 ACTIVE hold, other CONFLICTED). Additional tests that depend on the acceptance-created hold and change together with this reconciliation: #472, #501, #665, #881, #1056 | **RESOLVED** at `64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65` (G-v2.4). Closing note: `acceptRequest` creates a HOLD only when `handling === "EXCLUSIVE"`; COMPETITIVE creates no commitment. Historical status, preserved: OPEN — reconcile code, tests and coverage rows #20, #21 in one change-set (G-v2.4). |
 
 Evidence extraction note: the canonical coverage table identifies `domain.test.ts` #442 as a
 **KNOWN DEVIATION TEST** for KD-02 based on Product Architect judgement. The current
