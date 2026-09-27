@@ -268,6 +268,13 @@ Turn ID: `Founder Decision Gate, confirmed by Product Architect, 2026-09-26`
 
 Founder Decision Gate, 2026-09-26 — Villa Readiness identified as a missing domain concept during a UX research pass on the Butler 'Việc hôm nay' screen, cross-validated by four independent reviews. A villa carries a physical readiness state (DIRTY → CLEANING → READY) independent of any single Stay; it decays back to DIRTY on guest departure or after a configurable no-guest period. Butler is the primary actor; Host has a supporting capability without an inspection/approval layer or a shortcut. Villa Readiness is not a Stay Completion blocker, an Availability Block, or an Inventory Commitment. Recorded as the source of ADR-P072.
 
+<a id="src-33"></a>
+### SRC-33 — Founder Decision Gate: FD-02 Stay Completion blocker catalogue
+
+Turn ID: `Founder Decision Gate, recorded in the Product Architect task contract of 2026-09-27`
+
+Founder Decision Gate, 2026-09-27 — FD-02 Stay Completion blocker catalogue: three V0 Checkout Assessment outcomes (NORMAL, DAMAGE/COMPENSATION REQUIRING RESOLUTION, ENHANCED CLEANING REQUIRED); damage reuses the existing Incident lifecycle, not a parallel domain; Host damage-resolution authority is an explicit villa-scoped capability, never inferred from ownership or the HOST label; resolution does not execute a Money transaction; enhanced cleaning is a Villa Readiness annotation, not a fourth state or a Completion blocker; lost property is out of scope for V0. Recorded as the source of ADR-P073.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.
