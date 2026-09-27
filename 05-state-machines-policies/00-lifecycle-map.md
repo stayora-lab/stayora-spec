@@ -9,6 +9,7 @@
 | Booking | Small State Machine |
 | Payment | Obligation + Transaction Lifecycle |
 | Stay | State Machine |
+| Villa Readiness | State Machine |
 | Settlement | State Machine |
 | Payout | Transaction Lifecycle |
 | Verification | Status + Assessment/Review Case |
