@@ -275,6 +275,13 @@ Turn ID: `Founder Decision Gate, recorded in the Product Architect task contract
 
 Founder Decision Gate, 2026-09-27 — FD-02 Stay Completion blocker catalogue: three V0 Checkout Assessment outcomes (NORMAL, DAMAGE/COMPENSATION REQUIRING RESOLUTION, ENHANCED CLEANING REQUIRED); damage reuses the existing Incident lifecycle, not a parallel domain; Host damage-resolution authority is an explicit villa-scoped capability, never inferred from ownership or the HOST label; resolution does not execute a Money transaction; enhanced cleaning is a Villa Readiness annotation, not a fourth state or a Completion blocker; lost property is out of scope for V0. Recorded as the source of ADR-P073.
 
+<a id="src-34"></a>
+### SRC-34 — Founder Decision Gate: External Report out of V0 scope
+
+Turn ID: `Founder Decision Gate, confirmed by Product Architect, 2026-09-25/26`
+
+Founder Decision Gate, 2026-09-25/26 — External Report is out of scope for V0. Operational reality at Oceanami: external booking information reaches the Host directly; Sale has no channel to it, and a Butler contacts the Host directly rather than filing an in-app report. V0 keeps a single authoritative Host action (recordExternalBooking) establishing both an External Accommodation Fact and the applicable External-backed Commitment. The Report/Fact distinction remains conceptually valid for a possible future untrusted-source scenario but is not instantiated in V0. Recorded as the source of ADR-P074.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.

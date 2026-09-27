@@ -54,6 +54,8 @@ Severity: one open **P0** in G2 → G does not close. A **P1** must be fixed or 
 | **NOT REPRESENTED** | The prototype does not represent the boundary. |
 | **VALIDATED ELSEWHERE** | The Product Architect determines the boundary need not be prototyped to close G, and names the canonical evidence. |
 
+A row in OUT OF SCOPE — V0 is expected to show no prototype evidence once the corresponding capability is removed; absence of evidence there is correct coverage, not a regression, and must not be patched by re-adding the removed behavior or by weakening extractor patterns to manufacture a match.
+
 Exit rules:
 
 - **NOT REPRESENTED ≠ PASS.** Before G closes, every NOT REPRESENTED row becomes TESTED — PASS or VALIDATED ELSEWHERE — `<canonical evidence>`.
@@ -142,7 +144,7 @@ No clipping, no inaccessible primary action, no unusable modal, no table that hi
 
 > This snapshot is validation evidence at one specific commit. It is **not** canonical product semantics. Later iterations add new columns/tables; this snapshot is never overwritten.
 
-Summary: **20 TESTED — PASS · 1 PARTIAL · 0 TESTED — FAIL · 0 NOT REPRESENTED**
+Summary: **19 TESTED — PASS · 1 PARTIAL · 1 OUT OF SCOPE — V0 · 0 TESTED — FAIL · 0 NOT REPRESENTED**
 
 | # | Guardrail | State at `5c39748` | Evidence | Disposition |
 |---|---|---|---|---|
@@ -158,7 +160,7 @@ Summary: **20 TESTED — PASS · 1 PARTIAL · 0 TESTED — FAIL · 0 NOT REPRESE
 | 10 | Incident ≠ Maintenance Block | TESTED — PASS | #305 (incident changes no Booking, Stay or commitment) | |
 | 11 | Emergency Protective Hold ≠ Maintenance Block | TESTED — PASS | `placeProtectiveHold` and `releaseProtectiveHold` are separate from `recordMaintenanceFromHold`. `domain.test.ts` "placing a protective hold does not create a maintenance block"; "recording maintenance is a separate host action and is not the hold". `assertHoldActor` restricts placement to Host or BQL: a Butler is refused in "a protective hold over a stay does not end the booking or open a conflict". | |
 | 12 | Emergency Protective Hold ≠ Commitment | TESTED — PASS | A protective hold creates no Inventory Commitment. `domain.test.ts` "placing a protective hold does not create a maintenance block" (commitment count unchanged); "a protective hold over a stay does not end the booking or open a conflict". | |
-| 13 | External Report ≠ External Fact | TESTED — PASS | PASS against the G-v2.1–G-v2.4 V0 baseline. submitExternalReport (Sale or an assigned Butler) creates a Report only — the calendar is unaffected and no Fact is created. | |
+| 13 | External Report ≠ External Fact | OUT OF SCOPE — V0 | V0 does not expose an External Report workflow. External accommodation is recorded authoritatively by an appropriately scoped Host through recordExternalBooking. The distinction between unverified Report and authoritative Fact remains conceptually valid but is not instantiated as a V0 product layer. See ADR-P074. Prior evidence (submitExternalReport, TESTED — PASS at the G-v2.1–G-v2.4 V0 baseline) is superseded, not deleted from history — see this file's git history for the prior state. | |
 | 14 | External Fact ≠ External-backed Commitment | TESTED — PASS | `submitExternalReport` and `recordExternalBooking` write distinct truths. `domain.test.ts` "a Host can record a Fact while no External-backed Commitment exists"; "establishing a commitment is a different truth from the Fact, and one action can write both without a Booking". One action may write both without creating a fake Booking. | |
 | 15 | External Accommodation ≠ Stayora Booking | TESTED — PASS | #763; #835 | |
 | 16 | Assignment ≠ Authority | TESTED — PASS | `domain.test.ts` "a Butler cannot prepare, observe, check in, or check out a villa they are not assigned to". | |
