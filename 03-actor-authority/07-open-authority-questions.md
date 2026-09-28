@@ -16,8 +16,8 @@ Giữ công khai phần authority còn thiếu và source discrepancy. Chỉ ghi
 |---|---|---|---|
 | AQ-01 | TBD | Precedence giữa nhiều authorities hợp lệ trên cùng action/resource | Conflict policy; không dùng restrictive-wins |
 | AQ-02 | TBD — POLICY | Tiêu chí/người có quyền grant/revoke Record External Commitment; evidence nguồn | [WF-03](../04-core-workflows/03-external-booking-to-stay.md) |
-| AQ-03 | TBD — future-policy question | Chứng cứ authority Primary Host, transfer/offboarding/dispute, propagation khi source đổi | Delegation và continuity của Booking/Stay |
-| AQ-04 | TBD — future-policy question | Danh mục non-delegable; financial visibility/settlement/payout grants; beneficiaries | Sensitive authority, không mặc định Primary Host nhận tiền |
+| AQ-03 | TBD — future-policy question, partially narrowed | ADR-P075 resolves V0 relationship paths and atomic acceptance-based Primary/standard-authority establishment with new relationship + platform-policy provenance. Other source-evidence, offboarding/legal dispute and revoked-source timing/propagation remain open. | Delegation and Booking/Stay continuity; unresolved catalogue remains open |
+| AQ-04 | TBD — future-policy question, partially narrowed | ADR-P076 resolves only the pending-transfer whole-cohort recipient choice and successive-override preservation; non-delegable catalogue, financial visibility, general Settlement/Payout grants and beneficiaries remain open. | Sensitive authority; recipient rule does not redefine Financial Beneficiary |
 | AQ-05 | TBD | Affiliate onboarding approval, attribution/eligibility chi tiết | Không auto-activate hoặc miễn approval |
 | AQ-06 | TBD — future-policy question | Guest recognition, QR expiry/revoke/forwarding, field-level disclosure/retention | Privacy: legal-validation-required |
 | AQ-07 | TBD — future-policy question | Butler assignment change/shift, Destination Staff onboarding và local policy authority | Không global hóa Oceanami max-two rule |

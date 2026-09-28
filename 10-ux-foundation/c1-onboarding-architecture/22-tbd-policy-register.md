@@ -6,13 +6,13 @@
 |---|---|---|---|---|
 | C1-T01 | One Identity may hold multiple capacities. | Identity matching, duplicate and recovery policy? | Merge/link/access behavior. | IDENTITY / UX TBD |
 | C1-T02 | Party is distinct from Identity/account. | Organization representation and evidence? | Party acting/relationship outcomes. | DOMAIN / POLICY TBD |
-| C1-T03 | Relationship ≠ Authority. | Which relationship/evidence establishes each grant? | Resource actions/context. | AUTHORITY TBD |
+| C1-T03 | Relationship ≠ Authority. | ADR-P075 resolves normal V0 transfer standard-authority source as incoming Primary relationship + canonical platform policy, atomically at acceptance; other relationship/evidence/grant rules and missing catalogue names remain open. | Resource actions/context outside that resolved slice. | AUTHORITY TBD — partially narrowed |
 | C1-T04 | Invitations are proposals. | Recipient resolution, expiry, revocation and acceptance evidence? | Assignment/relationship activation. | WORKFLOW / UX TBD |
 | C1-T05 | Claims are not truth. | Ownership/hosting/Sale/Butler evidence thresholds? | Accepted/disputed relationship. | AUTHORITY / LEGAL TBD |
 | C1-T06 | Context visibility ≠ permission. | Context activation and field-level disclosure? | Available projections/actions. | UX / PRIVACY TBD |
 | C1-T07 | Platform eligibility is separate. | Approval/suspension/appeal criteria for Sale/Butler/Property? | Capability availability. | POLICY TBD |
 | C1-T08 | Property exists separately from publication/Verification. | Publication/compliance/quality thresholds? | Listing, Verification, Managed boundary. | PROPERTY / VERIFICATION TBD |
-| C1-T09 | Owner and Host are distinct. | Transfer/precedence/delegation/finance grants? | Hosting/Booking/Inventory actions. | AUTHORITY / LEGAL TBD |
+| C1-T09 | Owner and Host are distinct. | ADR-P075 resolves atomic normal V0 Primary transfer and new provenance; ADR-P076 resolves whole-cohort transfer payout choice and preservation across successive transfers. Legal precedence, revocation timing, general delegation/finance grants remain open. | Actions outside the resolved V0 transfer slices. | AUTHORITY / LEGAL TBD — partially narrowed |
 | C1-T10 | Sale capacity is limited. | Exact Distribution Relationship/attribution eligibility? | Offer/Request/economics. | DISTRIBUTION TBD |
 | C1-T11 | Butler assignment is operational. | Exact grants, replacement and propagation? | Stay preparation/access/Incidents. | OPERATIONS / AUTHORITY TBD |
 | C1-T12 | Completion is per outcome. | Which outcomes are required for V0 and their timing? | Context activation/readiness. | V0 / WORKFLOW TBD |
