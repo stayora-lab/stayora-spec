@@ -57,7 +57,7 @@ Identify or represent Property
 
 ## Authority
 
-Dùng [Effective Permission](../03-actor-authority/05-effective-permission.md). Muốn represent/sửa Property và điều khiển publication cần Property Authority cùng các publication conditions. Muốn quản lý Inventory cần Inventory Authority tường minh. Ownership, role Host, Sale eligibility hoặc whitelist đều không đủ ([C2 relationship/authority](../10-ux-foundation/c2-host-owner-property-onboarding/07-relationship-authority.md)). Verified Ownership Relationship là authority basis cho Owner Block có scope, không phải override chung ([FD-13](../11-detailed-interaction/CP8-E-FOUNDER-DECISION-RECONCILIATION.md)). Grantor/scope của Inventory responsibility: **TBD** (C2-TBD-07).
+Dùng [Effective Permission](../03-actor-authority/05-effective-permission.md). Muốn represent/sửa Property và điều khiển publication cần Property Authority cùng các publication conditions. Muốn quản lý Inventory cần Inventory Authority tường minh. Ownership, role Host, Sale eligibility hoặc whitelist đều không đủ ([C2 relationship/authority](../10-ux-foundation/c2-host-owner-property-onboarding/07-relationship-authority.md)). Verified Ownership Relationship là authority basis cho Owner Block có scope, không phải override chung ([FD-13](../11-detailed-interaction/CP8-E-FOUNDER-DECISION-RECONCILIATION.md)). For V0 hosting approval, the real Destination-scoped Admin may explicitly grant applicable unit-scoped Inventory Authority under [ADR-P075](../00-start-here/DECISIONS.md#adr-p075); relationship never implies the grant. Other grantor/scope and capability-granularity questions remain **TBD** (C2-TBD-07).
 
 ## Domain Truth Changes
 
@@ -88,7 +88,7 @@ Dùng [Effective Permission](../03-actor-authority/05-effective-permission.md). 
 ## Open Questions
 
 - Điều kiện publication và moderation (C2-TBD-06, C1-T08).
-- Grantor/scope cho Inventory responsibility (C2-TBD-07).
+- Grantor/scope for Inventory responsibility beyond the explicit V0 Admin unit-hosting flow, and unresolved capability granularity (C2-TBD-07).
 - Matching/precedence khi Property bị represent trùng (C2 DOMAIN GAP; C2-TBD-05).
 - Quy trình sửa Destination membership (C2-TBD-10).
 - Chi tiết Booking/payment/commercial readiness (C2-TBD-11).
@@ -97,3 +97,7 @@ Dùng [Effective Permission](../03-actor-authority/05-effective-permission.md). 
 - Checklist listing/compliance/right-to-operate (ADR-P001 boundary; ADR-P007: TBD, legal-validation-required).
 
 Xem [C2 TBD register](../10-ux-foundation/c2-host-owner-property-onboarding/21-tbd-policy-register.md), [C2 gaps](../10-ux-foundation/c2-host-owner-property-onboarding/22-domain-workflow-authority-gaps.md) và [Workflow questions](08-open-workflow-questions.md).
+
+## V0 in-Destination boundary
+
+**Status: CONFIRMED per [ADR-P075](../00-start-here/DECISIONS.md#adr-p075).** V0 onboarding supports units from a Destination catalogue; independent properties outside a Destination are OUT OF SCOPE — V0, with future onboarding undecided. Resource representation remains separate from the hosting relationship request in [WF-07](09-owner-onboarding.md). Admin-assisted operational approval establishes hosting, not legal ownership; publishing and explicit capability grants remain separate decisions. Initial Primary and transfers follow WF-07, without recreating Booking/Stay truth.

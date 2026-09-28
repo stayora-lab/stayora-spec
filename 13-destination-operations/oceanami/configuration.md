@@ -52,3 +52,11 @@ Not configuration values; they remain open and are not restated here:
 ## Operational note
 
 Butler is not the primary debt collector. Operational responsibility stays as recorded in [ADR-P061](../../00-start-here/DECISIONS.md#adr-p061) and in [Oceanami Pilot](../../01-product-foundation/10-oceanami-pilot.md#oceanami-pilot-booking-payment-policy-v01).
+
+## Hosting relationship verification
+
+Decision source: [ADR-P075](../../00-start-here/DECISIONS.md#adr-p075) and [SRC-35](../../00-start-here/SOURCE_OF_TRUTH.md#src-35), Founder Decision Gate, 2026-09-28.
+
+For the Oceanami V0 pilot, the Destination may be preselected/hidden because only one Destination is available; the underlying hosting relationship and Admin authority remain destination-scoped. General domain policy must not hard-code Oceanami.
+
+Admin-assisted external operational verification may use existing operational knowledge, BQL confirmation, Zalo or telephone. These are pilot examples, not mandatory domain channels or legal-ownership proof. No ownership/identity documents, chat transcripts or other sensitive evidence uploads are required merely to establish this pilot operational hosting relationship. Keep real Admin identity, timestamp, Admin-assisted basis/type, short reason and per-unit outcome in the audit; do not paste actual contact/unit data or sensitive evidence into this public specification. Future Destination evidence requirements remain open.
