@@ -3,6 +3,16 @@
 > Parent checkpoint: **CP8 — UX / Design System**  
 > Workstream: **CP8-B Critical Journeys → B2 External Booking → Stay**  
 > Status: **ACCEPTED AS BASELINE FOR CP8-B3**  
+
+> **SUPERSEDED by Founder Decision — V0 External Accommodation Registration (ADR-P074,
+> 2026-09-26).** This document previously introduced an External Report path allowing
+> ordinary Sale/Butler-originated reporting. Operational validation at Oceanami
+> established that external booking information reaches the Host directly and is
+> authoritatively registered by the Host. V0 therefore removes the External Report
+> workflow and retains direct Host external-booking registration, consistent with CP5.
+> The distinction this document draws between Report and Fact remains conceptually
+> valid; it is not instantiated as a V0 product layer. See ADR-P074.
+
 > Freeze status: **NOT FROZEN**  
 > Date: 2026-09-19
 

@@ -171,6 +171,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P071](#adr-p071) | Request deadlines and expiry | CONFIRMED |
 | [ADR-P072](#adr-p072) | Villa Readiness is an independent lifecycle | CONFIRMED |
 | [ADR-P073](#adr-p073) | Checkout Assessment and V0 Stay Completion blocker catalogue | CONFIRMED |
+| [ADR-P074](#adr-p074) | External Report is out of scope for V0 | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -976,6 +977,21 @@ This lifecycle is parallel to and distinct from the Stay, Booking and Payment li
 **Canonical detail:** [Stay Completion Policy](../05-state-machines-policies/16-stay-completion-policy.md), [Incident lifecycle](../05-state-machines-policies/07-incident-lifecycle.md), [WF-05](../04-core-workflows/05-incident-resolution.md), [WF-06](../04-core-workflows/06-completion-settlement-payout.md), and [Effective Permission](../03-actor-authority/05-effective-permission.md). Unrelated Incident taxonomy, severity, SLA, appeals and financial policy questions remain open.
 
 **Nguồn:** [SRC-33](SOURCE_OF_TRUTH.md#src-33) — Founder Decision Gate, 2026-09-27; Product Architect task contract, 2026-09-27.
+
+<a id="adr-p074"></a>
+### ADR-P074 — External Report is out of scope for V0
+
+**Status: CONFIRMED**
+
+V0 external accommodation registration is an authoritative Host action, not a two-stage Report-then-Fact workflow. An appropriately authorized and resource-scoped Host records an external booking directly. That single action establishes an External Accommodation Fact and the applicable External-backed Commitment as distinct canonical truths within one workflow — Fact ≠ Inventory Commitment is unchanged; "created in the same transaction" does not mean "the same concept."
+
+Ordinary Sale and Butler do not submit External Reports in V0. Operational reality at Oceanami: external booking information reaches the Host directly (Zalo, phone call, the external platform itself) — Sale has no channel to this information, and a Butler who notices an unexpected guest contacts the Host directly rather than filing an in-app report. There is no realistic two-step "report tentative information, Host confirms later" motion for this pilot.
+
+External Report ≠ External Fact remains a conceptually valid distinction for possible future untrusted or third-party evidence (a different destination, a different reporting channel), but no External Report workflow is instantiated in V0. This does not define future destination reporting, third-party evidence ingestion, BQL reporting, or exception-reporting workflows — those remain open.
+
+This confirms CP5 (06-v0-scope/03-critical-journeys.md), whose External Commerce journey was always a single step ("external booking/stay registration → Confirmed Accommodation Commitment"), never a two-stage Report/Fact split. The split was introduced later, in CP8-B2's interaction design, and is superseded by this decision.
+
+**Nguồn:** [SRC-34](../00-start-here/SOURCE_OF_TRUTH.md#src-34).
 
 ## Founder Decision canonicalization
 
