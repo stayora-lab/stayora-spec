@@ -172,6 +172,8 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P072](#adr-p072) | Villa Readiness is an independent lifecycle | CONFIRMED |
 | [ADR-P073](#adr-p073) | Checkout Assessment and V0 Stay Completion blocker catalogue | CONFIRMED |
 | [ADR-P074](#adr-p074) | External Report is out of scope for V0 | CONFIRMED |
+| [ADR-P075](#adr-p075) | V0 Hosting Relationship and Primary Host Lifecycle | CONFIRMED |
+| [ADR-P076](#adr-p076) | V0 Primary-Transfer Payout Recipient Rule | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -992,6 +994,42 @@ External Report ≠ External Fact remains a conceptually valid distinction for p
 This confirms CP5 (06-v0-scope/03-critical-journeys.md), whose External Commerce journey was always a single step ("external booking/stay registration → Confirmed Accommodation Commitment"), never a two-stage Report/Fact split. The split was introduced later, in CP8-B2's interaction design, and is superseded by this decision.
 
 **Nguồn:** [SRC-34](../00-start-here/SOURCE_OF_TRUTH.md#src-34).
+
+<a id="adr-p075"></a>
+### ADR-P075 — V0 Hosting Relationship and Primary Host Lifecycle
+
+**Status: CONFIRMED**
+
+**Capacity and scope.** Becoming a Host capacity remains self-service; operating a unit requires a separate hosting relationship request on that unit, not a "Host access request". Identity/Actor ≠ Capacity ≠ Hosting Relationship ≠ Authority. V0 supports in-Destination units only; independent properties are OUT OF SCOPE — V0. Destination remains a domain scope, not a hard-coded pilot name; future independent-property onboarding is undecided.
+
+**Lightweight relationship request.** The request contains applicant identity, destinationId, one or more units selected from the Destination catalogue, contact name, email and phone. Its lifecycle is PENDING / APPROVED / REJECTED, with outcome per unit and partial approval allowed. This is product information, not a schema. A real Stayora Admin with appropriate Destination authority verifies the requested operational relationship outside Stayora. V0 does not require ownership/identity documents, chat transcripts or other sensitive evidence uploads merely to establish the pilot hosting relationship. Keep approving/rejecting Admin identity, timestamp, verification basis/type (Admin-assisted), short reason and per-unit outcome. Request ≠ Evidence ≠ Relationship ≠ Authority; Admin-approved hosting relationship ≠ legal ownership determination. Operational verification is sufficient for the Oceanami V0 relationship without adjudicating legal ownership; future Destination evidence requirements remain open. Pilot channels belong in [Destination Operations](../13-destination-operations/oceanami/configuration.md#hosting-relationship-verification).
+
+**Explicit authority.** Approval establishes the relationship for approved units. In the same audited action, the real, appropriately Destination-scoped Admin may explicitly issue applicable, named, unit-scoped V0 Host capabilities under [Effective Permission](../03-actor-authority/05-effective-permission.md). Relationship itself grants no Booking, Inventory, Financial or other authority; no impersonation. Publishing remains separate. Supported capability families and remaining catalogue gaps are recorded in [Authority Capabilities](../03-actor-authority/02-authority-capabilities.md#v0-hosting-relationship-grants). HOST_DAMAGE remains separately governed by [ADR-P073](#adr-p073), not a generic/default Host bundle. This identifies the grantor only for this V0 flow, not every future workflow.
+
+**Initial Primary and competing requests.** Each unit has one Primary Host at a time, refining the existing [Primary Host model](#adr-p009) for this V0 flow. The first APPROVED hosting relationship becomes initial Primary; first SUBMITTED is not a winner rule. Later participants do not automatically become Primary; Co-host participation follows delegation. Multiple requests on the same unit retain their provenance until authorized manual disposition; no submission-time/timestamp precedence or legal-owner/co-owner precedence is created.
+
+**Normal Primary transfer.** The current Primary designates a specific proposed successor; Stayora does not decide whether the person is a legally valid owner. The recipient must explicitly ACCEPT once. This is an acceptance handshake, not a second Stayora approval. Until valid acceptance, transfer is pending, the existing Primary remains Primary and authority does not silently move. After acceptance the transition becomes effective under canonical authority/provenance rules. Revocation effective-time/propagation remains C2-TBD-09; no new timing rule is created.
+
+**Co-hosts and exception replacement.** Primary may invite/remove Co-hosts within valid delegation scope. Removal may show a non-blocking warning of accepted requests, upcoming stays, unsettled matters or Butler assignments; it neither prevents removal nor creates a lifecycle, Completion blocker or automatic responsibility transfer. Existing Co-hosts are presented to the incoming Primary and retained by default unless removed during confirmation. The incoming Primary must become the valid source/provenance for retained delegations: outgoing-Primary-sourced authority does not simply survive unchanged. Manual Admin/operations replacement is an exception when normal transfer cannot reasonably occur (for example, the Primary is unreachable or cannot/will not complete transfer), requiring real Admin identity, Destination-appropriate authority, reason, external operational verification and audit. It grants no generic impersonation, arbitrary reassignment or legal ownership determination.
+
+**Continuity and open boundaries.** Confirmed bookings/upcoming stays remain attached to the unit; transfer does not cancel, recreate or rewrite Booking/Stay truth or historical actions. Incoming Primary operates applicable future stays only with valid explicit authority. [ADR-P076](#adr-p076) separately defines the narrow payout rule. Legal disputes/checklists/ownership thresholds, co-owner precedence, future Destination requirements, revocation timing and unrelated capability/TBD gaps remain open. [WF-07](../04-core-workflows/09-owner-onboarding.md) records the workflow and [C2 register](../10-ux-foundation/c2-host-owner-property-onboarding/21-tbd-policy-register.md) the partial dispositions.
+
+**Nguồn:** [SRC-35](SOURCE_OF_TRUTH.md#src-35) — Founder Decision Gate + Product Architect disposition + independent Auditor reconciliation, 2026-09-28.
+
+<a id="adr-p076"></a>
+### ADR-P076 — V0 Primary-Transfer Payout Recipient Rule
+
+**Status: CONFIRMED**
+
+**Separate Money decision.** Owner ≠ Primary Host ≠ Financial Beneficiary ≠ payout recipient. This rule specifies only transfer-related future payout handling; it decides neither legal/beneficial ownership nor general Financial Authority or who legally deserves money. It refines the recipient boundary without replacing [WF-06](../04-core-workflows/06-completion-settlement-payout.md) economic eligibility, Settlement or Payout semantics.
+
+**Default and cohort.** Absent a transfer-specific override, payout handling for a stay follows the Primary effective for the unit when the Stay checks in / commences, using canonical Stay/check-in event semantics. Do not substitute booking creation, payment receipt, earliest timestamp, midnight or a calendar/timezone snapshot. At Primary transfer the affected cohort consists only of bookings already CONFIRMED before transfer whose Stay/check-in is after transfer. Historical completed/already checked-in stays, cancelled bookings, future requests and unrelated Money records are excluded.
+
+**Narrow transfer-time authority.** For that cohort the outgoing Primary has the explicit authority to choose ONCE whether the applicable payout recipient remains the outgoing Primary or follows the incoming Primary. The recorded choice governs that transfer-specific handling, not a suggestion Stayora may ignore. It does not grant unrestricted Financial Authority, change Financial Beneficiary, rewrite payment history, redirect unrelated payouts or affect bookings outside the cohort. If no selection is made, apply the default Primary-at-check-in/commencement rule; no new pending state is created.
+
+**Manual-assisted boundary and history.** V0 payout remains MANUAL-ASSISTED: Stayora records the applicable payout recipient for the manual process; parties may make private arrangements outside Stayora. This does not automate fund movement, payment processor behavior, Settlement execution or deductions, and does not reassign Financial Beneficiary. Primary transfer never rewrites historical payment records, executed payouts, Settlement facts or beneficiary records. Existing Money eligibility/execution authority and unrelated Money/Settlement TBDs remain intact.
+
+**Nguồn:** [SRC-35](SOURCE_OF_TRUTH.md#src-35) — Founder Decision Gate + Product Architect disposition + independent Auditor reconciliation, 2026-09-28.
 
 ## Founder Decision canonicalization
 

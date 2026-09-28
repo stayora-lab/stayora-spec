@@ -88,3 +88,13 @@ Checkout không tự Completed; Completed không tự Financially Reconciled; Fi
 ## Resolution note
 
 **CONFIRMED — WQ-15 resolved:** Operational Completion Readiness belongs to Stay. Financial Reconciliation belongs to Money. The normal path occurs after STAY COMPLETED; policy-driven Economic Eligibility may open an exception path without falsifying Stay as Completed. The unresolved questions remain Commissionable Booking Value, fees/splits, partial settlement, disputes and legal/accounting. Nguồn: [Foundation Money](../01-product-foundation/09-money-model.md), [ADR-P021](../00-start-here/DECISIONS.md#adr-p021), [Domain Invariants](../02-domain/03-domain-invariants.md), [WF-04](04-stay-lifecycle.md), [WF-05](05-incident-resolution.md).
+
+## V0 Primary-transfer payout recipient
+
+**Status: CONFIRMED per [ADR-P076](../00-start-here/DECISIONS.md#adr-p076).** This is a narrow recipient-handling rule, not a change to Financial Beneficiary, entitlement determination, Settlement eligibility or financial execution authority. Owner ≠ Primary Host ≠ Financial Beneficiary ≠ payout recipient.
+
+Absent a transfer-specific override, payout handling for a stay follows the Primary effective for the unit when the Stay checks in / commences, using canonical Stay/check-in event semantics. Booking-created-at, payment-received-at, earliest timestamp, midnight and calendar/timezone snapshots do not replace that event.
+
+The transfer cohort contains only bookings already CONFIRMED before transfer with Stay/check-in after transfer. It excludes completed/already checked-in stays, cancelled bookings, future requests and unrelated Money records. For this cohort alone, the outgoing Primary has explicit narrow transfer-time authority to choose ONCE whether payout recipient remains with the outgoing Primary or follows the incoming Primary. The recorded choice governs the manual handling; it does not change Financial Beneficiary or grant general Financial Authority. No selection uses the default Primary-at-check-in/commencement rule without a new pending state.
+
+V0 payout remains MANUAL-ASSISTED. Stayora records the applicable payout recipient for that process; parties may arrange privately outside Stayora. Transfer does not automate fund movement, processor behavior, Settlement execution or deductions, or rewrite historical payments, executed payouts, Settlement facts or beneficiary records. Unrelated Money/Settlement TBDs remain open.

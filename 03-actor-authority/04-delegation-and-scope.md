@@ -40,8 +40,18 @@ Butler Role, Butler Assignment và Stay Access khác nhau. Destination Staff đ�
 
 Grant hoặc restriction chỉ có hiệu lực nếu được ban hành/thực hiện qua authority hợp lệ trên đúng action và resource scope. Không dùng “More restrictive authority always wins”. Blacklist trong Distribution scope hợp lệ vẫn có ý nghĩa đã freeze; điều đó không giải precedence giữa nhiều valid authorities hoặc xóa authority từ một acting capacity khác bằng suy luận tự động.
 
-**TBD:** chuyển Primary Host, source bị thu hồi, Property offboarding, dispute, nhiều grants/restrictions hợp lệ cùng lúc, và ảnh hưởng tới Booking/Stay đang chạy. Không tự chọn “Host wins”, “latest wins” hoặc “deny always wins”.
+**TBD:** Primary transfer cases beyond the V0 scope of [ADR-P075](../00-start-here/DECISIONS.md#adr-p075), revoked-source effective-time/propagation, Property offboarding, legal dispute, multiple valid grants/restrictions and other effects on ongoing work. The decided V0 transfer preserves Booking/Stay truth as below. Không tự chọn “Host wins”, “latest wins” hoặc “deny always wins”.
 
 ## Liên kết nguồn và review
 
 [Foundation ADR-P009–010](../00-start-here/DECISIONS.md#adr-p009), [Domain ownership](../02-domain/02-domain-ownership.md), [Effective Permission](05-effective-permission.md), [Authority questions](07-open-authority-questions.md).
+
+## V0 Primary and delegation continuity
+
+**Status: CONFIRMED per [ADR-P075](../00-start-here/DECISIONS.md#adr-p075).** Initial Primary is the first APPROVED unit-hosting relationship, not the first submitted request. Multiple requests preserve provenance until authorized manual disposition; legal Owner/co-owner precedence remains open.
+
+Normal transfer requires designation by the current Primary and one explicit recipient acceptance. Before acceptance, existing Primary remains and authority does not silently move; acceptance is not a second Stayora approval or proof of ownership. Retained Co-hosts default to retain in the incoming Primary's confirmation, but delegations must acquire valid incoming-Primary source/provenance rather than surviving on outgoing-Primary authority. Invite/remove remains bounded by valid delegation; any outstanding-work warning is non-blocking and transfers no responsibility automatically.
+
+Admin/operations replacement is an audited manual exception when normal transfer cannot reasonably occur, with real Admin identity, Destination-appropriate authority, reason and external operational verification; no impersonation or arbitrary reassignment. Confirmed bookings/upcoming stays stay with the unit, and applicable future operations require valid explicit authority. Historical actions remain intact; C2-TBD-09 revocation timing/propagation is not decided.
+
+The financial separation above remains: only [ADR-P076](../00-start-here/DECISIONS.md#adr-p076) explicitly grants the outgoing Primary the narrow once-at-transfer payout-recipient choice for the defined confirmed future-booking cohort. It creates neither Owner entitlement nor general Financial Authority and never rewrites Money history.

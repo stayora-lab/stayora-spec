@@ -282,6 +282,13 @@ Turn ID: `Founder Decision Gate, confirmed by Product Architect, 2026-09-25/26`
 
 Founder Decision Gate, 2026-09-25/26 — External Report is out of scope for V0. Operational reality at Oceanami: external booking information reaches the Host directly; Sale has no channel to it, and a Butler contacts the Host directly rather than filing an in-app report. V0 keeps a single authoritative Host action (recordExternalBooking) establishing both an External Accommodation Fact and the applicable External-backed Commitment. The Report/Fact distinction remains conceptually valid for a possible future untrusted-source scenario but is not instantiated in V0. Recorded as the source of ADR-P074.
 
+<a id="src-35"></a>
+### SRC-35 — Founder Decision Gate: V0 hosting and Primary-transfer payout
+
+Turn ID: `Founder Decision Gate + Product Architect disposition + independent Auditor reconciliation, 2026-09-28`
+
+Founder Decision Gate, 2026-09-28 — lightweight Oceanami V0 hosting relationship approval, distinct from self-service Host capacity; real Destination-scoped Admin-assisted operational verification establishes the hosting relationship without adjudicating legal ownership or requiring sensitive evidence uploads. Approval may explicitly issue named unit-scoped capabilities in the same audited action; relationship is not authority and HOST_DAMAGE is separately governed. The first APPROVED hosting relationship becomes initial Primary. Normal Primary transfer requires the designated recipient's explicit acceptance; retained Co-host delegations need incoming-Primary provenance. Manual Admin replacement is an audited exception, not impersonation or ownership proof. Confirmed bookings/upcoming stays remain attached to the unit. Default payout handling follows the Primary effective when the Stay checks in/commences; the outgoing Primary has a narrow one-time choice for bookings CONFIRMED before transfer with Stay/check-in after transfer, to retain the payout recipient or follow the incoming Primary. No selection uses the default, with no new pending state. Payout remains manual-assisted; Primary Host is distinct from Owner, Financial Beneficiary and payout recipient, and historical Money truth is preserved. Future independent-property onboarding, legal disputes/evidence, revocation timing and unrelated capability gaps remain open. Recorded as the source of ADR-P075 and ADR-P076.
+
 ## Quy tắc cập nhật
 
 Đề xuất thay đổi phải ghi decision ID, câu hiện hành, câu mới, status, nguồn founder và file bị ảnh hưởng. Không xóa lịch sử: đánh dấu SUPERSEDED và nối decision thay thế. Khi chỉ thay tỷ lệ hoặc cách triển khai, không tự thay principle nền. Founder đã xác nhận freeze: ghi rõ phiên bản, ngày, phạm vi và các TBD được giữ mở.

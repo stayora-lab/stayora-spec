@@ -39,3 +39,20 @@ Primary Host không tự có financial visibility, Settlement authority hay Payo
 ## Phần còn mở và liên kết
 
 **TBD:** danh mục non-delegable; exact finance grants; capability granularity và delegation policy. Xem [Delegation](04-delegation-and-scope.md), [Authority questions](07-open-authority-questions.md), [Domain Ownership](../02-domain/02-domain-ownership.md) và [Foundation financial boundaries](../01-product-foundation/06-ecosystem-and-actors.md).
+
+<a id="v0-hosting-relationship-grants"></a>
+## V0 hosting relationship grants
+
+**Status: CONFIRMED per [ADR-P075](../00-start-here/DECISIONS.md#adr-p075).** Host capacity is self-service; unit hosting approval is a separate relationship decision. The real Stayora Admin with appropriate Destination authority may explicitly issue applicable named unit-scoped grants in the same audited approval action. Approval is neither legal ownership adjudication nor an implicit permission bundle. Every grant retains capability, scope, lifecycle, source and actual grantor provenance.
+
+The following are existing canonical capability names/families, not a complete default V0 Host bundle or technical permission identifiers:
+
+| Canonical capability/family | Evidence and limit |
+|---|---|
+| Booking Authority | Accept/reject Request and eligible booking actions under CP3 and [ADR-P010](../00-start-here/DECISIONS.md#adr-p010); requires explicit applicable scope. |
+| Inventory Authority | Manage availability and authorized commitments under CP3; each action must have its applicable explicit scope, not ownership-derived access. |
+| External Accommodation Recording Authority / Record External Commitment | [FD-12](../11-detailed-interaction/CP8-E-FOUNDER-DECISION-RECONCILIATION.md) and [ADR-P074](../00-start-here/DECISIONS.md#adr-p074) support authoritative Host external registration; Fact and Commitment remain distinct. |
+| Delegation Authority | Appoint/remove Co-host and grant only allowed capability/scope under [Delegation](04-delegation-and-scope.md); non-delegable catalogue remains open. |
+| Villa Readiness supporting authority | [ADR-P072](../00-start-here/DECISIONS.md#adr-p072) permits the villa's Host to record the same readiness transitions when the Butler cannot operate the system, including takeover mid-cleaning; no inspection or shortcut. This is a business capability, not a new permission identifier. |
+
+A complete named V0 Host capability catalogue/default grant selection cannot be derived from the current canonical baseline. Do not fill it from prototype behavior. Protective/Maintenance Hold, Butler assignment, Check-in/Checkout, financial visibility/Financial Authority and exact default grants/granularity require separate disposition where unresolved; this section grants none by default. HOST_DAMAGE (checkout damage-resolution authority) remains separately scoped under [ADR-P073](../00-start-here/DECISIONS.md#adr-p073), never included in a generic Host bundle. [ADR-P076](../00-start-here/DECISIONS.md#adr-p076) creates only the outgoing Primary's narrow one-time cohort payout-recipient choice, not general Financial Authority.
