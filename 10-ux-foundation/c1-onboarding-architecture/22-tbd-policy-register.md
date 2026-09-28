@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | C1-T01 | One Identity may hold multiple capacities. | Identity matching, duplicate and recovery policy? | Merge/link/access behavior. | IDENTITY / UX TBD |
 | C1-T02 | Party is distinct from Identity/account. | Organization representation and evidence? | Party acting/relationship outcomes. | DOMAIN / POLICY TBD |
-| C1-T03 | Relationship ≠ Authority. | ADR-P075 resolves normal V0 transfer standard-authority source as incoming Primary relationship + canonical platform policy, atomically at acceptance; other relationship/evidence/grant rules and missing catalogue names remain open. | Resource actions/context outside that resolved slice. | AUTHORITY TBD — partially narrowed |
+| C1-T03 | Relationship ≠ Authority. | ADR-P075 resolves normal V0 transfer standard-authority source as incoming Primary relationship + canonical platform policy, atomically at acceptance; the standard V0 set is defined in Authority Capabilities, while other relationship/evidence/grant rules and finer granularity remain open. | Resource actions/context outside that resolved slice. | AUTHORITY TBD — partially narrowed |
 | C1-T04 | Invitations are proposals. | Recipient resolution, expiry, revocation and acceptance evidence? | Assignment/relationship activation. | WORKFLOW / UX TBD |
 | C1-T05 | Claims are not truth. | Ownership/hosting/Sale/Butler evidence thresholds? | Accepted/disputed relationship. | AUTHORITY / LEGAL TBD |
 | C1-T06 | Context visibility ≠ permission. | Context activation and field-level disclosure? | Available projections/actions. | UX / PRIVACY TBD |

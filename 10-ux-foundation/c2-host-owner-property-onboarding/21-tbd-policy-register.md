@@ -8,7 +8,7 @@
 | C2-TBD-04 | Invitation acceptance and expiry | ADR-P075 requires one recipient acceptance for normal Primary transfer; invitation expiry, wrong recipient and other invitation policy remain open |
 | C2-TBD-05 | Claim conflict/dispute handling | Do not invent a dispute system |
 | C2-TBD-06 | Property publication conditions | Exact moderation/commercial policy remains open |
-| C2-TBD-07 | Inventory responsibility grantor/scope | ADR-P075 identifies real Destination-scoped Admin explicit unit grants for V0 onboarding, and normal transfer establishes standard authority atomically from the new Primary relationship + canonical platform policy at acceptance; other-flow grantor rules and unresolved catalogue/granularity remain open |
+| C2-TBD-07 | Inventory responsibility grantor/scope | ADR-P075 identifies real Destination-scoped Admin explicit unit grants for V0 onboarding, and normal transfer establishes standard authority atomically from the new Primary relationship + canonical platform policy at acceptance; the standard V0 set is defined in Authority Capabilities, while other-flow grantor rules and finer granularity remain open |
 | C2-TBD-08 | Owner/Host privacy projections | Relationship/resource policy required |
 | C2-TBD-09 | Effective-time and revocation propagation | CP4/authority policy dependency |
 | C2-TBD-10 | Destination correction/membership workflow | Destination policy not defined here |
