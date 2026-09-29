@@ -12,7 +12,7 @@
 | B3-T06 | Payment `UNKNOWN` is unresolved. | How and when is provider reconciliation completed? | Retry, release, default and Guest messaging. | INTEGRATION / POLICY TBD |
 | B3-T07 | Direct B3 requires no Sale attribution. | When may a Sale be legitimately attributed if it later assists? | Attribution, commission and disclosure. | DISTRIBUTION TBD |
 | B3-T08 | Instant Book is a separate controlled branch. | Eligibility, scope, authority, commitment and payment timing? | Optional direct path behavior. | FOUNDER / POLICY TBD |
-| B3-T09 | Guest account is not required by current product truth. | Minimum identity/contact, recovery and privacy boundary? | Accountless continuity and access. | UX / SECURITY TBD |
+| B3-T09 | Account is not required; [ADR-P077](../../00-start-here/DECISIONS.md#adr-p077) requires name + email-or-phone for Request creation and Guest Credential/access eligibility; URL/resource ID alone or matching contact information does not authorize access. | Exact credential mechanism, recovery and remaining privacy/field-level disclosure remain open. | Accountless continuity and access implementation. | PARTIALLY NARROWED — UX / SECURITY TBD |
 | B3-T10 | Booking begins only at `CONFIRMED`. | Exact Guest-facing blocked/progressing projection? | Copy and contextual projections. | UX TBD |
 | B3-T11 | Stay is separate from Booking. | Minimum basis/timing for Stay creation and access? | Schedule/access/operations handoff. | WORKFLOW / PRIVACY TBD |
 | B3-T12 | Public truth excludes private economics and notes. | Which restrictions, evidence and trust signals are public? | Marketplace disclosure. | MARKETPLACE TBD |
