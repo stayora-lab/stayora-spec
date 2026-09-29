@@ -174,6 +174,7 @@ No new role, workspace, domain state, policy, Inventory precedence or payment ru
 | [ADR-P074](#adr-p074) | External Report is out of scope for V0 | CONFIRMED |
 | [ADR-P075](#adr-p075) | V0 Hosting Relationship and Primary Host Lifecycle | CONFIRMED |
 | [ADR-P076](#adr-p076) | V0 Primary-Transfer Payout Recipient Rule | CONFIRMED |
+| [ADR-P077](#adr-p077) | Guest Minimum Contact Identity and Guest Credential | CONFIRMED |
 
 <a id="adr-p001"></a>
 ### ADR-P001 — Marketplace mở
@@ -1032,6 +1033,19 @@ This confirms CP5 (06-v0-scope/03-critical-journeys.md), whose External Commerce
 **Manual-assisted boundary and history.** V0 payout remains MANUAL-ASSISTED: Stayora records the applicable payout recipient for the manual process; parties may make private arrangements outside Stayora. This does not automate fund movement, payment processor behavior, Settlement execution or deductions, and does not reassign Financial Beneficiary. Primary transfer never rewrites historical payment records, executed payouts, Settlement facts or beneficiary records. Existing Money eligibility/execution authority and unrelated Money/Settlement TBDs remain intact.
 
 **Nguồn:** [SRC-35](SOURCE_OF_TRUTH.md#src-35) — Founder Decision Gate + Product Architect disposition + independent Auditor reconciliation, 2026-09-28.
+
+<a id="adr-p077"></a>
+### ADR-P077 — Guest Minimum Contact Identity and Guest Credential
+
+**Status: CONFIRMED**
+
+**Minimum contact identity.** A Stayora Account is not required for a Guest to create a Request. Creating a commercial Request requires a name AND at least one of email or phone. This minimum operational contact identity does not establish a Stayora Account, verified platform Identity, verified email/phone or legal identity. A display fallback such as “Khách” may label a presentation but must not satisfy Request-creation identity. Guest without Account ≠ anonymous commerce actor.
+
+**Guest access eligibility.** Contact Identity ≠ Guest Credential ≠ Resource Identifier. Knowledge or possession of a Request/Booking/Stay URL or resource identifier alone does not authorize access to associated Guest commerce, payment or operational data. Accountless access requires a Guest Credential / recognized access eligibility mechanism tied to the relevant relationship/lifecycle; account absence alone does not prohibit legitimate access. Matching or re-entering email or phone is not sufficient access authority. The existing Guest Credential concept applies beginning at Request-level as well as later Stay/QR contexts: it is possession-/relationship-/lifecycle-scoped access where canonical, not a Host/Admin role grant or delegation. Existing need-to-know and progressive-disclosure rules remain applicable.
+
+**Security and unresolved mechanisms.** Security-sensitive Guest identifiers or credentials require security-appropriate randomness. Identifier unpredictability does not substitute for access control; a difficult-to-guess Resource Identifier is not automatically a Guest Credential or authorization decision. This establishes an access invariant, not an implementation. OTP, password, social login, magic-link implementation, exact opaque-token mechanism, QR mechanism and recovery remain TBD. Account creation, email/phone/legal identity verification, detailed field-level disclosure, retention and downstream Arrival/Help/Review access design are not decided here.
+
+**Nguồn:** [SRC-36](SOURCE_OF_TRUTH.md#src-36) — Founder Decision Gate, 2026-09-28.
 
 ## Founder Decision canonicalization
 

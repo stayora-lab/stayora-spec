@@ -24,6 +24,12 @@ The canonical relationship may involve a Guest person/party and a separate accou
 
 Guest visibility or possession of a link does not itself prove Booking Authority, Staying Party identity, payer authority or operational access eligibility. Authentication, privacy, consent, recovery and credential lifecycle remain unresolved boundaries where CP6/CP8-A do not prescribe them.
 
+## Confirmed minimum contact and access invariant
+
+Per [ADR-P077](../../00-start-here/DECISIONS.md#adr-p077), commercial Request creation requires a name and at least email or phone, without requiring an Account or establishing verified Identity/contact/legal identity. “Khách” is only a presentation fallback and cannot satisfy this requirement. Guest without Account ≠ anonymous commerce actor.
+
+Contact Identity ≠ Guest Credential ≠ Resource Identifier. A Request/Booking/Stay URL or resource identifier alone, even with matching/re-entered email or phone, does not authorize Guest data access. Accountless access requires the existing Guest Credential / recognized access eligibility tied to the relevant relationship/lifecycle and existing need-to-know/progressive disclosure. Security-sensitive identifiers/credentials require security-appropriate randomness; unpredictability does not replace access control. Concrete credential and recovery mechanisms remain TBD.
+
 ## Safe B3 behavior
 
 - Keep Request, Payment and Booking truth independent of the original browser/session.
@@ -33,4 +39,4 @@ Guest visibility or possession of a link does not itself prove Booking Authority
 
 ## Open questions
 
-Minimum contact/identity data, payer/Guest relationship proof, recovery, duplicate identity handling, consent evidence, access eligibility and privacy disclosure are policy/UX/security TBD. B3 records them; it does not resolve them.
+Minimum Request contact identity and the access invariant are narrowed by ADR-P077. Exact credential mechanism, payer/Guest relationship proof, recovery, duplicate identity handling, consent evidence and remaining privacy/field-level disclosure are policy/UX/security TBD. B3 records these remaining questions; it does not resolve them.
