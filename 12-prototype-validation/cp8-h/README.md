@@ -1,15 +1,15 @@
 # CP8-H — V0 Acceptance Package
 
-> Status: **IN PROGRESS — DRAFT FOR PRODUCT ARCHITECT / AUDITOR REVIEW**
+> Status: **ACCEPTED — CP8-H COMPLETE**
 > Last reviewed: 2026-09-30 · Owner: Product Architect
 > Canonical input baseline: `b71833fff68c8178eb7d4683e8d76e4d3d4ad308`
-> CP8-G: **ACCEPTED — READY FOR CP8-H** · Implementation Planning: **NOT STARTED**
+> CP8-G: **ACCEPTED — CLOSED** · CP8-H: **ACCEPTED — CLOSED** · Implementation Planning: **READY TO BEGIN**
 
 ## 1. Purpose, baseline and exit boundary
 
-CP8-H packages the accepted Oceanami V0 product and UX baseline for [Implementation Planning](../../00-start-here/README.md#cp8-g-and-cp8-h). It summarizes constraints and links their canonical owners; it does not design another UX pass, iterate the prototype, choose implementation mechanisms, author the Implementation Plan or certify production readiness. This draft does not mark CP8-H or CP8 complete. The existing roadmap remains CP8-G → CP8-H → Implementation Planning → Implementation → Oceanami Pilot → Validation / Learning → Post-V0 Roadmap.
+CP8-H packages the accepted Oceanami V0 product and UX baseline for [Implementation Planning](../../00-start-here/README.md#cp8-g-and-cp8-h). It summarizes constraints and links their canonical owners; it does not design another UX pass, iterate the prototype, choose implementation mechanisms, author the Implementation Plan or certify production readiness. CP8-H is complete; the existing roadmap proceeds CP8-G → CP8-H → Implementation Planning → Implementation → Oceanami Pilot → Validation / Learning → Post-V0 Roadmap.
 
-CP8-H can be completed when this acceptance package has been reviewed and accepted as the implementation handoff under the existing [CP8-H boundary](../README.md#boundary): V0 UX baseline, validated journeys, V0 user stories and acceptance criteria derived from canonical sources, remaining TBD/Hypothesis register, deferred scope, Protected Baseline verification and handoff references are present. This is a review condition for the package, not a new product gate. A [Public Exposure Review](../../00-start-here/SOURCE_OF_TRUTH.md#public-exposure-review) is required **after CP8-H and before Implementation Planning**; it has not been completed by drafting this file.
+CP8-H was reviewed and accepted as the implementation handoff under the existing [CP8-H boundary](../README.md#boundary): V0 UX baseline, validated journeys, V0 user stories and acceptance criteria derived from canonical sources, remaining TBD/Hypothesis register, deferred scope, Protected Baseline verification and handoff references are present. This is a review condition for the package, not a new product gate. The [Public Exposure Review](../../00-start-here/SOURCE_OF_TRUTH.md#public-exposure-review) is recorded as completed; repository privatization remains an operational access-recovery task.
 
 ## 2. V0 scope and non-goals
 
@@ -106,11 +106,11 @@ ADR-P074 makes the External Report workflow **OUT OF SCOPE — V0**. The current
 
 This is the existing [CP8-H → Implementation Planning](../../00-start-here/README.md#cp8-g-and-cp8-h) handoff, not a new checkpoint. Mark each item with review evidence before declaring CP8-H complete or beginning the plan:
 
-- [ ] Product Architect / required governance review accepts the CP8-H package; no completion is inferred from this draft.
-- [ ] CP5 V0 classes and explicit non-goals are present, including later ADR-P074–P077 corrections; optional Instant Book is not promoted to MUST BUILD.
-- [ ] Required journeys, actor/action scope, lifecycle contracts and Protected Baseline references are linked; no unresolved contradiction would force implementers to invent product policy.
-- [ ] Remaining V0 TBDs and hypotheses are visible with a decision gate before the affected build, without requiring all of them to close before Implementation Planning.
-- [ ] CP6/CP7/CP8-E/F sources and CP8-G validation limits, including the G1/G4 carried action, are handed off with their provenance.
-- [ ] The [Public Exposure Review](../../00-start-here/SOURCE_OF_TRUTH.md#public-exposure-review) is completed before Implementation Planning; repository visibility changes follow its recorded outcome.
+- [x] Product Architect / required governance review accepts the CP8-H package; completion is recorded by this reconciliation.
+- [x] CP5 V0 classes and explicit non-goals are present, including later ADR-P074–P077 corrections; optional Instant Book is not promoted to MUST BUILD.
+- [x] Required journeys, actor/action scope, lifecycle contracts and Protected Baseline references are linked; no unresolved contradiction would force implementers to invent product policy.
+- [x] Remaining V0 TBDs and hypotheses are visible with a decision gate before the affected build, without requiring all of them to close before Implementation Planning.
+- [x] CP6/CP7/CP8-E/F sources and CP8-G validation limits, including the G1/G4 carried action, are handed off with their provenance.
+- [x] The [Public Exposure Review](../../00-start-here/SOURCE_OF_TRUTH.md#public-exposure-review) is completed before Implementation Planning; repository visibility changes follow its recorded outcome.
 
-Only after CP8-H acceptance and the prerequisite review does the existing roadmap proceed to **CP8 COMPLETE → Implementation Planning**. This file does not author that plan.
+The existing roadmap now proceeds to **CP8 COMPLETE → Implementation Planning**. This file does not author that plan.

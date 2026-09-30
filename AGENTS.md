@@ -82,7 +82,7 @@ prototype SHA → validation evidence → separate spec reconciliation task.
 The prototype repository (stayora-lab/stayora-new) is owned by Grok. Agents working
 here are read-only there.
 
-This repository is public during the specification phase. Never commit credentials,
+The Public Exposure Review was completed on 2026-09-30; repository privatization remains temporarily blocked by Founder account/access recovery. Never commit credentials,
 API keys, real owner names, real unit codes, real guest data, real prices, phone
 numbers, emails, financial records or internal contract documents. If a decision
 needs evidence from an internal document, record the conclusion and a reference —
