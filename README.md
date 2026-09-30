@@ -10,8 +10,10 @@ This is internal design documentation, not a commercial offer and not a
 solicitation. References to Oceanami describe the destination only; Stayora does
 not represent its management or developer.
 
-Visibility: PUBLIC during the specification phase. Before Implementation Planning
-begins, a Public Exposure Review is performed and this repository becomes private.
+Visibility: PUBLIC; the Public Exposure Review was completed on 2026-09-30 with no
+credentials, real personal/commercial/contractual data or exploitable physical-security
+procedure identified. Repository privatization remains temporarily blocked by Founder
+account/access recovery and is an operational task, not a product gate.
 Never commit credentials, real owner or guest data, real unit codes, real prices,
 phone numbers, emails, financial records or internal contracts.
 

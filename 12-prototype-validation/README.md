@@ -2,7 +2,7 @@
 
 > Status: **ACCEPTED — READY FOR CP8-H**
 > Current CP8-G disposition: **ACCEPTED** (Product Architect final disposition, 2026-09-30)
-> CP8-H — V0 Acceptance Package: **IN PROGRESS**
+> CP8-H — V0 Acceptance Package: **ACCEPTED — CLOSED**
 > Last reviewed: 2026-09-30 · Owner: Product Architect
 > Depends on: Protected Baseline (CP1–CP8 CONFIRMED decisions), ADR-P066 (draft, pending entry review), FD-01 → FD-19
 
@@ -282,15 +282,15 @@ CP8-G ends with a **CP8-G Validation Report**, never with "the prototype looks g
 
 ## Current Disposition
 
-**CP8-G ACCEPTED — READY FOR CP8-H** — Product Architect final disposition, 2026-09-30. **CP8-H — V0 Acceptance Package: IN PROGRESS.**
+**CP8-G ACCEPTED — CLOSED** — Product Architect final disposition, 2026-09-30. **CP8-H — V0 Acceptance Package: ACCEPTED — CLOSED.**
 
 The current coverage summary records **19 TESTED — PASS · 1 PARTIAL · 1 OUT OF SCOPE — V0 · 0 TESTED — FAIL · 0 NOT REPRESENTED**. KD-01 was resolved in G-v2.3 (`52ee16708f86d0bbfd1d66184bec259c2e30b733`); KD-02 was resolved in G-v2.4 (`64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65`). The earlier v2 baseline failures and v1 failed validation remain historical evidence; the final verdict applies to CP8-G after subsequent reconciliation and validation.
 
 Row 8 remains PARTIAL and row 13 remains OUT OF SCOPE — V0 under ADR-P074. The recorded evidence does not establish independent representative-user validation for G1 / G4; this is a **CARRIED VALIDATION ACTION — NON-BLOCKING FOR CP8-H / IMPLEMENTATION PLANNING**, not a PASS or a permanent waiver, and must be addressed before affected journeys are treated as pilot-ready or validated by representative real actors. The historical BQL operational-attention gap is not independently closed by row 17 alone. The Product Architect's final disposition permits progression to CP8-H with these limits visible; it does not freeze UX details, close remaining V0 TBDs, decide the Guest Credential mechanism or declare prototype code production-ready. Optional PR #20 tooling salvage is non-blocking and is not part of this disposition.
 
-CP8-H now begins as the existing V0 Acceptance Package checkpoint. Implementation Planning and implementation have not started.
+CP8-H is accepted and closed as the existing V0 Acceptance Package checkpoint. Implementation Planning is the next phase.
 
-The [CP8-H V0 Acceptance Package draft](cp8-h/README.md) collects the current V0 handoff boundaries and carried decisions for review; its draft status does not declare CP8-H complete.
+The [CP8-H V0 Acceptance Package](cp8-h/README.md) records the reviewed V0 handoff boundaries and carried decisions; CP8-H is complete.
 
 ---
 
