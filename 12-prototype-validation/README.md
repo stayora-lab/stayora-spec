@@ -290,6 +290,8 @@ Row 8 remains PARTIAL and row 13 remains OUT OF SCOPE — V0 under ADR-P074. The
 
 CP8-H now begins as the existing V0 Acceptance Package checkpoint. Implementation Planning and implementation have not started.
 
+The [CP8-H V0 Acceptance Package draft](cp8-h/README.md) collects the current V0 handoff boundaries and carried decisions for review; its draft status does not declare CP8-H complete.
+
 ---
 
 ## Boundary
