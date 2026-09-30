@@ -18,6 +18,8 @@
 | Lead | Lifecycle |
 | Lead Assignment | Lifecycle |
 | Sale/Butler Application | Application Lifecycle |
+| Hosting Relationship Request | Application Lifecycle |
+| Primary Host Transfer | Lifecycle |
 | Platform Eligibility | Eligibility Status |
 | Review Rights | Eligibility/Entitlement Model |
 
