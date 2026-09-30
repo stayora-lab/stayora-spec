@@ -1,9 +1,9 @@
 # CP8-G — Prototype & Validation
 
-> Status: **IN PROGRESS**
-> Current v2 validation disposition: **FAILED — ITERATION REQUIRED** (baseline assessed at `5c39748`)
-> CP8-H — V0 Acceptance Package: **NOT STARTED**
-> Last reviewed: 2026-09-22 · Owner: Product Architect
+> Status: **ACCEPTED — READY FOR CP8-H**
+> Current CP8-G disposition: **ACCEPTED** (Product Architect final disposition, 2026-09-30)
+> CP8-H — V0 Acceptance Package: **IN PROGRESS**
+> Last reviewed: 2026-09-30 · Owner: Product Architect
 > Depends on: Protected Baseline (CP1–CP8 CONFIRMED decisions), ADR-P066 (draft, pending entry review), FD-01 → FD-19
 
 ---
@@ -282,16 +282,13 @@ CP8-G ends with a **CP8-G Validation Report**, never with "the prototype looks g
 
 ## Current Disposition
 
-**CP8-G v2 — IN PROGRESS · disposition pending Product Architect review**
+**CP8-G ACCEPTED — READY FOR CP8-H** — Product Architect final disposition, 2026-09-30. **CP8-H — V0 Acceptance Package: IN PROGRESS.**
 
-The current coverage summary records **19 TESTED — PASS · 1 PARTIAL · 1 OUT OF SCOPE — V0 · 0 TESTED — FAIL · 0 NOT REPRESENTED**. This records coverage progress; it is not a final CP8-G acceptance verdict.
+The current coverage summary records **19 TESTED — PASS · 1 PARTIAL · 1 OUT OF SCOPE — V0 · 0 TESTED — FAIL · 0 NOT REPRESENTED**. KD-01 was resolved in G-v2.3 (`52ee16708f86d0bbfd1d66184bec259c2e30b733`); KD-02 was resolved in G-v2.4 (`64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65`). The earlier v2 baseline failures and v1 failed validation remain historical evidence; the final verdict applies to CP8-G after subsequent reconciliation and validation.
 
-- **Resolved semantic deviations** — KD-01 was resolved in G-v2.3 (`52ee16708f86d0bbfd1d66184bec259c2e30b733`); KD-02 was resolved in G-v2.4 (`64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65`). The Known Deviations table and rows 5, 20 and 21 record the closing evidence.
-- **Coverage boundary** — no guardrail is currently NOT REPRESENTED. Row 8 remains PARTIAL, and row 13 is OUT OF SCOPE — V0 under ADR-P074. Row 18 is TESTED — PASS in the current table.
-- **Journey evidence** — G-v2.1 and rows 6–7 record Butler arrival/departure observations separately from Check-in/Checkout; G-v2.2 and rows 11–12 record Emergency Protective Hold separately from Maintenance Block and Inventory Commitment. The prior Butler and Exception / Inventory gap statements refer to the `5c39748` snapshot, not the current coverage. The snapshot also lists BQL operational attention as a gap; current row 17 verifies BQL visibility ≠ authority, but does not by itself validate the full BQL operational-attention journey. Whole-of-G journey validation remains pending.
-- **Actor validation** — no independent representative-user evidence for G1 / G4 is recorded here; the `5c39748` journey snapshot says it is absent, and the final-validation log remains blank. The representative-user requirement above remains unmet in the recorded evidence.
+Row 8 remains PARTIAL and row 13 remains OUT OF SCOPE — V0 under ADR-P074. The recorded evidence does not establish independent representative-user validation for G1 / G4, and the historical BQL operational-attention gap is not independently closed by row 17 alone. The Product Architect's final disposition permits progression to CP8-H with these limits visible; it does not freeze UX details, close remaining V0 TBDs, decide the Guest Credential mechanism or declare prototype code production-ready. Optional PR #20 tooling salvage is non-blocking and is not part of this disposition.
 
-CP8-H is not opened.
+CP8-H now begins as the existing V0 Acceptance Package checkpoint. Implementation Planning and implementation have not started.
 
 ---
 
