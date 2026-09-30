@@ -155,9 +155,9 @@ The coherent vertical slice and required scenario demonstrations exist in the pr
 | CP8-F2 | ACCEPTED |
 | CP8-F | COMPLETE / ACCEPTED |
 | CP8-G | READY FOR FOUNDER / PRODUCT ARCHITECT VALIDATION |
-| CP8-H | NOT STARTED |
+| CP8-H | NOT STARTED at this report’s original assessment; superseded by the Product Architect’s final CP8-G ACCEPTED — READY FOR CP8-H disposition (2026-09-30). Current CP8-H status: IN PROGRESS. |
 
-CP8-G stops here. CP8-H is not started, and CP8 is not declared complete.
+CP8-G stops here in this historical report, before final validation. Its CP8-H NOT STARTED status is superseded by the Product Architect’s final CP8-G ACCEPTED — READY FOR CP8-H disposition (2026-09-30); CP8-H is now IN PROGRESS. CP8 is not declared complete.
 
 ---
 
