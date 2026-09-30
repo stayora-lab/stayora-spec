@@ -16,11 +16,11 @@ Ghi nhận Inventory/operational truth khi commerce được tạo ngoài Stayor
 
 ## Actors
 
-Actor có Record External Commitment authority trong scope; actor vận hành có authority tạo/phục vụ Stay; ordinary Sale có thể report/submit; Staying Party, assigned Butler và Destination Staff theo relationship. Nguồn commerce có thể là Airbnb, Booking.com, Agoda, Owner Direct, Sale/Zalo hoặc nguồn ngoài khác.
+Host có Record External Commitment authority trong scope ghi nhận external accommodation trực tiếp; actor vận hành có authority tạo/phục vụ Stay; Staying Party, assigned Butler và Destination Staff theo relationship. Ordinary Sale và Butler không submit External Report trong V0 theo [ADR-P074](../00-start-here/DECISIONS.md#adr-p074). Nguồn commerce có thể là Airbnb, Booking.com, Agoda, Owner Direct, Sale/Zalo hoặc nguồn ngoài khác.
 
 ## Preconditions
 
-**CONFIRMED:** establish external confirmed commitment cần explicit authority và commitment hợp lệ, không chỉ role/WHITELIST. Stay cần lightweight operational data/evidence phù hợp. Exact evidence threshold và điều kiện tạo Stay vẫn **TBD**; report chưa được tự coi authoritative.
+**CONFIRMED:** establish external confirmed commitment cần explicit authority và commitment hợp lệ, không chỉ role/WHITELIST. Stay cần lightweight operational data/evidence phù hợp. Exact evidence threshold và điều kiện tạo Stay vẫn **TBD**; V0 không có bước External Report trước khi Host ghi nhận authoritative theo ADR-P074.
 
 ## Trigger
 
@@ -36,15 +36,15 @@ External Commerce
 Destination Operations
 ```
 
-1. External record được reference/ghi tối thiểu cho inventory và/hoặc operations; không route qua Stayora Booking.
-2. Actor được grant Record External Commitment có thể establish valid confirmed commitment trong scope; Inventory xét sự tương thích với truth hiện có.
+1. Host được cấp Record External Commitment trong scope ghi nhận external accommodation trực tiếp; một V0 workflow thiết lập External Accommodation Fact và applicable External-backed Commitment như hai truth riêng biệt theo [ADR-P074](../00-start-here/DECISIONS.md#adr-p074), không route qua Stayora Booking.
+2. Inventory xét sự tương thích của applicable confirmed commitment với truth hiện có; Fact ≠ Commitment dù cùng một action thiết lập cả hai.
 3. Stay được biểu đạt bằng dữ liệu phục vụ vận hành; Foundation nêu villa, IN/OUT, số khách, booking source và thông tin cần cho BQL. Đây không là final required-field schema.
 4. Stay tham gia [WF-04](04-stay-lifecycle.md)/Destination Operations theo authority tương ứng.
 5. Khi Stay có đủ evidence diễn ra/completed, Reputation có thể tạo eligible Review Rights theo rule riêng.
 
 ## Alternative Paths
 
-**CONFIRMED:** dùng nhánh Inventory Truth và/hoặc Stay; không buộc cả hai qua một commerce pipeline. Ordinary Sale có thể submit/report; report chưa đổi Inventory Truth thành BOOKED. Cơ chế xử lý report và cấp capability là **TBD — POLICY**.
+**CONFIRMED:** dùng nhánh Inventory Truth và/hoặc Stay; không buộc cả hai qua một commerce pipeline. V0 không có ordinary Sale/Butler External Report stage; quyền ghi nhận Host vẫn cần explicit capability trong scope theo ADR-P074. Future untrusted-source reporting remains outside this V0 workflow.
 
 External cancellation/no-show cập nhật operational truth đúng thực tế; không invent external refund, penalty, commission hoặc automatic completion. Shared operations không suy identical commercial responsibility.
 
@@ -68,11 +68,11 @@ External Commerce giữ commercial lifecycle bên ngoài. Inventory giữ availa
 
 ## Notifications
 
-**TBD:** báo report chưa đủ authority, conflict/sync issues, changes/cancellations và operational coordination cho ai, lúc nào, kênh nào. Operational need không mở toàn bộ external commerce data.
+**TBD:** báo external record chưa đủ authority, conflict/sync issues, changes/cancellations và operational coordination cho ai, lúc nào, kênh nào. Operational need không mở toàn bộ external commerce data.
 
 ## Audit Events
 
-Trace business source, reporting actor, actor/capability establish commitment, resource/scope, evidence, conflict/changes, Stay participation và actual operations. Các policy actions giữ provenance. Data schema và evidence threshold **TBD**.
+Trace business source, actual Host actor/capability establishing the Fact and applicable commitment, resource/scope, evidence, conflict/changes, Stay participation và actual operations. Các policy actions giữ provenance. Data schema và evidence threshold **TBD**.
 
 ## Invariants
 

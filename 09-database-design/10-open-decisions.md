@@ -19,6 +19,6 @@
 - Exact Payment Allocation representation.
 - Exact Refund transaction family.
 - Final table/column naming and indexes after profiling.
-- Exact external Report persistence and implementation of temporal/concurrency strategy.
+- Exact External Report persistence: **OUT OF SCOPE — V0 / SUPERSEDED by [ADR-P074](../00-start-here/DECISIONS.md#adr-p074)** as a V0 open decision; the conceptual future untrusted-source distinction is not a V0 schema requirement. Implementation of temporal/concurrency strategy remains TBD.
 
 The CP7 persistence direction does not resolve these questions and does not promote them into implementation requirements.
