@@ -282,17 +282,14 @@ CP8-G ends with a **CP8-G Validation Report**, never with "the prototype looks g
 
 ## Current Disposition
 
-**CP8-G v2 — IN PROGRESS · baseline `5c39748` · FAILED — ITERATION REQUIRED**
+**CP8-G v2 — IN PROGRESS · disposition pending Product Architect review**
 
-This does not mean v2 failed the way v1 did. It means v2 has not met the exit contract.
+The current coverage summary records **19 TESTED — PASS · 1 PARTIAL · 1 OUT OF SCOPE — V0 · 0 TESTED — FAIL · 0 NOT REPRESENTED**. This records coverage progress; it is not a final CP8-G acceptance verdict.
 
-Blocking evidence:
-
-- **Semantic blocker** — KD-01: Booking cancellation → Stay `CANCELLED`, conflicting with the CP4 Stay lifecycle and ADR-P066, and preserved by tests #991 and #1027.
-- **Semantic blocker** — KD-02: every Commercial Acceptance becomes an exclusive HOLD and a second overlapping acceptance is directly CONFLICTED, conflicting with the CP4 Booking Request lifecycle, ADR-P014 and ADR-P070, and preserved by tests #390 and #442 (`domain.test.ts`) and #47 (`world-mutate.test.ts`). Reconcile in G-v2.4.
-- **Coverage gaps** — 7 guardrails NOT REPRESENTED must be represented behaviorally (rows 6, 7, 11, 12, 13, 14 and 21); row 18 remains VALIDATED ELSEWHERE under the constraint above.
-- **Journey gaps** — Butler Prepare → Arrival → In-stay → Departure; Exception Incident → Attention → authorized intervention; BQL operational attention.
-- **Actor validation** — no representative-user evidence for G1 / G4.
+- **Resolved semantic deviations** — KD-01 was resolved in G-v2.3 (`52ee16708f86d0bbfd1d66184bec259c2e30b733`); KD-02 was resolved in G-v2.4 (`64dbe5dd17f1ec3d4e0b3d513f235e50e12eeb65`). The Known Deviations table and rows 5, 20 and 21 record the closing evidence.
+- **Coverage boundary** — no guardrail is currently NOT REPRESENTED. Row 8 remains PARTIAL, and row 13 is OUT OF SCOPE — V0 under ADR-P074. Row 18 is TESTED — PASS in the current table.
+- **Journey evidence** — G-v2.1 and rows 6–7 record Butler arrival/departure observations separately from Check-in/Checkout; G-v2.2 and rows 11–12 record Emergency Protective Hold separately from Maintenance Block and Inventory Commitment. The prior Butler and Exception / Inventory gap statements refer to the `5c39748` snapshot, not the current coverage. The snapshot also lists BQL operational attention as a gap; current row 17 verifies BQL visibility ≠ authority, but does not by itself validate the full BQL operational-attention journey. Whole-of-G journey validation remains pending.
+- **Actor validation** — no independent representative-user evidence for G1 / G4 is recorded here; the `5c39748` journey snapshot says it is absent, and the final-validation log remains blank. The representative-user requirement above remains unmet in the recorded evidence.
 
 CP8-H is not opened.
 
